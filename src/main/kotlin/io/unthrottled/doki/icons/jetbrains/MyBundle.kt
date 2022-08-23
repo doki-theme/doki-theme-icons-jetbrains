@@ -1,4 +1,4 @@
-package com.github.unthrottled.dokithemeiconsjetbrains
+package io.unthrottled.doki.icons.jetbrains
 
 import com.intellij.DynamicBundle
 import org.jetbrains.annotations.NonNls

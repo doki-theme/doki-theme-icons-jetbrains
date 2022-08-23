@@ -1,4 +1,4 @@
-package com.github.unthrottled.dokithemeiconsjetbrains
+package io.unthrottled.doki.icons.jetbrains
 
 import com.intellij.ide.highlighter.XmlFileType
 import com.intellij.psi.xml.XmlFile

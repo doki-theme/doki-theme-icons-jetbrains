@@ -1,18 +1,14 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
-    <id>com.github.unthrottled.dokithemeiconsjetbrains</id>
-    <name>doki-theme-icons-jetbrains</name>
-    <vendor>unthrottled</vendor>
+    <id>io.unthrottled.doki.icons</id>
+    <name>Doki Theme Icons</name>
+    <vendor>Unthrottled</vendor>
 
     <depends>com.intellij.modules.platform</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <applicationService serviceImplementation="com.github.unthrottled.dokithemeiconsjetbrains.services.MyApplicationService"/>
-        <projectService serviceImplementation="com.github.unthrottled.dokithemeiconsjetbrains.services.MyProjectService"/>
     </extensions>
 
     <applicationListeners>
-        <listener class="com.github.unthrottled.dokithemeiconsjetbrains.listeners.MyProjectManagerListener"
-                  topic="com.intellij.openapi.project.ProjectManagerListener"/>
     </applicationListeners>
 </idea-plugin>
