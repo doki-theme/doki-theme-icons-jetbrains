@@ -5,6 +5,7 @@
     <vendor>Unthrottled</vendor>
 
     <depends>com.intellij.modules.platform</depends>
+    <depends optional="true" config-file="io.unthrottled.doki.icons-io.unthrottled.doki.theme.xml">io.acari.DDLCTheme</depends>
 
     <extensions defaultExtensionNs="com.intellij">
     </extensions>
