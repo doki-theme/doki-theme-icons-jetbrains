@@ -1,3 +1,29 @@
+scripts/
+testAssets/
+
+# Generated Themes Directory
+src/main/resources/doki/themes
+
+# macOS
+.DS_Store
+
+# IntelliJ
+out/
+.idea/
+*.iml
+
+# Gradle
+.gradle/
+build/
+classes/
+
+#gradle.properties
+*.icls
+src/test/resources/
+
+masterThemes/
+.qodana/
+
 .gradle
 .idea
 .qodana
