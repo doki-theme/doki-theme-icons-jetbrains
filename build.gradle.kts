@@ -13,6 +13,10 @@ plugins {
   id("org.jetbrains.changelog") version "1.3.1"
   // Gradle Qodana Plugin
   id("org.jetbrains.qodana") version "0.1.13"
+  // detekt linter - read more: https://detekt.github.io/detekt/gradle.html
+  id("io.gitlab.arturbosch.detekt") version "1.21.0"
+  // ktlint linter - read more: https://github.com/JLLeitschuh/ktlint-gradle
+  id("org.jlleitschuh.gradle.ktlint") version "10.3.0"
 }
 
 group = properties("pluginGroup")
@@ -44,6 +48,20 @@ intellij {
 changelog {
   version.set(properties("pluginVersion"))
   groups.set(emptyList())
+}
+
+// Configure detekt plugin.
+// Read more: https://detekt.github.io/detekt/kotlindsl.html
+detekt {
+  config = files("./detekt-config.yml")
+  buildUponDefaultConfig = true
+  autoCorrect = true
+
+  reports {
+    html.enabled = false
+    xml.enabled = false
+    txt.enabled = false
+  }
 }
 
 // Configure Gradle Qodana Plugin - read more: https://github.com/JetBrains/gradle-qodana-plugin
@@ -78,11 +96,13 @@ tasks {
     )
 
     // Get the latest available change notes from the changelog file
-    changeNotes.set(provider {
-      changelog.run {
-        getOrNull(properties("pluginVersion")) ?: getLatest()
-      }.toHTML()
-    })
+    changeNotes.set(
+      provider {
+        changelog.run {
+          getOrNull(properties("pluginVersion")) ?: getLatest()
+        }.toHTML()
+      }
+    )
   }
 
   runIde {
