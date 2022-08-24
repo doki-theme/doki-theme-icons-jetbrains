@@ -3,6 +3,8 @@ import org.jetbrains.changelog.markdownToHTML
 fun properties(key: String) = project.findProperty(key).toString()
 
 plugins {
+  // Custom plugin for building all the themes
+  id("doki-theme-plugin")
   // Java support
   id("java")
   // Kotlin support
