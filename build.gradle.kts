@@ -27,6 +27,21 @@ repositories {
   mavenCentral()
 }
 
+dependencies {
+  implementation("commons-io:commons-io:2.11.0")
+  implementation("io.sentry:sentry:6.4.0")
+  testImplementation("org.assertj:assertj-core:3.23.1")
+  testImplementation("io.mockk:mockk:1.12.5")
+}
+
+configurations {
+  implementation.configure {
+    // sentry brings in a slf4j that breaks when
+    // with the platform slf4j
+    exclude("org.slf4j")
+  }
+}
+
 // Set the JVM language level used to compile sources and generate files - Java 11 is required since 2020.3
 kotlin {
   jvmToolchain {

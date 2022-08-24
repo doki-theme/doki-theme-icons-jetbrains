@@ -1,4 +1,4 @@
-package io.unthrottled.doki.icons.jetbrains
+package io.unthrottled.doki.icons.jetbrains.tools
 
 import com.intellij.DynamicBundle
 import org.jetbrains.annotations.NonNls
@@ -7,7 +7,7 @@ import org.jetbrains.annotations.PropertyKey
 @NonNls
 private const val BUNDLE = "messages.MyBundle"
 
-object MyBundle : DynamicBundle(BUNDLE) {
+object PluginMessageBundle : DynamicBundle(BUNDLE) {
 
   @Suppress("SpreadOperator")
   @JvmStatic

@@ -8,8 +8,16 @@
     <depends optional="true" config-file="io.unthrottled.doki.icons-io.unthrottled.doki.theme.xml">io.acari.DDLCTheme</depends>
 
     <extensions defaultExtensionNs="com.intellij">
+      <applicationService serviceImplementation="io.unthrottled.doki.icons.jetbrains.config.Config"/>
+      <applicationService serviceImplementation="io.unthrottled.doki.icons.jetbrains.PluginMaster"/>
+      <errorHandler implementation="io.unthrottled.doki.icons.jetbrains.integrations.ErrorReporter"/>
+      <notificationGroup displayType="BALLOON" id="Doki Theme Icons Updates" isLogByDefault="false" toolWindowId="Doki Theme Icons Updates" />
     </extensions>
 
     <applicationListeners>
+      <listener class="io.unthrottled.doki.icons.jetbrains.integrations.IDEPluginInstallListener"
+                topic="com.intellij.ide.plugins.DynamicPluginListener"/>
+      <listener class="io.unthrottled.doki.icons.jetbrains.integrations.ProjectListener"
+                topic="com.intellij.openapi.project.ProjectManagerListener"/>
     </applicationListeners>
 </idea-plugin>
