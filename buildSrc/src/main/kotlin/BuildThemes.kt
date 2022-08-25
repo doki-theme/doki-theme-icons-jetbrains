@@ -1,28 +1,37 @@
 import com.google.gson.GsonBuilder
 import groovy.util.Node
-import groovy.util.NodeList
-import io.unthrottled.doki.build.jvm.tools.GroupToNameMapping.getLafNamePrefix
-import io.unthrottled.doki.build.jvm.models.*
+import io.unthrottled.doki.build.jvm.models.IconsAppDefinition
+import io.unthrottled.doki.build.jvm.models.MasterThemeDefinition
+import io.unthrottled.doki.build.jvm.models.ThemeTemplateDefinition
 import io.unthrottled.doki.build.jvm.tools.DefinitionSupplier.createThemeDefinitions
 import io.unthrottled.doki.build.jvm.tools.DefinitionSupplier.getAllDokiThemeDefinitions
 import io.unthrottled.doki.build.jvm.tools.DokiProduct
-import org.gradle.api.DefaultTask
-import org.gradle.api.tasks.TaskAction
+import io.unthrottled.doki.build.jvm.tools.GroupToNameMapping.getLafNamePrefix
 import java.io.File
-import java.io.InputStreamReader
-import java.nio.charset.StandardCharsets
 import java.nio.file.Files
-import java.nio.file.Files.*
+import java.nio.file.Files.createDirectories
+import java.nio.file.Files.exists
+import java.nio.file.Files.notExists
+import java.nio.file.Files.walk
 import java.nio.file.Path
 import java.nio.file.Paths.get
-import java.nio.file.StandardCopyOption
 import java.nio.file.StandardOpenOption
-import java.util.*
-import java.util.regex.Pattern
+import java.util.TreeMap
 import java.util.stream.Collectors
 import java.util.stream.Stream
+import org.gradle.api.DefaultTask
+import org.gradle.api.tasks.TaskAction
 
 fun String.getStickerName(): String = this.substring(this.lastIndexOf("/") + 1)
+
+data class DokiTheme(
+  val id: String,
+  val name: String,
+  val displayName: String,
+  val group: String,
+  val listName: String,
+  val colors: Map<String, String>,
+)
 
 open class BuildThemes : DefaultTask() {
 
@@ -31,7 +40,7 @@ open class BuildThemes : DefaultTask() {
     private const val COLOR_TEMPLATE = "COLOR"
   }
 
-  private val gson = GsonBuilder().setPrettyPrinting().create()
+  private val gson = GsonBuilder().create()
 
   init {
     group = "doki"
@@ -51,50 +60,75 @@ open class BuildThemes : DefaultTask() {
 
     val jetbrainsDokiThemeDefinitionDirectory = getThemeDefinitionDirectory()
 
-    // todo: create one big json file with all the theme definitions!
-    getAllDokiThemeDefinitions(
+    val allDokiThemeDefinitions = getAllDokiThemeDefinitions(
       DokiProduct.ICONS,
       jetbrainsDokiThemeDefinitionDirectory,
       masterThemeDirectory,
       IconsAppDefinition::class.java
-    )
-      .forEach { pathMasterDefinitionAndJetbrainsDefinition ->
-        val dokiThemeResourcePath = constructIntellijTheme(
-          pathMasterDefinitionAndJetbrainsDefinition,
-          dokiThemeTemplates,
-        )
+    ).collect(Collectors.toList())
+
+    val dokiThemes = allDokiThemeDefinitions
+      .map {
+        constructDokiTheme(it, dokiThemeTemplates)
       }
+
+    writeThemesAsJson(dokiThemes)
+  }
+
+  private fun writeThemesAsJson(dokiThemes: List<DokiTheme>) {
+    val directoryToPutStuffIn =
+      ensureExists(
+        get(
+          getResourcesDirectory().toString(),
+          "doki",
+          "generated"
+        )
+      )
+
+    val dokiThemesPath = get(directoryToPutStuffIn.toString(), "doki-theme-definitions.json");
+
+    Files.newBufferedWriter(dokiThemesPath, StandardOpenOption.CREATE_NEW)
+      .use { writer ->
+        gson.toJson(dokiThemes, writer)
+      }
+  }
+
+  private fun ensureExists(path: Path): Path {
+    if (!exists(path) && Files.isDirectory(path)) {
+      createDirectories(path)
+    }
+    return path
+  }
+
+  private fun constructDokiTheme(
+    it: Triple<Path, MasterThemeDefinition, IconsAppDefinition>,
+    dokiThemeTemplates: Map<String, Map<String, ThemeTemplateDefinition>>
+  ): DokiTheme {
+    val (
+    path,
+      masterThemeDefinition,
+    appDefinition
+    ) = it
+    return DokiTheme(
+      id = masterThemeDefinition.id,
+      name = masterThemeDefinition.name,
+      displayName = masterThemeDefinition.displayName,
+      group = masterThemeDefinition.group,
+      listName = "${getLafNamePrefix(masterThemeDefinition.group)}${masterThemeDefinition.name}",
+      colors = resolveColors(masterThemeDefinition, dokiThemeTemplates),
+    )
   }
 
   private fun getThemeDefinitionDirectory() = get(getBuildAssetDirectory().toString(), "themes")
 
   private fun getBuildAssetDirectory() = get(project.rootDir.absolutePath, "buildSrc", "assets")
 
-  private fun constructIntellijTheme(
-    pathMasterAndJetbrainsDefinition: Triple<Path, MasterThemeDefinition, IconsAppDefinition>,
-    dokiTemplates: Map<String, Map<String, ThemeTemplateDefinition>>,
-  ): String {
-    val (
-      dokiThemeDefinitionPath,
-      themeDefinition,
-      jetbrainsDefinition
-    ) = pathMasterAndJetbrainsDefinition
-    val resourceDirectory = getResourceDirectory(themeDefinition)
-    if (!exists(resourceDirectory)) {
-      createDirectories(resourceDirectory)
-    }
-
-    val themeJson = get(resourceDirectory.toString(), "${themeDefinition.usableName}.theme.json")
-
-    if (exists(themeJson)) {
-      delete(themeJson)
-    }
-
-
+  // todo: common
+  private fun resolveColors(
+      themeDefinition: MasterThemeDefinition,
+      dokiTemplates: Map<String, Map<String, ThemeTemplateDefinition>>
+  ): MutableMap<String, String> {
     val templateName = if (themeDefinition.dark) "dark" else "light"
-    val dokiThemeTemplates =
-      dokiTemplates[LAF_TEMPLATE] ?: throw IllegalStateException("Expected the $LAF_TEMPLATE template to be present")
-
     val dokiColorTemplates =
       dokiTemplates[COLOR_TEMPLATE]
         ?: throw IllegalStateException("Expected the $COLOR_TEMPLATE template to be present")
@@ -102,12 +136,10 @@ open class BuildThemes : DefaultTask() {
       dokiColorTemplates[templateName] ?: throw IllegalStateException("Theme $templateName does not exist."),
       dokiColorTemplates,
       themeDefinition.colors
-    ) {
+      ) {
       it.colors ?: throw IllegalArgumentException("Expected the $LAF_TEMPLATE to have a 'colors' attribute")
-    } as MutableMap<String, String>
-    val name = "${getLafNamePrefix(themeDefinition.group)}${themeDefinition.name}"
-
-    return extractResourcesPath(themeJson)
+      } as MutableMap<String, String>
+    return resolvedNamedColors
   }
 
   private fun sanitizePath(dirtyPath: String): String =
@@ -117,7 +149,7 @@ open class BuildThemes : DefaultTask() {
     val themeDirectory = get(
       getResourcesDirectory().toString(),
       "doki",
-      "themes"
+      "generated"
     )
     if (notExists(themeDirectory)) {
       createDirectories(themeDirectory)
@@ -128,19 +160,13 @@ open class BuildThemes : DefaultTask() {
     }
   }
 
-  private fun getResourceDirectory(masterThemeDefinition: MasterThemeDefinition): Path = get(
-    getResourcesDirectory().toString(),
-    "doki",
-    "themes",
-    masterThemeDefinition.usableGroup.toLowerCase()
-  )
-
   private fun getResourcesDirectory(): Path = get(
     project.rootDir.absolutePath,
     "src",
     "main",
     "resources"
   )
+
   private fun resolveNamedColorsForMap(
     resolveAttributes: MutableMap<String, Any>,
     colors: Map<String, String>
