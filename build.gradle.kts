@@ -120,6 +120,9 @@ tasks {
         }.toHTML()
       }
     )
+
+    // todo: this
+//    dependsOn("patchChangelog", "buildThemes")
   }
 
   runIde {
