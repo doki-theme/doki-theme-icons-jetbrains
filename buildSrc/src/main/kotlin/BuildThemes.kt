@@ -7,6 +7,8 @@ import io.unthrottled.doki.build.jvm.tools.DefinitionSupplier.createThemeDefinit
 import io.unthrottled.doki.build.jvm.tools.DefinitionSupplier.getAllDokiThemeDefinitions
 import io.unthrottled.doki.build.jvm.tools.DokiProduct
 import io.unthrottled.doki.build.jvm.tools.GroupToNameMapping.getLafNamePrefix
+import io.unthrottled.doki.build.jvm.tools.PathTools.cleanDirectory
+import io.unthrottled.doki.build.jvm.tools.PathTools.ensureExists
 import java.io.File
 import java.nio.file.Files
 import java.nio.file.Files.createDirectories
@@ -56,7 +58,7 @@ open class BuildThemes : DefaultTask() {
       masterThemeDirectory
     )
 
-    cleanThemeDirectory()
+    cleanDirectory(getGenerateResourcesDirectory())
 
     val jetbrainsDokiThemeDefinitionDirectory = getThemeDefinitionDirectory()
 
@@ -78,11 +80,7 @@ open class BuildThemes : DefaultTask() {
   private fun writeThemesAsJson(dokiThemes: List<DokiTheme>) {
     val directoryToPutStuffIn =
       ensureExists(
-        get(
-          getResourcesDirectory().toString(),
-          "doki",
-          "generated"
-        )
+        getGenerateResourcesDirectory()
       )
 
     val dokiThemesPath = get(directoryToPutStuffIn.toString(), "doki-theme-definitions.json");
@@ -91,13 +89,6 @@ open class BuildThemes : DefaultTask() {
       .use { writer ->
         gson.toJson(dokiThemes, writer)
       }
-  }
-
-  private fun ensureExists(path: Path): Path {
-    if (!exists(path) && Files.isDirectory(path)) {
-      createDirectories(path)
-    }
-    return path
   }
 
   private fun constructDokiTheme(
@@ -145,20 +136,11 @@ open class BuildThemes : DefaultTask() {
   private fun sanitizePath(dirtyPath: String): String =
     dirtyPath.replace(File.separator, "/")
 
-  private fun cleanThemeDirectory() {
-    val themeDirectory = get(
-      getResourcesDirectory().toString(),
-      "doki",
-      "generated"
-    )
-    if (notExists(themeDirectory)) {
-      createDirectories(themeDirectory)
-    } else {
-      walk(themeDirectory)
-        .sorted(Comparator.reverseOrder())
-        .forEach(Files::delete)
-    }
-  }
+  private fun getGenerateResourcesDirectory(): Path = get(
+    getResourcesDirectory().toString(),
+    "doki",
+    "generated"
+  )
 
   private fun getResourcesDirectory(): Path = get(
     project.rootDir.absolutePath,
