@@ -1,9 +1,13 @@
 import com.google.gson.GsonBuilder
 import groovy.util.Node
+import io.unthrottled.doki.build.jvm.models.AssetTemplateDefinition
 import io.unthrottled.doki.build.jvm.models.IconsAppDefinition
 import io.unthrottled.doki.build.jvm.models.MasterThemeDefinition
-import io.unthrottled.doki.build.jvm.models.ThemeTemplateDefinition
-import io.unthrottled.doki.build.jvm.tools.DefinitionSupplier.createThemeDefinitions
+import io.unthrottled.doki.build.jvm.tools.BuildTools
+import io.unthrottled.doki.build.jvm.tools.BuildTools.combineMaps
+import io.unthrottled.doki.build.jvm.tools.ConstructableAssetSupplier
+import io.unthrottled.doki.build.jvm.tools.ConstructableTypes
+import io.unthrottled.doki.build.jvm.tools.DefinitionSupplier
 import io.unthrottled.doki.build.jvm.tools.DefinitionSupplier.getAllDokiThemeDefinitions
 import io.unthrottled.doki.build.jvm.tools.DokiProduct
 import io.unthrottled.doki.build.jvm.tools.GroupToNameMapping.getLafNamePrefix
@@ -11,10 +15,6 @@ import io.unthrottled.doki.build.jvm.tools.PathTools.cleanDirectory
 import io.unthrottled.doki.build.jvm.tools.PathTools.ensureExists
 import java.io.File
 import java.nio.file.Files
-import java.nio.file.Files.createDirectories
-import java.nio.file.Files.exists
-import java.nio.file.Files.notExists
-import java.nio.file.Files.walk
 import java.nio.file.Path
 import java.nio.file.Paths.get
 import java.nio.file.StandardOpenOption
@@ -51,27 +51,28 @@ open class BuildThemes : DefaultTask() {
 
   @TaskAction
   fun run() {
-    val buildAssetDirectory = getBuildAssetDirectory()
-    val masterThemeDirectory = get(project.rootDir.absolutePath, "masterThemes")
-    val dokiThemeTemplates = createThemeDefinitions(
-      buildAssetDirectory,
-      masterThemeDirectory
-    )
+    val buildSourceAssetDirectory = getBuildSourceAssetDirectory()
+    val masterThemesDirectory = get(project.rootDir.absolutePath, "masterThemes")
+    val constructableAssetSupplier =
+      DefinitionSupplier.createCommonAssetsTemplate(
+        buildSourceAssetDirectory,
+        masterThemesDirectory
+      )
 
     cleanDirectory(getGenerateResourcesDirectory())
 
-    val jetbrainsDokiThemeDefinitionDirectory = getThemeDefinitionDirectory()
+    val jetbrainsIconsThemeDirectory = getThemeDefinitionDirectory()
 
     val allDokiThemeDefinitions = getAllDokiThemeDefinitions(
       DokiProduct.ICONS,
-      jetbrainsDokiThemeDefinitionDirectory,
-      masterThemeDirectory,
+      jetbrainsIconsThemeDirectory,
+      masterThemesDirectory,
       IconsAppDefinition::class.java
     ).collect(Collectors.toList())
 
     val dokiThemes = allDokiThemeDefinitions
       .map {
-        constructDokiTheme(it, dokiThemeTemplates)
+        constructDokiTheme(it, constructableAssetSupplier)
       }
 
     writeThemesAsJson(dokiThemes)
@@ -93,12 +94,12 @@ open class BuildThemes : DefaultTask() {
 
   private fun constructDokiTheme(
     it: Triple<Path, MasterThemeDefinition, IconsAppDefinition>,
-    dokiThemeTemplates: Map<String, Map<String, ThemeTemplateDefinition>>
+    constructableAssetSupplier: ConstructableAssetSupplier
   ): DokiTheme {
     val (
-    path,
+      path,
       masterThemeDefinition,
-    appDefinition
+      appDefinition
     ) = it
     return DokiTheme(
       id = masterThemeDefinition.id,
@@ -106,31 +107,49 @@ open class BuildThemes : DefaultTask() {
       displayName = masterThemeDefinition.displayName,
       group = masterThemeDefinition.group,
       listName = "${getLafNamePrefix(masterThemeDefinition.group)}${masterThemeDefinition.name}",
-      colors = resolveColors(masterThemeDefinition, dokiThemeTemplates),
+      colors = resolveColors(
+        masterThemeDefinition,
+        appDefinition,
+        constructableAssetSupplier
+      ),
     )
   }
 
-  private fun getThemeDefinitionDirectory() = get(getBuildAssetDirectory().toString(), "themes")
+  private fun getThemeDefinitionDirectory() = get(getBuildSourceAssetDirectory().toString(), "themes")
 
-  private fun getBuildAssetDirectory() = get(project.rootDir.absolutePath, "buildSrc", "assets")
+  private fun getBuildSourceAssetDirectory() = get(project.rootDir.absolutePath, "buildSrc", "assets")
 
-  // todo: common
   private fun resolveColors(
-      themeDefinition: MasterThemeDefinition,
-      dokiTemplates: Map<String, Map<String, ThemeTemplateDefinition>>
+    masterThemeDefinition: MasterThemeDefinition,
+    iconsAppDefinition: IconsAppDefinition,
+    constructableAssetSupplier: ConstructableAssetSupplier
   ): MutableMap<String, String> {
-    val templateName = if (themeDefinition.dark) "dark" else "light"
-    val dokiColorTemplates =
-      dokiTemplates[COLOR_TEMPLATE]
-        ?: throw IllegalStateException("Expected the $COLOR_TEMPLATE template to be present")
-    val resolvedNamedColors = resolveAttributes(
-      dokiColorTemplates[templateName] ?: throw IllegalStateException("Theme $templateName does not exist."),
-      dokiColorTemplates,
-      themeDefinition.colors
-      ) {
-      it.colors ?: throw IllegalArgumentException("Expected the $LAF_TEMPLATE to have a 'colors' attribute")
-      } as MutableMap<String, String>
-    return resolvedNamedColors
+    val templateName = if (masterThemeDefinition.dark) "dark" else "light"
+    return constructableAssetSupplier.getConstructableAsset(
+      ConstructableTypes.Color
+    ).map { colorAsset ->
+      BuildTools.resolveTemplateWithCombini(
+        AssetTemplateDefinition(
+          colors = combineMaps(
+            masterThemeDefinition.colors,
+            iconsAppDefinition.colors,
+          ),
+          name = "app color template",
+          extends = templateName,
+        ),
+        colorAsset.definitions,
+        { it.colors!! },
+        { it.extends },
+        { parent, child ->
+          combineMaps(parent, child)
+        }
+      )
+    }.map {
+      it.toMutableMap()
+    }
+      .orElseGet {
+        masterThemeDefinition.colors.toMutableMap()
+      }
   }
 
   private fun sanitizePath(dirtyPath: String): String =
@@ -175,42 +194,6 @@ open class BuildThemes : DefaultTask() {
     } else {
       value
     }
-
-  private fun resolveAttributes(
-    childTemplate: ThemeTemplateDefinition,
-    dokiTemplateDefinitions: Map<String, ThemeTemplateDefinition>,
-    definitionAttributes: Map<String, Any>,
-    attributeExtractor: (ThemeTemplateDefinition) -> Map<String, Any>
-  ): MutableMap<String, Any> =
-    Stream.of(
-      resolveTemplate(childTemplate, dokiTemplateDefinitions, attributeExtractor),
-      definitionAttributes.entries.stream()
-    )
-      .flatMap { it }
-      .collect(Collectors.toMap({ it.key }, { it.value }, { _, b -> b },
-        { TreeMap(Comparator.comparing { item -> item.toLowerCase() }) })
-      )
-
-  private fun resolveTemplate(
-    childTemplate: ThemeTemplateDefinition,
-    allThemeTemplates: Map<String, ThemeTemplateDefinition>,
-    entryExtractor: (ThemeTemplateDefinition) -> Map<String, Any>
-  ): Stream<Map.Entry<String, Any>> =
-    if (childTemplate.extends == null) {
-      entryExtractor(childTemplate).entries.stream()
-    } else {
-      Stream.concat(
-        resolveTemplate(
-          allThemeTemplates[childTemplate.extends]
-            ?: throw IllegalStateException("Theme template ${childTemplate.extends} is not a valid parent template"),
-          allThemeTemplates,
-          entryExtractor
-        ), entryExtractor(childTemplate).entries.stream()
-      )
-    }
-
-  private fun getComparable(left: Node): String =
-    (left.attribute("name") as? String) ?: left.name().toString()
 
   private fun buildReplacement(replacementColor: String, value: String, end: Int) =
     "$replacementColor${value.substring(end + 1)}"
