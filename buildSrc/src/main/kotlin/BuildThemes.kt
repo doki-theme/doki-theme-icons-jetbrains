@@ -12,7 +12,7 @@ import io.unthrottled.doki.build.jvm.tools.DefinitionSupplier.getAllDokiThemeDef
 import io.unthrottled.doki.build.jvm.tools.DokiProduct
 import io.unthrottled.doki.build.jvm.tools.GroupToNameMapping.getLafNamePrefix
 import io.unthrottled.doki.build.jvm.tools.PathTools.cleanDirectory
-import io.unthrottled.doki.build.jvm.tools.PathTools.ensureExists
+import io.unthrottled.doki.build.jvm.tools.PathTools.ensureDirectoryExists
 import java.io.File
 import java.nio.file.Files
 import java.nio.file.Path
@@ -24,7 +24,6 @@ import java.util.stream.Stream
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.TaskAction
 
-fun String.getStickerName(): String = this.substring(this.lastIndexOf("/") + 1)
 
 data class DokiTheme(
   val id: String,
@@ -36,11 +35,6 @@ data class DokiTheme(
 )
 
 open class BuildThemes : DefaultTask() {
-
-  companion object {
-    private const val LAF_TEMPLATE = "LAF"
-    private const val COLOR_TEMPLATE = "COLOR"
-  }
 
   private val gson = GsonBuilder().create()
 
@@ -80,7 +74,7 @@ open class BuildThemes : DefaultTask() {
 
   private fun writeThemesAsJson(dokiThemes: List<DokiTheme>) {
     val directoryToPutStuffIn =
-      ensureExists(
+      ensureDirectoryExists(
         getGenerateResourcesDirectory()
       )
 
@@ -97,7 +91,7 @@ open class BuildThemes : DefaultTask() {
     constructableAssetSupplier: ConstructableAssetSupplier
   ): DokiTheme {
     val (
-      path,
+      _,
       masterThemeDefinition,
       appDefinition
     ) = it
@@ -167,50 +161,6 @@ open class BuildThemes : DefaultTask() {
     "main",
     "resources"
   )
-
-  private fun resolveNamedColorsForMap(
-    resolveAttributes: MutableMap<String, Any>,
-    colors: Map<String, String>
-  ): TreeMap<String, Any> = resolveAttributes.entries
-    .stream()
-    .map {
-      it.key to when (val value = it.value) {
-        is String -> resolveStringTemplate(value, colors)
-        is Map<*, *> -> resolveNamedColorsForMap(value as MutableMap<String, Any>, colors)
-        else -> value
-      }
-    }
-    .collect(Collectors.toMap({ it.first }, { it.second }, { _, b -> b },
-      { TreeMap(Comparator.comparing { item -> item.toLowerCase() }) })
-    )
-
-  private fun resolveStringTemplate(value: String, colors: Map<String, String>): String =
-    if (value.contains('&')) {
-      val (end, replacementColor) = getReplacementColor(value, '&') { templateColor ->
-        colors[templateColor]
-          ?: throw IllegalArgumentException("$templateColor is not in the color definition.")
-      }
-      '#' + buildReplacement(replacementColor, value, end)
-    } else {
-      value
-    }
-
-  private fun buildReplacement(replacementColor: String, value: String, end: Int) =
-    "$replacementColor${value.substring(end + 1)}"
-
-  private fun getReplacementColor(
-    value: String,
-    templateDelemiter: Char,
-    replacementSupplier: (CharSequence) -> String
-  ): Pair<Int, String> {
-    val start = value.indexOf(templateDelemiter)
-    val end = value.lastIndexOf(templateDelemiter)
-    val templateColor = value.subSequence(start + 1, end)
-    val replacementHexColor = replacementSupplier(templateColor)
-    val replacementColor = replacementHexColor.substring(1)
-    return Pair(end, replacementColor)
-  }
-
 
   private fun extractResourcesPath(destination: Path): String {
     val fullResourcesPath = destination.toString()
