@@ -34,6 +34,8 @@ dependencies {
   implementation("io.sentry:sentry:6.4.0")
   testImplementation("org.assertj:assertj-core:3.23.1")
   testImplementation("io.mockk:mockk:1.12.5")
+  implementation(project(":shared"))
+  runtimeOnly(project(":rider"))
 }
 
 configurations {
@@ -44,10 +46,44 @@ configurations {
   }
 }
 
-// Set the JVM language level used to compile sources and generate files - Java 11 is required since 2020.3
-kotlin {
-  jvmToolchain {
-    languageVersion.set(JavaLanguageVersion.of(11))
+allprojects {
+  apply {
+    plugin("java")
+    plugin("org.jetbrains.kotlin.jvm")
+    plugin("org.jetbrains.intellij")
+    plugin("io.gitlab.arturbosch.detekt")
+    plugin("org.jlleitschuh.gradle.ktlint")
+  }
+
+  repositories {
+    mavenCentral()
+  }
+
+  // Set the JVM language level used to compile sources and generate files - Java 11 is required since 2020.3
+  kotlin {
+    jvmToolchain {
+      languageVersion.set(JavaLanguageVersion.of(11))
+    }
+  }
+
+// Configure detekt plugin.
+// Read more: https://detekt.github.io/detekt/kotlindsl.html
+  detekt {
+    config = files("./detekt-config.yml")
+    buildUponDefaultConfig = true
+    autoCorrect = true
+
+    reports {
+      html.enabled = false
+      xml.enabled = false
+      txt.enabled = false
+    }
+  }
+
+  tasks {
+    buildSearchableOptions {
+      enabled = false
+    }
   }
 }
 
@@ -65,20 +101,6 @@ intellij {
 changelog {
   version.set(properties("pluginVersion"))
   groups.set(emptyList())
-}
-
-// Configure detekt plugin.
-// Read more: https://detekt.github.io/detekt/kotlindsl.html
-detekt {
-  config = files("./detekt-config.yml")
-  buildUponDefaultConfig = true
-  autoCorrect = true
-
-  reports {
-    html.enabled = false
-    xml.enabled = false
-    txt.enabled = false
-  }
 }
 
 // Configure Gradle Qodana Plugin - read more: https://github.com/JetBrains/gradle-qodana-plugin
