@@ -5,6 +5,11 @@ plugins {
 repositories {
   mavenLocal()
   mavenCentral()
+  maven {
+    name = "GitHubPackages"
+    url = uri("https://maven.pkg.github.com/doki-theme/doki-build-source-jvm")
+  }
+
 }
 
 dependencies {
