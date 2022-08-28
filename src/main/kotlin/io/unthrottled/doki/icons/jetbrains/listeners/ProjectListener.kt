@@ -1,4 +1,4 @@
-package io.unthrottled.doki.icons.jetbrains.integrations
+package io.unthrottled.doki.icons.jetbrains.listeners
 
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.project.ProjectManagerListener

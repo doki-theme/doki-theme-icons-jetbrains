@@ -1,4 +1,4 @@
-package io.unthrottled.doki.icons.jetbrains.integrations
+package io.unthrottled.doki.icons.jetbrains.listeners
 
 import com.intellij.ide.plugins.DynamicPluginListener
 import com.intellij.ide.plugins.IdeaPluginDescriptor
@@ -24,7 +24,7 @@ class IDEPluginInstallListener : DynamicPluginListener, Logging {
   override fun pluginLoaded(pluginDescriptor: IdeaPluginDescriptor) {
     if (pluginDescriptor.pluginId.idString == PLUGIN_ID) {
       ApplicationManager.getApplication().invokeLater {
-        PluginMaster.instance.onUpdate()
+        PluginMaster.instance.initializePlugin()
       }
     }
   }

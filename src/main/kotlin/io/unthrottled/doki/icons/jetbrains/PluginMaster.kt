@@ -6,6 +6,7 @@ import com.intellij.openapi.project.Project
 import com.intellij.openapi.project.ProjectManager
 import com.intellij.openapi.project.ProjectManagerListener
 import io.unthrottled.doki.icons.jetbrains.onboarding.UserOnBoarding
+import io.unthrottled.doki.icons.jetbrains.path.IconPathReplacementComponent
 import io.unthrottled.doki.icons.jetbrains.tools.Logging
 import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.ConcurrentMap
@@ -33,10 +34,12 @@ class PluginMaster : ProjectManagerListener, Disposable, Logging {
   }
 
   override fun dispose() {
+    IconPathReplacementComponent.dispose()
     projectListeners.forEach { (_, listeners) -> listeners.dispose() }
   }
 
-  fun onUpdate() {
+  fun initializePlugin() {
+    IconPathReplacementComponent.initialize()
     ProjectManager.getInstance().openProjects
       .forEach { registerListenersForProject(it) }
   }
