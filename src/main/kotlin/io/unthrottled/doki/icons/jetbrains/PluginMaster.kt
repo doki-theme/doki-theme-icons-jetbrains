@@ -7,6 +7,7 @@ import com.intellij.openapi.project.ProjectManager
 import com.intellij.openapi.project.ProjectManagerListener
 import io.unthrottled.doki.icons.jetbrains.onboarding.UserOnBoarding
 import io.unthrottled.doki.icons.jetbrains.path.IconPathReplacementComponent
+import io.unthrottled.doki.icons.jetbrains.themes.ThemeManager
 import io.unthrottled.doki.icons.jetbrains.tools.Logging
 import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.ConcurrentMap
@@ -19,6 +20,10 @@ class PluginMaster : ProjectManagerListener, Disposable, Logging {
   }
 
   private val projectListeners: ConcurrentMap<String, ProjectListeners> = ConcurrentHashMap()
+
+  init {
+    ThemeManager.instance.init()
+  }
 
   override fun projectOpened(project: Project) {
     registerListenersForProject(project)
@@ -34,6 +39,7 @@ class PluginMaster : ProjectManagerListener, Disposable, Logging {
   }
 
   override fun dispose() {
+    ThemeManager.instance.dispose()
     IconPathReplacementComponent.dispose()
     projectListeners.forEach { (_, listeners) -> listeners.dispose() }
   }
