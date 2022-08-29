@@ -1,2 +1,2 @@
 rootProject.name = "doki-theme-icons-jetbrains"
-include("shared","rider")
+include("shared", "rider")
