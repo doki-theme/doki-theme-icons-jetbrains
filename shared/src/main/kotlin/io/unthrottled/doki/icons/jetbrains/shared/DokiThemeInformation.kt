@@ -1,6 +1,6 @@
 package io.unthrottled.doki.icons.jetbrains.shared
 
-data class DokiTheme(
+data class DokiThemeInformation(
   val id: String,
   val name: String,
   val displayName: String,

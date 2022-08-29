@@ -15,6 +15,10 @@ intellij {
   instrumentCode.set(false)
 }
 
+detekt {
+  config = files("../detekt-config.yml")
+}
+
 tasks {
   verifyPlugin {
     enabled = false

@@ -8,13 +8,25 @@ import com.intellij.ide.ui.laf.UIThemeBasedLookAndFeelInfo
 import com.intellij.openapi.Disposable
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.util.messages.Topic
-import io.unthrottled.doki.icons.jetbrains.shared.DokiTheme
+import io.unthrottled.doki.icons.jetbrains.DokiThemeIcons
+import io.unthrottled.doki.icons.jetbrains.shared.DokiThemeInformation
 import io.unthrottled.doki.icons.jetbrains.tools.AssetTools
 import io.unthrottled.doki.icons.jetbrains.tools.doOrElse
 import io.unthrottled.doki.util.toOptional
 import java.util.EventListener
 import java.util.Optional
 import javax.swing.UIManager
+
+class DokiTheme(
+  private val dokiThemeInformation: DokiThemeInformation,
+  val version: String,
+) {
+  val id: String
+    get() = dokiThemeInformation.id
+
+  val colors: Map<String, String>
+    get() = dokiThemeInformation.colors
+}
 
 interface ThemeManagerListener : EventListener {
 
@@ -23,33 +35,35 @@ interface ThemeManagerListener : EventListener {
   fun onDokiThemeRemoved()
 }
 
-class ThemeManager : LafManagerListener, Disposable {
+class IconThemeManager : LafManagerListener, Disposable {
   companion object {
     val TOPIC = Topic(ThemeManagerListener::class.java)
-    val instance: ThemeManager
-      get() = ApplicationManager.getApplication().getService(ThemeManager::class.java)
+    val instance: IconThemeManager
+      get() = ApplicationManager.getApplication().getService(IconThemeManager::class.java)
   }
 
   private val connection = ApplicationManager.getApplication().messageBus.connect()
 
+  private val themeMap: Map<String, DokiTheme>
   init {
     connection.subscribe(LafManagerListener.TOPIC, this)
+    val currentVersion = DokiThemeIcons.getVersion().orElse("69")
+    themeMap = AssetTools.readJsonFromResources<List<DokiThemeInformation>>(
+      "/doki/generated",
+      "doki-theme-definitions.json",
+      object : TypeToken<List<DokiThemeInformation>>() {}.type
+    ).map {
+      themes ->
+      themes
+        .map { DokiTheme(it, currentVersion) }
+        .associateBy { it.id }
+    }.orElseGet {
+      emptyMap()
+    }
   }
 
   fun init() {
   }
-
-  private val themeMap: Map<String, DokiTheme> =
-    AssetTools.readJsonFromResources<List<DokiTheme>>(
-      "/doki/generated",
-      "doki-theme-definitions.json",
-      object : TypeToken<List<DokiTheme>>() {}.type
-    ).map {
-      themes ->
-      themes.associateBy { it.id }
-    }.orElseGet {
-      emptyMap()
-    }
 
   val isCurrentThemeDoki: Boolean
     get() = currentTheme.isPresent

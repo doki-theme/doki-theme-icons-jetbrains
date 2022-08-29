@@ -9,6 +9,10 @@ intellij {
   type.set(properties("platformType"))
 }
 
+detekt {
+  config = files("../detekt-config.yml")
+}
+
 tasks {
   verifyPlugin {
     enabled = false
