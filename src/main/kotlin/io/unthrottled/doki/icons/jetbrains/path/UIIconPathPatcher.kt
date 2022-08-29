@@ -15,6 +15,7 @@ class UIIconPathPatcher : IconPathPatcher(), Logging {
 
   private val pathMappings: Map<String, String> =
     readJsonFromResources<List<PathMapping>>(
+      "/",
       "ui-icons.path.mappings.json",
       object : TypeToken<List<PathMapping>>() {}.type
     )

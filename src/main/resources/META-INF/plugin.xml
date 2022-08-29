@@ -9,6 +9,7 @@
 
     <extensions defaultExtensionNs="com.intellij">
       <applicationService serviceImplementation="io.unthrottled.doki.icons.jetbrains.config.Config"/>
+      <applicationService serviceImplementation="io.unthrottled.doki.icons.jetbrains.themes.ThemeManager"/>
       <applicationService serviceImplementation="io.unthrottled.doki.icons.jetbrains.PluginMaster"/>
       <errorHandler implementation="io.unthrottled.doki.icons.jetbrains.integrations.ErrorReporter"/>
       <notificationGroup displayType="BALLOON" id="Doki Theme Icons Updates" isLogByDefault="false" toolWindowId="Doki Theme Icons Updates" />

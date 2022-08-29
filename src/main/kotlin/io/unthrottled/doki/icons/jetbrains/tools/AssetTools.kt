@@ -10,11 +10,15 @@ import java.util.Optional
 object AssetTools : Logging {
   private val gson = Gson()
 
-  fun <T : Any> readJsonFromResources(filePath: String, type: Type): Optional<T> {
+  fun <T : Any> readJsonFromResources(
+    basePath: String,
+    filePath: String,
+    type: Type
+  ): Optional<T> {
     return runSafelyWithResult({
       ResourceUtil.getResourceAsStream(
         AssetTools::class.java.classLoader,
-        "/",
+        basePath,
         filePath
       ).use { inputStream ->
         gson.fromJson<T>(
@@ -23,7 +27,7 @@ object AssetTools : Logging {
         ).toOptional()
       }
     }) {
-      logger().error("Unable to read JSON from resources for file $filePath", it)
+      logger().error("Unable to read JSON from resources for file $basePath/$filePath", it)
       Optional.empty()
     }
   }
