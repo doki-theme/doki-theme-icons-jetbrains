@@ -7,13 +7,12 @@ import io.unthrottled.doki.icons.jetbrains.themes.DokiTheme
 import io.unthrottled.doki.icons.jetbrains.tools.toColor
 import io.unthrottled.doki.themes.ThemeManager
 import io.unthrottled.doki.util.toHexString
-import java.awt.Color
 import org.w3c.dom.Element
+import java.awt.Color
 
 class SVGColorizerProvider(private val dokiTheme: DokiTheme) : PatcherProvider {
   override fun forPath(path: String?): SVGLoader.SvgElementColorPatcher? = SVGColorizer(dokiTheme)
 }
-
 
 class SVGColorizer(private val dokiTheme: DokiTheme) : Patcher {
   override fun patchColors(svg: Element) {

@@ -13,6 +13,7 @@
       <applicationService serviceImplementation="io.unthrottled.doki.icons.jetbrains.svg.ThemedSVGManager"/>
       <applicationService serviceImplementation="io.unthrottled.doki.icons.jetbrains.PluginMaster"/>
       <errorHandler implementation="io.unthrottled.doki.icons.jetbrains.integrations.ErrorReporter"/>
+      <iconProvider implementation="io.unthrottled.doki.icons.jetbrains.tree.TreeIconProvider" order="first"/>
       <notificationGroup displayType="BALLOON" id="Doki Theme Icons Updates" isLogByDefault="false" toolWindowId="Doki Theme Icons Updates" />
     </extensions>
 
