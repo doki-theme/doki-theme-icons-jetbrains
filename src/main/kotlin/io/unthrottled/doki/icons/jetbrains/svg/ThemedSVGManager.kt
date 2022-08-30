@@ -24,7 +24,7 @@ class ThemedSVGManager : ThemeManagerListener, Disposable {
 
   private fun activateTheme(currentTheme: DokiTheme) {
     SVGLoader.setColorPatcherProvider(
-      SVGColorizerProviderFactory.createForTheme(currentTheme)
+      ComposedSVGColorizerProviderFactory.createForTheme(currentTheme)
     )
   }
 
