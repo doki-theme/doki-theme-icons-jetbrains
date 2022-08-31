@@ -11,12 +11,12 @@ data class PathMapping(
   val newPath: String,
 )
 
-class UIIconPathPatcher : IconPathPatcher(), Logging {
+class DokiIconPathPatcher(mappingFile: String) : IconPathPatcher(), Logging {
 
   private val pathMappings: Map<String, String> =
     readJsonFromResources<List<PathMapping>>(
       "/",
-      "ui-icons.path.mappings.json",
+      mappingFile,
       object : TypeToken<List<PathMapping>>() {}.type
     )
       .map { def ->
