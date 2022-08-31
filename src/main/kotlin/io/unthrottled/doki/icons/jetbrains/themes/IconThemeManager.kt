@@ -24,6 +24,9 @@ class DokiTheme(
   val id: String
     get() = dokiThemeInformation.id
 
+  val listName: String
+    get() = dokiThemeInformation.listName
+
   val colors: Map<String, String>
     get() = dokiThemeInformation.colors
 }
@@ -37,6 +40,7 @@ interface ThemeManagerListener : EventListener {
 
 class IconThemeManager : LafManagerListener, Disposable {
   companion object {
+    const val DEFAULT_THEME_ID = "13adffd9-acbe-47af-8101-fa71269a4c5c" // Zero Two Obsidian
     val TOPIC = Topic(ThemeManagerListener::class.java)
     val instance: IconThemeManager
       get() = ApplicationManager.getApplication().getService(IconThemeManager::class.java)
@@ -97,4 +101,7 @@ class IconThemeManager : LafManagerListener, Disposable {
           .onDokiThemeRemoved()
       }
   }
+
+  fun getThemeById(currentThemeId: String): Optional<DokiTheme> =
+    themeMap[currentThemeId].toOptional()
 }

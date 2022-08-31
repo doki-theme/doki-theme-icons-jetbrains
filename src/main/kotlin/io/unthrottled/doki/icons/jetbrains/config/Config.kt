@@ -7,6 +7,7 @@ import com.intellij.openapi.components.State
 import com.intellij.openapi.components.Storage
 import com.intellij.util.xmlb.XmlSerializerUtil.copyBean
 import com.intellij.util.xmlb.XmlSerializerUtil.createCopy
+import io.unthrottled.doki.icons.jetbrains.themes.IconThemeManager
 
 fun Application.getConfig(): Config = this.getService(Config::class.java)
 
@@ -23,6 +24,7 @@ class Config : PersistentStateComponent<Config>, Cloneable {
 
   var userId: String = ""
   var version: String = ""
+  var currentThemeId: String = IconThemeManager.DEFAULT_THEME_ID
 
   override fun getState(): Config? =
     createCopy(this)

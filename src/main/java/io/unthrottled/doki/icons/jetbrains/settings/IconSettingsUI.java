@@ -14,6 +14,8 @@ import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 
@@ -24,6 +26,12 @@ public class IconSettingsUI implements SearchableConfigurable, Configurable.NoSc
 
 
   private JPanel rootPane;
+  private JComboBox currentThemeWomboComboBox;
+  private JCheckBox syncWithDokiThemeCheckBox;
+  private JCheckBox UIIconsCheckBox;
+  private JCheckBox foldersCheckBox;
+  private JCheckBox filesCheckBox;
+  private JCheckBox PSICheckBox;
 
   @Override
   public @NotNull @NonNls String getId() {
@@ -58,5 +66,13 @@ public class IconSettingsUI implements SearchableConfigurable, Configurable.NoSc
       .syncPublisher(IconConfigListener.getICON_CONFIG_TOPIC())
       .iconConfigUpdated(config);
     initialIconSettingsModel = iconSettingsModel;
+  }
+
+  private void createUIComponents() {
+    currentThemeWomboComboBox = IconSettings.INSTANCE.createThemeComboBoxModel(
+      () -> this.iconSettingsModel == null ?
+        IconSettings.createSettingsModule() :
+        iconSettingsModel
+    );
   }
 }
