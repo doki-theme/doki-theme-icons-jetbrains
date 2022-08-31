@@ -90,8 +90,8 @@ public class IconSettingsUI implements SearchableConfigurable, Configurable.NoSc
 
     ApplicationManager.getApplication()
       .getMessageBus()
-      .syncPublisher(IconConfigListener.getICON_CONFIG_TOPIC())
-      .iconConfigUpdated(config);
+      .syncPublisher(IconConfigListener.getTOPIC())
+      .iconConfigUpdated(initialIconSettingsModel, iconSettingsModel);
     initialIconSettingsModel = iconSettingsModel;
   }
 

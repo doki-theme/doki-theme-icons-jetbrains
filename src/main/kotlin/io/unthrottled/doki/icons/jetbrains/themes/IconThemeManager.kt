@@ -9,6 +9,9 @@ import com.intellij.openapi.Disposable
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.util.messages.Topic
 import io.unthrottled.doki.icons.jetbrains.DokiThemeIcons
+import io.unthrottled.doki.icons.jetbrains.config.Config
+import io.unthrottled.doki.icons.jetbrains.config.IconConfigListener
+import io.unthrottled.doki.icons.jetbrains.config.IconSettingsModel
 import io.unthrottled.doki.icons.jetbrains.shared.DokiThemeInformation
 import io.unthrottled.doki.icons.jetbrains.tools.AssetTools
 import io.unthrottled.doki.icons.jetbrains.tools.doOrElse
@@ -38,7 +41,7 @@ interface ThemeManagerListener : EventListener {
   fun onDokiThemeRemoved()
 }
 
-class IconThemeManager : LafManagerListener, Disposable {
+class IconThemeManager : LafManagerListener, Disposable, IconConfigListener {
   companion object {
     const val DEFAULT_THEME_ID = "13adffd9-acbe-47af-8101-fa71269a4c5c" // Zero Two Obsidian
     val TOPIC = Topic(ThemeManagerListener::class.java)
@@ -49,15 +52,16 @@ class IconThemeManager : LafManagerListener, Disposable {
   private val connection = ApplicationManager.getApplication().messageBus.connect()
 
   private val themeMap: Map<String, DokiTheme>
+
   init {
     connection.subscribe(LafManagerListener.TOPIC, this)
+    connection.subscribe(IconConfigListener.TOPIC, this)
     val currentVersion = DokiThemeIcons.getVersion().orElse("69")
     themeMap = AssetTools.readJsonFromResources<List<DokiThemeInformation>>(
       "/doki/generated",
       "doki-theme-definitions.json",
       object : TypeToken<List<DokiThemeInformation>>() {}.type
-    ).map {
-      themes ->
+    ).map { themes ->
       themes
         .map { DokiTheme(it, currentVersion) }
         .associateBy { it.id }
@@ -68,9 +72,6 @@ class IconThemeManager : LafManagerListener, Disposable {
 
   fun init() {
   }
-
-  val isCurrentThemeDoki: Boolean
-    get() = currentTheme.isPresent
 
   val defaultTheme: DokiTheme
     get() = getThemeById(DEFAULT_THEME_ID).get()
@@ -93,8 +94,11 @@ class IconThemeManager : LafManagerListener, Disposable {
   }
 
   override fun lookAndFeelChanged(source: LafManager) {
+    if (!Config.instance.syncWithDokiTheme) {
+      return
+    }
+
     val messageBus = ApplicationManager.getApplication().messageBus
-    // todo: only update if integrated with theme plugin.
     processLaf(source.currentLookAndFeel)
       .doOrElse({ dokiTheme ->
         messageBus.syncPublisher(TOPIC)
@@ -107,4 +111,18 @@ class IconThemeManager : LafManagerListener, Disposable {
 
   fun getThemeById(currentThemeId: String): Optional<DokiTheme> =
     themeMap[currentThemeId].toOptional()
+
+  override fun iconConfigUpdated(
+    previousState: IconSettingsModel,
+    newState: IconSettingsModel
+  ) {
+    val currentThemeId = newState.currentThemeId
+    if (previousState.currentThemeId != currentThemeId) {
+      getThemeById(currentThemeId).ifPresent {
+        ApplicationManager.getApplication().messageBus
+          .syncPublisher(TOPIC)
+          .onDokiThemeActivated(it)
+      }
+    }
+  }
 }

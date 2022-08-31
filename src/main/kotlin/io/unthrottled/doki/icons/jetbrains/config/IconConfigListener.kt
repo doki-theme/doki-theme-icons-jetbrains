@@ -6,8 +6,8 @@ import java.util.EventListener
 interface IconConfigListener : EventListener {
   companion object {
     @JvmStatic
-    val ICON_CONFIG_TOPIC: Topic<IconConfigListener> =
+    val TOPIC: Topic<IconConfigListener> =
       Topic(IconConfigListener::class.java)
   }
-  fun iconConfigUpdated(iconConfig: Config)
+  fun iconConfigUpdated(previousState: IconSettingsModel, newState: IconSettingsModel)
 }
