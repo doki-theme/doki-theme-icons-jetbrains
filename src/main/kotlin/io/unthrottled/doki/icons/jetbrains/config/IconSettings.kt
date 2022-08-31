@@ -36,6 +36,7 @@ data class IconSettingsModel(
   var isPSIIcons: Boolean,
   var isFolderIcons: Boolean,
   var currentThemeId: String,
+  var syncWithDokiTheme: Boolean,
 )
 
 object IconSettings {
@@ -45,11 +46,16 @@ object IconSettings {
   @JvmStatic
   fun createSettingsModule(): IconSettingsModel =
     IconSettingsModel(
-      isUIIcons = false,
-      isFileIcons = false,
-      isPSIIcons = false,
-      isFolderIcons = false,
-      currentThemeId = IconThemeManager.instance.currentTheme.map { it.id }.orElseGet { IconThemeManager.DEFAULT_THEME_ID }
+      isUIIcons = Config.instance.isUIIcons,
+      isFileIcons = Config.instance.isFileIcons,
+      isPSIIcons = Config.instance.isPSIIcons,
+      isFolderIcons = Config.instance.isFolderIcons,
+      currentThemeId = IconThemeManager.instance.getThemeById(
+        Config.instance.currentThemeId
+      ).orElseGet {
+        IconThemeManager.instance.defaultTheme
+      }.id,
+      syncWithDokiTheme = Config.instance.syncWithDokiTheme == DeferredTrueItem.YES
     )
 
   fun createThemeComboBoxModel(settingsSupplier: () -> IconSettingsModel): ComboBox<ThemeComboItem> {

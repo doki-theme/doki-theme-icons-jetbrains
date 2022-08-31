@@ -7,6 +7,7 @@ import com.intellij.openapi.options.SearchableConfigurable;
 import com.intellij.openapi.project.DumbAware;
 import com.intellij.openapi.util.NlsContexts;
 import io.unthrottled.doki.icons.jetbrains.config.Config;
+import io.unthrottled.doki.icons.jetbrains.config.DeferredTrueItem;
 import io.unthrottled.doki.icons.jetbrains.config.IconConfigListener;
 import io.unthrottled.doki.icons.jetbrains.config.IconSettings;
 import io.unthrottled.doki.icons.jetbrains.config.IconSettingsModel;
@@ -50,7 +51,11 @@ public class IconSettingsUI implements SearchableConfigurable, Configurable.NoSc
   }
 
   private void initializeAutoCreatedComponents() {
-
+    UIIconsCheckBox.setSelected(initialIconSettingsModel.isUIIcons());
+    filesCheckBox.setSelected(initialIconSettingsModel.isFileIcons());
+    PSICheckBox.setSelected(initialIconSettingsModel.isPSIIcons());
+    foldersCheckBox.setSelected(initialIconSettingsModel.isFolderIcons());
+    syncWithDokiThemeCheckBox.setSelected(initialIconSettingsModel.getSyncWithDokiTheme());
   }
 
   @Override
@@ -61,6 +66,22 @@ public class IconSettingsUI implements SearchableConfigurable, Configurable.NoSc
   @Override
   public void apply() throws ConfigurationException {
     Config config = Config.getInstance();
+    config.setUIIcons(UIIconsCheckBox.isSelected());
+    config.setFileIcons(filesCheckBox.isSelected());
+    config.setPSIIcons(PSICheckBox.isSelected());
+    config.setFolderIcons(foldersCheckBox.isSelected());
+    config.setCurrentThemeId(iconSettingsModel.getCurrentThemeId());
+
+    // When the Doki Theme is installed this defaults to Yes
+    // it will be indeterminate until the Doki Theme is installed.
+    if (initialIconSettingsModel.getSyncWithDokiTheme() != iconSettingsModel.getSyncWithDokiTheme() &&
+      config.getSyncWithDokiTheme() != DeferredTrueItem.NOT_YET_NO) {
+      config.setSyncWithDokiTheme(
+        iconSettingsModel.getSyncWithDokiTheme() ?
+          DeferredTrueItem.YES : DeferredTrueItem.NO
+      );
+    }
+
     ApplicationManager.getApplication()
       .getMessageBus()
       .syncPublisher(IconConfigListener.getICON_CONFIG_TOPIC())

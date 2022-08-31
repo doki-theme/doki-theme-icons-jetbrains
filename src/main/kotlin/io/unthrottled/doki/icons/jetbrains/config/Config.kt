@@ -11,6 +11,10 @@ import io.unthrottled.doki.icons.jetbrains.themes.IconThemeManager
 
 fun Application.getConfig(): Config = this.getService(Config::class.java)
 
+enum class DeferredTrueItem {
+  NOT_YET_NO, NO, YES
+}
+
 @State(
   name = "Plugin-Config",
   storages = [Storage("doki-theme-icons.xml")]
@@ -25,6 +29,11 @@ class Config : PersistentStateComponent<Config>, Cloneable {
   var userId: String = ""
   var version: String = ""
   var currentThemeId: String = IconThemeManager.DEFAULT_THEME_ID
+  var isUIIcons: Boolean = true
+  var isFileIcons: Boolean = true
+  var isPSIIcons: Boolean = true
+  var isFolderIcons: Boolean = true
+  var syncWithDokiTheme: DeferredTrueItem = DeferredTrueItem.NOT_YET_NO
 
   override fun getState(): Config? =
     createCopy(this)
