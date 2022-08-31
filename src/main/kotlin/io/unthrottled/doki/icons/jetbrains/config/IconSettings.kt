@@ -55,7 +55,7 @@ object IconSettings {
       ).orElseGet {
         IconThemeManager.instance.defaultTheme
       }.id,
-      syncWithDokiTheme = Config.instance.syncWithDokiTheme == DeferredTrueItem.YES
+      syncWithDokiTheme = Config.instance.syncWithDokiTheme
     )
 
   fun createThemeComboBoxModel(settingsSupplier: () -> IconSettingsModel): ComboBox<ThemeComboItem> {

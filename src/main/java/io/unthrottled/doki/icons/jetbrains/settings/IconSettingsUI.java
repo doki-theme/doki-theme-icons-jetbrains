@@ -7,10 +7,10 @@ import com.intellij.openapi.options.SearchableConfigurable;
 import com.intellij.openapi.project.DumbAware;
 import com.intellij.openapi.util.NlsContexts;
 import io.unthrottled.doki.icons.jetbrains.config.Config;
-import io.unthrottled.doki.icons.jetbrains.config.DeferredTrueItem;
 import io.unthrottled.doki.icons.jetbrains.config.IconConfigListener;
 import io.unthrottled.doki.icons.jetbrains.config.IconSettings;
 import io.unthrottled.doki.icons.jetbrains.config.IconSettingsModel;
+import io.unthrottled.doki.icons.jetbrains.integrations.PluginService;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -52,10 +52,25 @@ public class IconSettingsUI implements SearchableConfigurable, Configurable.NoSc
 
   private void initializeAutoCreatedComponents() {
     UIIconsCheckBox.setSelected(initialIconSettingsModel.isUIIcons());
+    UIIconsCheckBox.addActionListener(e ->
+      initialIconSettingsModel.setUIIcons(UIIconsCheckBox.isSelected()));
+
     filesCheckBox.setSelected(initialIconSettingsModel.isFileIcons());
+    filesCheckBox.addActionListener(e ->
+      initialIconSettingsModel.setFileIcons(filesCheckBox.isSelected()));
+
     PSICheckBox.setSelected(initialIconSettingsModel.isPSIIcons());
+    PSICheckBox.addActionListener(e ->
+      initialIconSettingsModel.setPSIIcons(PSICheckBox.isSelected()));
+
     foldersCheckBox.setSelected(initialIconSettingsModel.isFolderIcons());
+    foldersCheckBox.addActionListener(e ->
+      initialIconSettingsModel.setFolderIcons(foldersCheckBox.isSelected()));
+
+    syncWithDokiThemeCheckBox.setEnabled(PluginService.INSTANCE.isDokiThemeInstalled());
     syncWithDokiThemeCheckBox.setSelected(initialIconSettingsModel.getSyncWithDokiTheme());
+    syncWithDokiThemeCheckBox.addActionListener(e ->
+      initialIconSettingsModel.setSyncWithDokiTheme(syncWithDokiThemeCheckBox.isSelected()));
   }
 
   @Override
@@ -71,16 +86,7 @@ public class IconSettingsUI implements SearchableConfigurable, Configurable.NoSc
     config.setPSIIcons(PSICheckBox.isSelected());
     config.setFolderIcons(foldersCheckBox.isSelected());
     config.setCurrentThemeId(iconSettingsModel.getCurrentThemeId());
-
-    // When the Doki Theme is installed this defaults to Yes
-    // it will be indeterminate until the Doki Theme is installed.
-    if (initialIconSettingsModel.getSyncWithDokiTheme() != iconSettingsModel.getSyncWithDokiTheme() &&
-      config.getSyncWithDokiTheme() != DeferredTrueItem.NOT_YET_NO) {
-      config.setSyncWithDokiTheme(
-        iconSettingsModel.getSyncWithDokiTheme() ?
-          DeferredTrueItem.YES : DeferredTrueItem.NO
-      );
-    }
+    config.setSyncWithDokiTheme(syncWithDokiThemeCheckBox.isSelected());
 
     ApplicationManager.getApplication()
       .getMessageBus()
