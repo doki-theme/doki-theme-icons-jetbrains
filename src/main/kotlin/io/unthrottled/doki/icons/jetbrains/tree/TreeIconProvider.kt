@@ -6,7 +6,7 @@ import com.intellij.psi.PsiDirectory
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 import com.intellij.psi.util.PsiUtilCore
-import io.unthrottled.doki.icons.jetbrains.themes.IconThemeManager
+import io.unthrottled.doki.icons.jetbrains.config.Config
 import io.unthrottled.doki.icons.jetbrains.tools.toOptional
 import javax.swing.Icon
 
@@ -19,19 +19,21 @@ class TreeIconProvider : IconProvider(), DumbAware {
       else -> null
     }
 
-  private fun getDirectoryIcon(element: PsiDirectory): Icon? {
-    return IconThemeManager.instance.currentTheme // todo: not this.
-      .flatMap { PsiUtilCore.getVirtualFile(element).toOptional() }
-      .map { VirtualFileInfo(element, it) }
-      .map { DirectoryIconProvider.getIcon(it) }
-      .orElseGet { null }
-  }
+  private fun getDirectoryIcon(element: PsiDirectory): Icon? =
+    provideIcon(Config.instance.isFolderIcons, element) { DirectoryIconProvider.getIcon(it) }
 
-  private fun getFileIcon(element: PsiFile): Icon? {
-    return IconThemeManager.instance.currentTheme
-      .flatMap { PsiUtilCore.getVirtualFile(element).toOptional() }
-      .map { VirtualFileInfo(element, it) }
-      .map { FileIconProvider.getIcon(it) }
-      .orElseGet { null }
-  }
+  private fun getFileIcon(element: PsiFile): Icon? =
+    provideIcon(Config.instance.isFileIcons, element) { FileIconProvider.getIcon(it) }
+
+  // todo: make sure refreshes
+  private fun provideIcon(
+    configOption: Boolean,
+    element: PsiElement,
+    function: (t: VirtualFileInfo) -> Icon?
+  ): Icon? = configOption.toOptional()
+    .filter { it }
+    .flatMap { PsiUtilCore.getVirtualFile(element).toOptional() }
+    .map { VirtualFileInfo(element, it) }
+    .map(function)
+    .orElseGet { null }
 }
