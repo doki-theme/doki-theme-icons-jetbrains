@@ -10,7 +10,7 @@ import io.unthrottled.doki.icons.jetbrains.config.Config
 import io.unthrottled.doki.icons.jetbrains.tools.toOptional
 import javax.swing.Icon
 
-class TreeIconProvider : IconProvider(), DumbAware {
+class TreeNamedIconProvider : IconProvider(), DumbAware {
 
   override fun getIcon(element: PsiElement, flags: Int): Icon? =
     when (element) {
@@ -20,10 +20,10 @@ class TreeIconProvider : IconProvider(), DumbAware {
     }
 
   private fun getDirectoryIcon(element: PsiDirectory): Icon? =
-    provideIcon(Config.instance.isFolderIcons, element) { DirectoryIconProvider.getIcon(it) }
+    provideIcon(Config.instance.isNamedFolderIcons, element) { DirectoryIconProvider.getNamedIcon(it) }
 
   private fun getFileIcon(element: PsiFile): Icon? =
-    provideIcon(Config.instance.isFileIcons, element) { FileIconProvider.getIcon(it) }
+    provideIcon(Config.instance.isNamedFileIcons, element) { NamedFileIconProvider.getNamedIcon(it) }
 
   // todo: make sure refreshes
   private fun provideIcon(

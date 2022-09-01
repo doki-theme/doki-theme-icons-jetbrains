@@ -55,17 +55,17 @@ public class IconSettingsUI implements SearchableConfigurable, Configurable.NoSc
     UIIconsCheckBox.addActionListener(e ->
       initialIconSettingsModel.setUIIcons(UIIconsCheckBox.isSelected()));
 
-    filesCheckBox.setSelected(initialIconSettingsModel.isFileIcons());
+    filesCheckBox.setSelected(initialIconSettingsModel.isNamedFileIcons());
     filesCheckBox.addActionListener(e ->
-      initialIconSettingsModel.setFileIcons(filesCheckBox.isSelected()));
+      initialIconSettingsModel.setNamedFileIcons(filesCheckBox.isSelected()));
 
     PSICheckBox.setSelected(initialIconSettingsModel.isGlyphIcons());
     PSICheckBox.addActionListener(e ->
       initialIconSettingsModel.setGlyphIcons(PSICheckBox.isSelected()));
 
-    foldersCheckBox.setSelected(initialIconSettingsModel.isFolderIcons());
+    foldersCheckBox.setSelected(initialIconSettingsModel.isNamedFolderIcons());
     foldersCheckBox.addActionListener(e ->
-      initialIconSettingsModel.setFolderIcons(foldersCheckBox.isSelected()));
+      initialIconSettingsModel.setNamedFolderIcons(foldersCheckBox.isSelected()));
 
     syncWithDokiThemeCheckBox.setEnabled(PluginService.INSTANCE.isDokiThemeInstalled());
     syncWithDokiThemeCheckBox.setSelected(initialIconSettingsModel.getSyncWithDokiTheme());
@@ -82,9 +82,9 @@ public class IconSettingsUI implements SearchableConfigurable, Configurable.NoSc
   public void apply() throws ConfigurationException {
     Config config = Config.getInstance();
     config.setUIIcons(UIIconsCheckBox.isSelected());
-    config.setFileIcons(filesCheckBox.isSelected());
+    config.setNamedFileIcons(filesCheckBox.isSelected());
     config.setGlyphIcon(PSICheckBox.isSelected());
-    config.setFolderIcons(foldersCheckBox.isSelected());
+    config.setNamedFolderIcons(foldersCheckBox.isSelected());
     config.setCurrentThemeId(iconSettingsModel.getCurrentThemeId());
     config.setSyncWithDokiTheme(syncWithDokiThemeCheckBox.isSelected());
 

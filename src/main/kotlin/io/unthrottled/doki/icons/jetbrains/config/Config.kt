@@ -26,9 +26,9 @@ class Config : PersistentStateComponent<Config>, Cloneable {
   var version: String = ""
   var currentThemeId: String = IconThemeManager.DEFAULT_THEME_ID
   var isUIIcons: Boolean = true
-  var isFileIcons: Boolean = true
+  var isNamedFileIcons: Boolean = true
   var isGlyphIcon: Boolean = true
-  var isFolderIcons: Boolean = true
+  var isNamedFolderIcons: Boolean = true
   var syncWithDokiTheme: Boolean = true
 
   override fun getState(): Config? =
