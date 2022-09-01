@@ -19,6 +19,11 @@ object IconPathReplacementComponent : IconConfigListener {
         DokiIconPathPatcher("ui-icons.path.mappings.json"),
         { it.isUIIcons },
         { it.isUIIcons }
+      ),
+      IconReplacementPack(
+        DokiIconPathPatcher("glyph-icons.path.mappings.json"),
+        { it.isGlyphIcons },
+        { it.isGlyphIcon }
       )
     )
 

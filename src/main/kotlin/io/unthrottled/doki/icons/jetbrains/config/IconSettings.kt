@@ -33,7 +33,7 @@ class ThemeComboItem(private val dokiTheme: DokiTheme) {
 data class IconSettingsModel(
   var isUIIcons: Boolean,
   var isFileIcons: Boolean,
-  var isPSIIcons: Boolean,
+  var isGlyphIcons: Boolean,
   var isFolderIcons: Boolean,
   var currentThemeId: String,
   var syncWithDokiTheme: Boolean,
@@ -48,7 +48,7 @@ object IconSettings {
     IconSettingsModel(
       isUIIcons = Config.instance.isUIIcons,
       isFileIcons = Config.instance.isFileIcons,
-      isPSIIcons = Config.instance.isPSIIcons,
+      isGlyphIcons = Config.instance.isGlyphIcon,
       isFolderIcons = Config.instance.isFolderIcons,
       currentThemeId = IconThemeManager.instance.getThemeById(
         Config.instance.currentThemeId

@@ -59,9 +59,9 @@ public class IconSettingsUI implements SearchableConfigurable, Configurable.NoSc
     filesCheckBox.addActionListener(e ->
       initialIconSettingsModel.setFileIcons(filesCheckBox.isSelected()));
 
-    PSICheckBox.setSelected(initialIconSettingsModel.isPSIIcons());
+    PSICheckBox.setSelected(initialIconSettingsModel.isGlyphIcons());
     PSICheckBox.addActionListener(e ->
-      initialIconSettingsModel.setPSIIcons(PSICheckBox.isSelected()));
+      initialIconSettingsModel.setGlyphIcons(PSICheckBox.isSelected()));
 
     foldersCheckBox.setSelected(initialIconSettingsModel.isFolderIcons());
     foldersCheckBox.addActionListener(e ->
@@ -83,7 +83,7 @@ public class IconSettingsUI implements SearchableConfigurable, Configurable.NoSc
     Config config = Config.getInstance();
     config.setUIIcons(UIIconsCheckBox.isSelected());
     config.setFileIcons(filesCheckBox.isSelected());
-    config.setPSIIcons(PSICheckBox.isSelected());
+    config.setGlyphIcon(PSICheckBox.isSelected());
     config.setFolderIcons(foldersCheckBox.isSelected());
     config.setCurrentThemeId(iconSettingsModel.getCurrentThemeId());
     config.setSyncWithDokiTheme(syncWithDokiThemeCheckBox.isSelected());

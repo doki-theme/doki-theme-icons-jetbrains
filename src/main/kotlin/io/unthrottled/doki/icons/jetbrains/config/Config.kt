@@ -27,7 +27,7 @@ class Config : PersistentStateComponent<Config>, Cloneable {
   var currentThemeId: String = IconThemeManager.DEFAULT_THEME_ID
   var isUIIcons: Boolean = true
   var isFileIcons: Boolean = true
-  var isPSIIcons: Boolean = true
+  var isGlyphIcon: Boolean = true
   var isFolderIcons: Boolean = true
   var syncWithDokiTheme: Boolean = true
 
