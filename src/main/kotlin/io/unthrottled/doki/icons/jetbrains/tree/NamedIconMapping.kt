@@ -11,12 +11,16 @@ enum class NamedIconMappings(val fileName: String) {
   FOLDER("folders.named.mappings.json"), FILE("files.named.mappings.json"),
 }
 
-data class NamedIconMapping(
+data class SerializedNamedIconMapping(
   val name: String,
-  val mappingPattern: Regex,
+  val mappingPattern: String,
   val iconPath: String,
 )
-
+data class NamedIconMapping(
+  val name: String,
+  val mappingRegex: Regex,
+  val iconPath: String,
+)
 class NamedIconMappingLocator(
   private val namedIconMappings: List<NamedIconMapping>
 ) {
@@ -27,22 +31,31 @@ class NamedIconMappingLocator(
       }
 
   private fun pickFileNameFromList(fileName: String): Optional<NamedIconMapping> {
-    return namedIconMappings.first {
-      fileName.matches(it.mappingPattern)
+    return namedIconMappings.firstOrNull {
+      fileName.matches(it.mappingRegex)
     }.toOptional() // todo smart pick from list
   }
 }
 
-// todo: test this
 object NamedIconMappingLocatorFactory : Logging {
 
   fun create(namedIconMapping: NamedIconMappings): NamedIconMappingLocator =
-    AssetTools.readJsonFromResources<List<NamedIconMapping>>(
+    AssetTools.readJsonFromResources<List<SerializedNamedIconMapping>>(
       "/",
       namedIconMapping.fileName,
-      object : TypeToken<List<NamedIconMapping>>() {}.type
+      object : TypeToken<List<SerializedNamedIconMapping>>() {}.type
     )
-      .map { NamedIconMappingLocator(it) }
+      .map { serializedNamedIconMappings ->
+        NamedIconMappingLocator(
+          serializedNamedIconMappings.map {
+            NamedIconMapping(
+              name = it.name,
+              mappingRegex = Regex(it.mappingPattern),
+              iconPath = it.iconPath
+            )
+          }
+        )
+      }
       .orElseGet {
         logger().warn("Unable to read named icon mappings for raisins")
         NamedIconMappingLocator(emptyList())
