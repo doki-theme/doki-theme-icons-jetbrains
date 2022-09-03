@@ -2,5 +2,9 @@
   {
     "originalPath": "/actions/compile.svg",
     "newPath": "/doki/icons/build.svg"
+  },
+  {
+    "originalPath": "/resharper/ProjectModel/Folder.svg",
+    "newPath": "/doki/icons/folder.svg"
   }
 ]
