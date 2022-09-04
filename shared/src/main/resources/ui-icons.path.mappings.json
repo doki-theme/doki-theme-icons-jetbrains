@@ -73,14 +73,62 @@
   },
   {
     "originalPath": "/icons/toolWindowDatabase.svg",
-    "newPath": "/doki/icons/db_solid.svg"
+    "newPath": "/doki/icons/db_solid_13x13.svg"
   },
   {
     "originalPath": "/toolwindows/notifications.svg",
-    "newPath": "/doki/icons/notifications.svg"
+    "newPath": "/doki/icons/notifications_13x13.svg"
   },
   {
     "originalPath": "/actions/compile.svg",
     "newPath": "/doki/icons/build.svg"
+  },
+  {
+    "originalPath": "/ide/readwrite.svg",
+    "newPath": "/doki/icons/unlocked_13x13.svg"
+  },
+  {
+    "originalPath": "/vcs/branch.svg",
+    "newPath": "/doki/icons/vcs_solid_13x13.svg"
+  },
+  {
+    "originalPath": "/toolwindows/toolWindowChanges.svg",
+    "newPath": "/doki/icons/vcs_solid_13x13.svg"
+  },
+  {
+    "originalPath": "/toolwindows/toolWindowStructure.svg",
+    "newPath": "/doki/icons/structure_13x13.svg"
+  },
+  {
+    "originalPath": "/toolwindows/toolWindowBookmarks.svg",
+    "newPath": "/doki/icons/bookmark_13x13.svg"
+  },
+  {
+    "originalPath": "/org/jetbrains/plugins/github/pullRequestsToolWindow.svg",
+    "newPath": "/doki/icons/pull_request_13x13.svg"
+  },
+  {
+    "originalPath": "/toolwindows/toolWindowTodo.svg",
+    "newPath": "/doki/icons/todo_13x13.svg"
+  },
+  {
+    "originalPath": "/toolwindows/toolWindowProblemsEmpty.svg",
+    "newPath": "/doki/icons/warning_circle_13x13.svg"
+  },
+  {
+    "originalPath": "/icons/OpenTerminal_13x13.svg",
+    "newPath": "/doki/icons/terminal_solid_13x13.svg"
+  },
+  {
+    "originalPath": "/toolwindows/toolWindowServices.svg",
+    "newPath": "/doki/icons/services_13x13.svg"
+  },
+  {
+    "originalPath": "/toolwindows/toolWindowProfiler.svg",
+    "newPath": "/doki/icons/profile_13x13.svg"
+  },
+  {
+    "originalPath": "/icons/artifactSmall.svg",
+    "newPath": "/doki/icons/dependencies_13x13.svg"
   }
 ]
