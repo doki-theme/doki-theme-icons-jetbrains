@@ -101,6 +101,7 @@ class IconThemeManager : LafManagerListener, Disposable, IconConfigListener {
     val messageBus = ApplicationManager.getApplication().messageBus
     processLaf(source.currentLookAndFeel)
       .doOrElse({ dokiTheme ->
+        Config.instance.currentThemeId = dokiTheme.id
         messageBus.syncPublisher(TOPIC)
           .onDokiThemeActivated(dokiTheme)
       }) {
