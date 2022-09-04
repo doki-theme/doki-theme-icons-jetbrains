@@ -2,7 +2,7 @@ scripts/
 testAssets/
 
 # Generated Directory
-src/main/resources/doki/generated
+shared/src/main/resources/doki/generated
 
 # macOS
 .DS_Store

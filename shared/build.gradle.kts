@@ -4,6 +4,21 @@ plugins {
   kotlin("jvm")
 }
 
+dependencies {
+  implementation("commons-io:commons-io:2.11.0")
+  implementation("io.sentry:sentry:6.4.0")
+  testImplementation("org.assertj:assertj-core:3.23.1")
+  testImplementation("io.mockk:mockk:1.12.5")
+}
+
+configurations {
+  implementation.configure {
+    // sentry brings in a slf4j that breaks when
+    // with the platform slf4j
+    exclude("org.slf4j")
+  }
+}
+
 intellij {
   version.set(properties("platformVersion"))
   type.set(properties("platformType"))

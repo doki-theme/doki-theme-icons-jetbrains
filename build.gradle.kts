@@ -30,21 +30,10 @@ repositories {
 }
 
 dependencies {
-  implementation("commons-io:commons-io:2.11.0")
-  implementation("io.sentry:sentry:6.4.0")
-  testImplementation("org.assertj:assertj-core:3.23.1")
-  testImplementation("io.mockk:mockk:1.12.5")
   implementation(project(":shared"))
   runtimeOnly(project(":rider"))
 }
 
-configurations {
-  implementation.configure {
-    // sentry brings in a slf4j that breaks when
-    // with the platform slf4j
-    exclude("org.slf4j")
-  }
-}
 
 allprojects {
   apply {
@@ -151,7 +140,6 @@ tasks {
     val idePath = properties("idePath")
     if (idePath.isNotEmpty()) {
       ideDir.set(file(idePath))
-//      systemProperty("idea.platform.prefix", properties("idePrefix"))
     }
   }
 

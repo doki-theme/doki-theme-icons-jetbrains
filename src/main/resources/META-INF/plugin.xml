@@ -8,22 +8,22 @@
     <depends optional="true" config-file="io.unthrottled.doki.icons-io.unthrottled.doki.theme.xml">io.acari.DDLCTheme</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-      <applicationConfigurable id="io.unthrottled.doki.icons.jetbrains.settings.ThemeSettings" instance="io.unthrottled.doki.icons.jetbrains.settings.IconSettingsUI" groupId="appearance"/>
-      <applicationService serviceImplementation="io.unthrottled.doki.icons.jetbrains.config.Config"/>
-      <applicationService serviceImplementation="io.unthrottled.doki.icons.jetbrains.themes.IconThemeManager"/>
-      <applicationService serviceImplementation="io.unthrottled.doki.icons.jetbrains.svg.ThemedSVGManager"/>
-      <applicationService serviceImplementation="io.unthrottled.doki.icons.jetbrains.PluginMaster"/>
-      <errorHandler implementation="io.unthrottled.doki.icons.jetbrains.integrations.ErrorReporter"/>
-      <iconProvider implementation="io.unthrottled.doki.icons.jetbrains.tree.TreeNamedIconProvider" order="first"/>
+      <applicationConfigurable id="io.unthrottled.doki.icons.jetbrains.shared.settings.ThemeSettings" instance="io.unthrottled.doki.icons.jetbrains.shared.settings.IconSettingsUI" groupId="appearance"/>
+      <applicationService serviceImplementation="io.unthrottled.doki.icons.jetbrains.shared.config.Config"/>
+      <applicationService serviceImplementation="io.unthrottled.doki.icons.jetbrains.shared.themes.IconThemeManager"/>
+      <applicationService serviceImplementation="io.unthrottled.doki.icons.jetbrains.shared.svg.ThemedSVGManager"/>
+      <applicationService serviceImplementation="io.unthrottled.doki.icons.jetbrains.shared.PluginMaster"/>
+      <errorHandler implementation="io.unthrottled.doki.icons.jetbrains.shared.integrations.ErrorReporter"/>
+      <iconProvider implementation="io.unthrottled.doki.icons.jetbrains.shared.tree.TreeNamedIconProvider" order="first"/>
       <notificationGroup displayType="BALLOON" id="Doki Theme Icons Updates" isLogByDefault="false" toolWindowId="Doki Theme Icons Updates" />
     </extensions>
 
     <applicationListeners>
-      <listener class="io.unthrottled.doki.icons.jetbrains.listeners.IDEPluginInstallListener"
+      <listener class="io.unthrottled.doki.icons.jetbrains.shared.listeners.IDEPluginInstallListener"
                 topic="com.intellij.ide.plugins.DynamicPluginListener"/>
-      <listener class="io.unthrottled.doki.icons.jetbrains.listeners.ApplicationLifecycleListener"
+      <listener class="io.unthrottled.doki.icons.jetbrains.shared.listeners.ApplicationLifecycleListener"
                 topic="com.intellij.ide.AppLifecycleListener" />
-      <listener class="io.unthrottled.doki.icons.jetbrains.listeners.ProjectListener"
+      <listener class="io.unthrottled.doki.icons.jetbrains.shared.listeners.ProjectListener"
                 topic="com.intellij.openapi.project.ProjectManagerListener"/>
     </applicationListeners>
 </idea-plugin>
