@@ -3,6 +3,7 @@ testAssets/
 
 # Generated Directory
 shared/src/main/resources/doki/generated
+shared/src/main/resources/doki/icons
 
 # macOS
 .DS_Store
@@ -28,3 +29,4 @@ masterThemes/
 .idea
 .qodana
 build
+iconSource
