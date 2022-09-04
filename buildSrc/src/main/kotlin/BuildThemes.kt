@@ -3,12 +3,12 @@ import groovy.util.Node
 import io.unthrottled.doki.build.jvm.models.AssetTemplateDefinition
 import io.unthrottled.doki.build.jvm.models.IconsAppDefinition
 import io.unthrottled.doki.build.jvm.models.MasterThemeDefinition
-import io.unthrottled.doki.build.jvm.tools.BuildTools
-import io.unthrottled.doki.build.jvm.tools.BuildTools.combineMaps
+import io.unthrottled.doki.build.jvm.tools.BuildFunctions
+import io.unthrottled.doki.build.jvm.tools.BuildFunctions.combineMaps
+import io.unthrottled.doki.build.jvm.tools.CommonConstructionFunctions.getAllDokiThemeDefinitions
 import io.unthrottled.doki.build.jvm.tools.ConstructableAssetSupplier
+import io.unthrottled.doki.build.jvm.tools.ConstructableAssetSupplierFactory
 import io.unthrottled.doki.build.jvm.tools.ConstructableTypes
-import io.unthrottled.doki.build.jvm.tools.DefinitionSupplier
-import io.unthrottled.doki.build.jvm.tools.DefinitionSupplier.getAllDokiThemeDefinitions
 import io.unthrottled.doki.build.jvm.tools.DokiProduct
 import io.unthrottled.doki.build.jvm.tools.GroupToNameMapping.getLafNamePrefix
 import io.unthrottled.doki.build.jvm.tools.PathTools.cleanDirectory
@@ -16,7 +16,9 @@ import io.unthrottled.doki.build.jvm.tools.PathTools.ensureDirectoryExists
 import java.io.File
 import java.nio.file.Files
 import java.nio.file.Path
+import java.nio.file.Paths
 import java.nio.file.Paths.get
+import java.nio.file.StandardCopyOption
 import java.nio.file.StandardOpenOption
 import java.util.TreeMap
 import java.util.stream.Collectors
@@ -48,7 +50,7 @@ open class BuildThemes : DefaultTask() {
     val buildSourceAssetDirectory = getBuildSourceAssetDirectory()
     val masterThemesDirectory = get(project.rootDir.absolutePath, "masterThemes")
     val constructableAssetSupplier =
-      DefinitionSupplier.createCommonAssetsTemplate(
+      ConstructableAssetSupplierFactory.createCommonAssetsTemplate(
         buildSourceAssetDirectory,
         masterThemesDirectory
       )
@@ -70,6 +72,27 @@ open class BuildThemes : DefaultTask() {
       }
 
     writeThemesAsJson(dokiThemes)
+
+    copyUsedIconsFromIconSource()
+  }
+
+  private fun copyUsedIconsFromIconSource() {
+    ensureDirectoryExists(getIconsDirectory())
+    cleanDirectory(getIconsDirectory())
+
+    // todo: only copy over used icons.
+    Files.walk(iconSourceDirectory())
+      .filter { Files.isDirectory(it).not() }
+      .forEach {
+        dokiIconPath ->
+        Files.copy(
+          dokiIconPath,
+          Paths.get(
+            getIconsDirectory().toAbsolutePath().toString(),
+            dokiIconPath.fileName.toString()
+          ),
+        )
+      }
   }
 
   private fun writeThemesAsJson(dokiThemes: List<DokiTheme>) {
@@ -122,7 +145,7 @@ open class BuildThemes : DefaultTask() {
     return constructableAssetSupplier.getConstructableAsset(
       ConstructableTypes.Color
     ).map { colorAsset ->
-      BuildTools.resolveTemplateWithCombini(
+      BuildFunctions.resolveTemplateWithCombini(
         AssetTemplateDefinition(
           colors = combineMaps(
             masterThemeDefinition.colors,
@@ -154,6 +177,11 @@ open class BuildThemes : DefaultTask() {
     "doki",
     "generated"
   )
+  private fun getIconsDirectory(): Path = get(
+    getResourcesDirectory().toString(),
+    "doki",
+    "icons"
+  )
 
   private fun getResourcesDirectory(): Path = get(
     project.rootDir.absolutePath,
@@ -161,6 +189,11 @@ open class BuildThemes : DefaultTask() {
     "src",
     "main",
     "resources"
+  )
+  private fun iconSourceDirectory(): Path = get(
+    project.rootDir.absolutePath,
+    "iconSource",
+    "icons",
   )
 
   private fun extractResourcesPath(destination: Path): String {
