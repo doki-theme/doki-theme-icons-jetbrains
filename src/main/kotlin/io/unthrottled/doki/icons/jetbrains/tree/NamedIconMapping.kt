@@ -8,7 +8,7 @@ import io.unthrottled.doki.util.toOptional
 import java.util.Optional
 
 enum class NamedIconMappings(val fileName: String) {
-  FOLDER("folders.named.mappings.json"), FILE("files.named.mappings.json"),
+  FILE("files.named.mappings.json"),
 }
 
 data class SerializedNamedIconMapping(

@@ -66,6 +66,7 @@ public class IconSettingsUI implements SearchableConfigurable, Configurable.NoSc
     foldersCheckBox.setSelected(initialIconSettingsModel.isNamedFolderIcons());
     foldersCheckBox.addActionListener(e ->
       initialIconSettingsModel.setNamedFolderIcons(foldersCheckBox.isSelected()));
+    foldersCheckBox.setVisible(false);
 
     syncWithDokiThemeCheckBox.setEnabled(PluginService.INSTANCE.isDokiThemeInstalled());
     syncWithDokiThemeCheckBox.setSelected(initialIconSettingsModel.getSyncWithDokiTheme());

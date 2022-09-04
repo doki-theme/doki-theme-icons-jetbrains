@@ -20,7 +20,7 @@ class TreeNamedIconProvider : IconProvider(), DumbAware {
     }
 
   private fun getDirectoryIcon(element: PsiDirectory): Icon? =
-    provideIcon(Config.instance.isNamedFolderIcons, element) { NamedDirectoryIconProvider.getNamedIcon(it) }
+    provideIcon(Config.instance.isUIIcons, element) { RainbowDirectoryIconProvider.getNamedIcon(it) }
 
   private fun getFileIcon(element: PsiFile): Icon? =
     provideIcon(Config.instance.isNamedFileIcons, element) { NamedFileIconProvider.getNamedIcon(it) }
