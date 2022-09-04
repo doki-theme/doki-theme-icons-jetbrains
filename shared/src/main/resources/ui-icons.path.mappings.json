@@ -6,5 +6,81 @@
   {
     "originalPath": "/resharper/ProjectModel/Folder.svg",
     "newPath": "/doki/icons/folder.svg"
+  },
+  {
+    "originalPath": "/actions/execute.svg",
+    "newPath": "/doki/icons/play_solid.svg"
+  },
+  {
+    "originalPath": "/actions/startDebugger.svg",
+    "newPath": "/doki/icons/debug.svg"
+  },
+  {
+    "originalPath": "/general/runWithCoverage.svg",
+    "newPath": "/doki/icons/coverage.svg"
+  },
+  {
+    "originalPath": "/actions/profile.svg",
+    "newPath": "/doki/icons/profile.svg"
+  },
+  {
+    "originalPath": "/actions/suspend.svg",
+    "newPath": "/doki/icons/stop_solid.svg"
+  },
+  {
+    "originalPath": "/actions/checkOut.svg",
+    "newPath": "/doki/icons/update_project.svg"
+  },
+  {
+    "originalPath": "/actions/commit.svg",
+    "newPath": "/doki/icons/check.svg"
+  },
+  {
+    "originalPath": "/vcs/push.svg",
+    "newPath": "/doki/icons/push_changes.svg"
+  },
+  {
+    "originalPath": "/vcs/history.svg",
+    "newPath": "/doki/icons/history.svg"
+  },
+  {
+    "originalPath": "/actions/rollback.svg",
+    "newPath": "/doki/icons/revert.svg"
+  },
+  {
+    "originalPath": "/actions/find.svg",
+    "newPath": "/doki/icons/search_right.svg"
+  },
+  {
+    "originalPath": "/general/gearPlain.svg",
+    "newPath": "/doki/icons/settings.svg"
+  },
+  {
+    "originalPath": "/actions/expandall.svg",
+    "newPath": "/doki/icons/expand_all.svg"
+  },
+  {
+    "originalPath": "/actions/collapseall.svg",
+    "newPath": "/doki/icons/collapse_all.svg"
+  },
+  {
+    "originalPath": "/general/hideToolWindow.svg",
+    "newPath": "/doki/icons/hide.svg"
+  },
+  {
+    "originalPath": "/general/locate.svg",
+    "newPath": "/doki/icons/locate.svg"
+  },
+  {
+    "originalPath": "/icons/toolWindowDatabase.svg",
+    "newPath": "/doki/icons/db_solid.svg"
+  },
+  {
+    "originalPath": "/toolwindows/notifications.svg",
+    "newPath": "/doki/icons/notifications.svg"
+  },
+  {
+    "originalPath": "/actions/compile.svg",
+    "newPath": "/doki/icons/build.svg"
   }
 ]
