@@ -82,7 +82,8 @@ open class BuildThemes : DefaultTask() {
 
     // todo: only copy over used icons.
     Files.walk(iconSourceDirectory())
-      .filter { Files.isDirectory(it).not() }
+      .filter { Files.isDirectory(it).not() &&
+        it.fileName.toString().contains(".DS_Store", ignoreCase = true).not() }
       .forEach {
         dokiIconPath ->
         Files.copy(

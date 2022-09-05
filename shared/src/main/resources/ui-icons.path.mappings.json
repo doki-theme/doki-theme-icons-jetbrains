@@ -130,5 +130,49 @@
   {
     "originalPath": "/icons/artifactSmall.svg",
     "newPath": "/doki/icons/dependencies_13x13.svg"
+  },
+  {
+    "originalPath": "/actions/more.svg",
+    "newPath": "/doki/icons/ellipsis_vertical.svg"
+  },
+  {
+    "originalPath": "/actions/findAndShowPrevMatchesSmall.svg",
+    "newPath": "/doki/icons/chevron_up_13x13.svg"
+  },
+  {
+    "originalPath": "/actions/findAndShowNextMatchesSmall.svg",
+    "newPath": "/doki/icons/chevron_down_13x13.svg"
+  },
+  {
+    "originalPath": "/general/buttonDropTriangle.svg",
+    "newPath": "/doki/icons/chevron_down_13x13.svg"
+  },
+  {
+    "originalPath": "/actions/back.svg",
+    "newPath": "/doki/icons/chevron_left.svg"
+  },
+  {
+    "originalPath": "/actions/forward.svg",
+    "newPath": "/doki/icons/chevron_right.svg"
+  },
+  {
+    "originalPath": "/actions/refresh.svg",
+    "newPath": "/doki/icons/refresh.svg"
+  },
+  {
+    "originalPath": "/general/add.svg",
+    "newPath": "/doki/icons/add.svg"
+  },
+  {
+    "originalPath": "/general/remove.svg",
+    "newPath": "/doki/icons/subtract.svg"
+  },
+  {
+    "originalPath": "/actions/moveUp.svg",
+    "newPath": "/doki/icons/chevron_up.svg"
+  },
+  {
+    "originalPath": "/actions/moveDown.svg",
+    "newPath": "/doki/icons/chevron_down.svg"
   }
 ]
