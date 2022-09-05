@@ -13,6 +13,7 @@ import io.unthrottled.doki.build.jvm.tools.DokiProduct
 import io.unthrottled.doki.build.jvm.tools.GroupToNameMapping.getLafNamePrefix
 import io.unthrottled.doki.build.jvm.tools.PathTools.cleanDirectory
 import io.unthrottled.doki.build.jvm.tools.PathTools.ensureDirectoryExists
+import io.unthrottled.doki.build.jvm.tools.PathTools.readJSONFromFile
 import java.io.File
 import java.io.InputStreamReader
 import java.nio.file.Files
@@ -122,17 +123,6 @@ open class BuildThemes : DefaultTask() {
         )
       }
   }
-
-  // todo common
-  private fun <T> readJSONFromFile(mappingFile: Path, typeToken: TypeToken<T>): T =
-    gson.fromJson<T>(
-      InputStreamReader(
-        Files.newInputStream(
-          mappingFile
-        )
-      ),
-      typeToken.type
-    )
 
   private fun getFileFromResources(mappingFile: String): Path = get(
     getResourcesDirectory().toAbsolutePath().toString(),
