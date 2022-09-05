@@ -1,10 +1,10 @@
 [
   {
     "originalPath": "/nodes/class.svg",
-    "newPath": "/doki/icons/solid_doki_glyph.svg"
+    "iconName": "solid_doki_glyph.svg"
   },
   {
     "originalPath": "/resharper/PsiCSharp/Csharp.svg",
-    "newPath": "/doki/icons/build.svg"
+    "iconName": "build.svg"
   }
 ]

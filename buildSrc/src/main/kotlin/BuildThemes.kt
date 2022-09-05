@@ -1,5 +1,5 @@
 import com.google.gson.GsonBuilder
-import groovy.util.Node
+import com.google.gson.reflect.TypeToken
 import io.unthrottled.doki.build.jvm.models.AssetTemplateDefinition
 import io.unthrottled.doki.build.jvm.models.IconsAppDefinition
 import io.unthrottled.doki.build.jvm.models.MasterThemeDefinition
@@ -14,15 +14,13 @@ import io.unthrottled.doki.build.jvm.tools.GroupToNameMapping.getLafNamePrefix
 import io.unthrottled.doki.build.jvm.tools.PathTools.cleanDirectory
 import io.unthrottled.doki.build.jvm.tools.PathTools.ensureDirectoryExists
 import java.io.File
+import java.io.InputStreamReader
 import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
 import java.nio.file.Paths.get
-import java.nio.file.StandardCopyOption
 import java.nio.file.StandardOpenOption
-import java.util.TreeMap
 import java.util.stream.Collectors
-import java.util.stream.Stream
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.TaskAction
 
@@ -36,9 +34,14 @@ data class DokiTheme(
   val colors: Map<String, String>,
 )
 
+data class IconPathMapping(
+  val iconName: String,
+)
+
 open class BuildThemes : DefaultTask() {
 
-  private val gson = GsonBuilder().create()
+  private val gson = GsonBuilder()
+    .create()
 
   init {
     group = "doki"
@@ -80,12 +83,32 @@ open class BuildThemes : DefaultTask() {
     ensureDirectoryExists(getIconsDirectory())
     cleanDirectory(getIconsDirectory())
 
-    // todo: only copy over used icons.
+    val allUsedIcons = arrayListOf(
+      "files.named.mappings.json",
+      "glyph-icons.path.mappings.json",
+      "ui-icons.path.mappings.json",
+    )
+      .flatMap { mappingFile ->
+        gson.fromJson<List<IconPathMapping>>(
+          InputStreamReader(
+            Files.newInputStream(
+              get(
+                getResourcesDirectory().toAbsolutePath().toString(),
+                mappingFile,
+              )
+            )
+          ),
+          object : TypeToken<List<IconPathMapping>>() {}.type
+        )
+      }
+      .map { it.iconName }
+      .toSet()
+
     Files.walk(iconSourceDirectory())
-      .filter { Files.isDirectory(it).not() &&
-        it.fileName.toString().contains(".DS_Store", ignoreCase = true).not() }
-      .forEach {
-        dokiIconPath ->
+      .filter {
+        allUsedIcons.contains(it.fileName.toString())
+      }
+      .forEach { dokiIconPath ->
         Files.copy(
           dokiIconPath,
           Paths.get(
@@ -178,6 +201,7 @@ open class BuildThemes : DefaultTask() {
     "doki",
     "generated"
   )
+
   private fun getIconsDirectory(): Path = get(
     getResourcesDirectory().toString(),
     "doki",
@@ -191,6 +215,7 @@ open class BuildThemes : DefaultTask() {
     "main",
     "resources"
   )
+
   private fun iconSourceDirectory(): Path = get(
     project.rootDir.absolutePath,
     "iconSource",

@@ -2,6 +2,6 @@
   {
     "name": "JSON",
     "mappingPattern": "^.*\\.json$",
-    "iconPath": "curly_braces.svg"
+    "iconName": "curly_braces.svg"
   }
 ]

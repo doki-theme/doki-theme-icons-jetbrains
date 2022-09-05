@@ -11,7 +11,7 @@ open class NamedIconProvider(namedIconMappings: NamedIconMappings) : IconProvide
 
   override fun getNamedIcon(virtualFileInfo: VirtualFileInfo): Icon? {
     return mappingLocator.locateMapping(virtualFileInfo)
-      .map { IconLoader.getIcon("${Constants.DOKI_ICONS_BASE_PATH}/${it.iconPath}", javaClass) }
+      .map { IconLoader.getIcon("${Constants.DOKI_ICONS_BASE_PATH}/${it.iconName}", javaClass) }
       .orElse(null)
   }
 }

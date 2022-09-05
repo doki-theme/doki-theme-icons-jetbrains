@@ -1,178 +1,178 @@
 [
   {
     "originalPath": "/actions/compile.svg",
-    "newPath": "/doki/icons/build.svg"
+    "iconName": "build.svg"
   },
   {
     "originalPath": "/resharper/ProjectModel/Folder.svg",
-    "newPath": "/doki/icons/folder.svg"
+    "iconName": "folder.svg"
   },
   {
     "originalPath": "/actions/execute.svg",
-    "newPath": "/doki/icons/play_solid.svg"
+    "iconName": "play_solid.svg"
   },
   {
     "originalPath": "/actions/startDebugger.svg",
-    "newPath": "/doki/icons/debug.svg"
+    "iconName": "debug.svg"
   },
   {
     "originalPath": "/general/runWithCoverage.svg",
-    "newPath": "/doki/icons/coverage.svg"
+    "iconName": "coverage.svg"
   },
   {
     "originalPath": "/actions/profile.svg",
-    "newPath": "/doki/icons/profile.svg"
+    "iconName": "profile.svg"
   },
   {
     "originalPath": "/actions/suspend.svg",
-    "newPath": "/doki/icons/stop_solid.svg"
+    "iconName": "stop_solid.svg"
   },
   {
     "originalPath": "/actions/checkOut.svg",
-    "newPath": "/doki/icons/update_project.svg"
+    "iconName": "update_project.svg"
   },
   {
     "originalPath": "/actions/commit.svg",
-    "newPath": "/doki/icons/check.svg"
+    "iconName": "check.svg"
   },
   {
     "originalPath": "/vcs/push.svg",
-    "newPath": "/doki/icons/push_changes.svg"
+    "iconName": "push_changes.svg"
   },
   {
     "originalPath": "/vcs/history.svg",
-    "newPath": "/doki/icons/history.svg"
+    "iconName": "history.svg"
   },
   {
     "originalPath": "/actions/rollback.svg",
-    "newPath": "/doki/icons/revert.svg"
+    "iconName": "revert.svg"
   },
   {
     "originalPath": "/actions/find.svg",
-    "newPath": "/doki/icons/search_right.svg"
+    "iconName": "search_right.svg"
   },
   {
     "originalPath": "/general/gearPlain.svg",
-    "newPath": "/doki/icons/settings.svg"
+    "iconName": "settings.svg"
   },
   {
     "originalPath": "/actions/expandall.svg",
-    "newPath": "/doki/icons/expand_all.svg"
+    "iconName": "expand_all.svg"
   },
   {
     "originalPath": "/actions/collapseall.svg",
-    "newPath": "/doki/icons/collapse_all.svg"
+    "iconName": "collapse_all.svg"
   },
   {
     "originalPath": "/general/hideToolWindow.svg",
-    "newPath": "/doki/icons/hide.svg"
+    "iconName": "hide.svg"
   },
   {
     "originalPath": "/general/locate.svg",
-    "newPath": "/doki/icons/locate.svg"
+    "iconName": "locate.svg"
   },
   {
     "originalPath": "/icons/toolWindowDatabase.svg",
-    "newPath": "/doki/icons/db_solid_13x13.svg"
+    "iconName": "db_solid_13x13.svg"
   },
   {
     "originalPath": "/toolwindows/notifications.svg",
-    "newPath": "/doki/icons/notifications_13x13.svg"
+    "iconName": "notifications_13x13.svg"
   },
   {
     "originalPath": "/actions/compile.svg",
-    "newPath": "/doki/icons/build.svg"
+    "iconName": "build.svg"
   },
   {
     "originalPath": "/ide/readwrite.svg",
-    "newPath": "/doki/icons/unlocked_13x13.svg"
+    "iconName": "unlocked_13x13.svg"
   },
   {
     "originalPath": "/vcs/branch.svg",
-    "newPath": "/doki/icons/vcs_solid_13x13.svg"
+    "iconName": "vcs_solid_13x13.svg"
   },
   {
     "originalPath": "/toolwindows/toolWindowChanges.svg",
-    "newPath": "/doki/icons/vcs_solid_13x13.svg"
+    "iconName": "vcs_solid_13x13.svg"
   },
   {
     "originalPath": "/toolwindows/toolWindowStructure.svg",
-    "newPath": "/doki/icons/structure_13x13.svg"
+    "iconName": "structure_13x13.svg"
   },
   {
     "originalPath": "/toolwindows/toolWindowBookmarks.svg",
-    "newPath": "/doki/icons/bookmark_13x13.svg"
+    "iconName": "bookmark_13x13.svg"
   },
   {
     "originalPath": "/org/jetbrains/plugins/github/pullRequestsToolWindow.svg",
-    "newPath": "/doki/icons/pull_request_13x13.svg"
+    "iconName": "pull_request_13x13.svg"
   },
   {
     "originalPath": "/toolwindows/toolWindowTodo.svg",
-    "newPath": "/doki/icons/todo_13x13.svg"
+    "iconName": "todo_13x13.svg"
   },
   {
     "originalPath": "/toolwindows/toolWindowProblemsEmpty.svg",
-    "newPath": "/doki/icons/warning_circle_13x13.svg"
+    "iconName": "warning_circle_13x13.svg"
   },
   {
     "originalPath": "/icons/OpenTerminal_13x13.svg",
-    "newPath": "/doki/icons/terminal_solid_13x13.svg"
+    "iconName": "terminal_solid_13x13.svg"
   },
   {
     "originalPath": "/toolwindows/toolWindowServices.svg",
-    "newPath": "/doki/icons/services_13x13.svg"
+    "iconName": "services_13x13.svg"
   },
   {
     "originalPath": "/toolwindows/toolWindowProfiler.svg",
-    "newPath": "/doki/icons/profile_13x13.svg"
+    "iconName": "profile_13x13.svg"
   },
   {
     "originalPath": "/icons/artifactSmall.svg",
-    "newPath": "/doki/icons/dependencies_13x13.svg"
+    "iconName": "dependencies_13x13.svg"
   },
   {
     "originalPath": "/actions/more.svg",
-    "newPath": "/doki/icons/ellipsis_vertical.svg"
+    "iconName": "ellipsis_vertical.svg"
   },
   {
     "originalPath": "/actions/findAndShowPrevMatchesSmall.svg",
-    "newPath": "/doki/icons/chevron_up_13x13.svg"
+    "iconName": "chevron_up_13x13.svg"
   },
   {
     "originalPath": "/actions/findAndShowNextMatchesSmall.svg",
-    "newPath": "/doki/icons/chevron_down_13x13.svg"
+    "iconName": "chevron_down_13x13.svg"
   },
   {
     "originalPath": "/general/buttonDropTriangle.svg",
-    "newPath": "/doki/icons/chevron_down_13x13.svg"
+    "iconName": "chevron_down_13x13.svg"
   },
   {
     "originalPath": "/actions/back.svg",
-    "newPath": "/doki/icons/chevron_left.svg"
+    "iconName": "chevron_left.svg"
   },
   {
     "originalPath": "/actions/forward.svg",
-    "newPath": "/doki/icons/chevron_right.svg"
+    "iconName": "chevron_right.svg"
   },
   {
     "originalPath": "/actions/refresh.svg",
-    "newPath": "/doki/icons/refresh.svg"
+    "iconName": "refresh.svg"
   },
   {
     "originalPath": "/general/add.svg",
-    "newPath": "/doki/icons/add.svg"
+    "iconName": "add.svg"
   },
   {
     "originalPath": "/general/remove.svg",
-    "newPath": "/doki/icons/subtract.svg"
+    "iconName": "subtract.svg"
   },
   {
     "originalPath": "/actions/moveUp.svg",
-    "newPath": "/doki/icons/chevron_up.svg"
+    "iconName": "chevron_up.svg"
   },
   {
     "originalPath": "/actions/moveDown.svg",
-    "newPath": "/doki/icons/chevron_down.svg"
+    "iconName": "chevron_down.svg"
   }
 ]

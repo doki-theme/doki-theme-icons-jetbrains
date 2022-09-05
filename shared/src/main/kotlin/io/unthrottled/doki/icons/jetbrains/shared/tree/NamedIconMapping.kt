@@ -14,12 +14,12 @@ enum class NamedIconMappings(val fileName: String) {
 data class SerializedNamedIconMapping(
   val name: String,
   val mappingPattern: String,
-  val iconPath: String,
+  val iconName: String,
 )
 data class NamedIconMapping(
   val name: String,
   val mappingRegex: Regex,
-  val iconPath: String,
+  val iconName: String,
 )
 class NamedIconMappingLocator(
   private val namedIconMappings: List<NamedIconMapping>
@@ -51,7 +51,7 @@ object NamedIconMappingLocatorFactory : Logging {
             NamedIconMapping(
               name = it.name,
               mappingRegex = Regex(it.mappingPattern),
-              iconPath = it.iconPath
+              iconName = it.iconName
             )
           }
         )
