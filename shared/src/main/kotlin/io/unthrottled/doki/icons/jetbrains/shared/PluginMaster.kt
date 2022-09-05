@@ -5,6 +5,7 @@ import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.project.ProjectManager
 import com.intellij.openapi.project.ProjectManagerListener
+import io.unthrottled.doki.icons.jetbrains.shared.laf.LAFIconReplacementComponent
 import io.unthrottled.doki.icons.jetbrains.shared.onboarding.UserOnBoarding
 import io.unthrottled.doki.icons.jetbrains.shared.path.IconPathReplacementComponent
 import io.unthrottled.doki.icons.jetbrains.shared.svg.ThemedSVGManager
@@ -26,6 +27,7 @@ class PluginMaster : ProjectManagerListener, Disposable, Logging {
     IconThemeManager.instance.init()
     ThemedSVGManager.instance.initialize()
     IconPathReplacementComponent.initialize()
+    LAFIconReplacementComponent.initialize()
   }
 
   override fun projectOpened(project: Project) {
@@ -45,6 +47,7 @@ class PluginMaster : ProjectManagerListener, Disposable, Logging {
     IconThemeManager.instance.dispose()
     ThemedSVGManager.instance.dispose()
     IconPathReplacementComponent.dispose()
+    LAFIconReplacementComponent.dispose()
     projectListeners.forEach { (_, listeners) -> listeners.dispose() }
   }
 

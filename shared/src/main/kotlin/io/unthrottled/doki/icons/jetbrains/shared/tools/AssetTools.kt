@@ -10,6 +10,7 @@ import java.util.Optional
 object AssetTools : Logging {
   private val gson = Gson()
 
+  // todo: common
   fun <T : Any> readJsonFromResources(
     basePath: String,
     filePath: String,
