@@ -1,6 +1,8 @@
 package io.unthrottled.doki.icons.jetbrains.shared.path
 
+import com.intellij.openapi.actionSystem.impl.ActionToolbarImpl
 import com.intellij.openapi.application.ApplicationManager
+import com.intellij.openapi.fileTypes.ex.FileTypeManagerEx
 import com.intellij.openapi.util.IconLoader
 import io.unthrottled.doki.icons.jetbrains.shared.config.Config
 import io.unthrottled.doki.icons.jetbrains.shared.config.IconConfigListener
@@ -46,7 +48,6 @@ object IconPathReplacementComponent : IconConfigListener {
     }
   }
 
-  // todo: refresh project to make sure icon changes take effect.
   override fun iconConfigUpdated(previousState: IconSettingsModel, newState: IconSettingsModel) {
     iconInstallPacs.filter {
       it.iconSettingsExtractor(previousState) != it.iconSettingsExtractor(newState)
@@ -57,6 +58,16 @@ object IconPathReplacementComponent : IconConfigListener {
       } else {
         IconLoader.installPathPatcher(pak.iconPatcher)
       }
+    }
+
+    refresh()
+  }
+
+  private fun refresh() {
+    ApplicationManager.getApplication().invokeLater {
+      val app = ApplicationManager.getApplication()
+      app.runWriteAction { FileTypeManagerEx.getInstanceEx().fireFileTypesChanged() }
+      app.runWriteAction { ActionToolbarImpl.updateAllToolbarsImmediately() }
     }
   }
 }

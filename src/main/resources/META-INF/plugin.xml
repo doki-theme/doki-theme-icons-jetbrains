@@ -25,5 +25,7 @@
                 topic="com.intellij.ide.AppLifecycleListener" />
       <listener class="io.unthrottled.doki.icons.jetbrains.shared.listeners.ProjectListener"
                 topic="com.intellij.openapi.project.ProjectManagerListener"/>
+      <listener class="io.unthrottled.doki.icons.jetbrains.shared.listeners.ProjectRefreshListener"
+                topic="io.unthrottled.doki.icons.jetbrains.shared.config.IconConfigListener"/>
     </applicationListeners>
 </idea-plugin>

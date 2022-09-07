@@ -19,5 +19,4 @@ object DokiThemeIcons {
 
   private fun load(path: String): Icon =
     getInstance().getIcon(path, DokiThemeIcons::class.java)
-
 }

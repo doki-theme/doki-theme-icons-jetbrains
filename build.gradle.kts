@@ -34,7 +34,6 @@ dependencies {
   runtimeOnly(project(":rider"))
 }
 
-
 allprojects {
   apply {
     plugin("java")

@@ -25,7 +25,6 @@ class TreeNamedIconProvider : IconProvider(), DumbAware {
   private fun getFileIcon(element: PsiFile): Icon? =
     provideIcon(Config.instance.isNamedFileIcons, element) { NamedFileIconProvider.getNamedIcon(it) }
 
-  // todo: make sure refreshes
   private fun provideIcon(
     configOption: Boolean,
     element: PsiElement,
