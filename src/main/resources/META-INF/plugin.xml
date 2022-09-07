@@ -16,6 +16,7 @@
       <errorHandler implementation="io.unthrottled.doki.icons.jetbrains.shared.integrations.ErrorReporter"/>
       <iconProvider implementation="io.unthrottled.doki.icons.jetbrains.shared.tree.TreeNamedIconProvider" order="first"/>
       <notificationGroup displayType="BALLOON" id="Doki Theme Icons Updates" isLogByDefault="false" toolWindowId="Doki Theme Icons Updates" />
+      <projectService serviceImplementation="io.unthrottled.doki.icons.jetbrains.shared.tree.OptimisticNameProvider" />
     </extensions>
 
     <applicationListeners>

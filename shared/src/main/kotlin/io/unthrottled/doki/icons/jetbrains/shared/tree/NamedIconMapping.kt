@@ -7,7 +7,9 @@ import io.unthrottled.doki.icons.jetbrains.shared.tools.logger
 import io.unthrottled.doki.icons.jetbrains.shared.tools.toOptional
 import java.util.Optional
 
-enum class NamedIconMappings(val fileName: String) {
+enum class NamedIconMappings(
+  val fileName: String,
+) {
   FILE("files.named.mappings.json"),
 }
 
@@ -16,48 +18,46 @@ data class SerializedNamedIconMapping(
   val mappingPattern: String,
   val iconName: String,
 )
+
 data class NamedIconMapping(
   val name: String,
   val mappingRegex: Regex,
   val iconName: String,
 )
-class NamedIconMappingLocator(
-  private val namedIconMappings: List<NamedIconMapping>
-) {
+
+object NamedIconMappingLocator {
   fun locateMapping(virtualFileInfo: VirtualFileInfo): Optional<NamedIconMapping> =
     virtualFileInfo.name.toOptional()
       .flatMap { fileName ->
-        pickFileNameFromList(fileName)
+        virtualFileInfo.psiElement.project.nameProvider()
+          .findMapping(fileName)
       }
-
-  private fun pickFileNameFromList(fileName: String): Optional<NamedIconMapping> {
-    return namedIconMappings.firstOrNull {
-      fileName.matches(it.mappingRegex)
-    }.toOptional() // todo smart pick from list
-  }
 }
 
-object NamedIconMappingLocatorFactory : Logging {
+object NamedIconMappingFactory : Logging {
 
-  fun create(namedIconMapping: NamedIconMappings): NamedIconMappingLocator =
+  fun create(namedIconMapping: NamedIconMappings): List<NamedIconMapping> =
     AssetTools.readJsonFromResources<List<SerializedNamedIconMapping>>(
       "/",
       namedIconMapping.fileName,
       object : TypeToken<List<SerializedNamedIconMapping>>() {}.type
     )
       .map { serializedNamedIconMappings ->
-        NamedIconMappingLocator(
-          serializedNamedIconMappings.map {
-            NamedIconMapping(
-              name = it.name,
-              mappingRegex = Regex(it.mappingPattern),
-              iconName = it.iconName
-            )
-          }
-        )
+        serializedNamedIconMappings.map {
+          NamedIconMapping(
+            name = it.name,
+            mappingRegex = Regex(it.mappingPattern),
+            iconName = it.iconName
+          )
+        }
       }
       .orElseGet {
         logger().warn("Unable to read named icon mappings for raisins")
-        NamedIconMappingLocator(emptyList())
+        emptyList()
       }
+}
+
+object NamedMappingStore {
+  val FILES: List<NamedIconMapping> =
+    NamedIconMappingFactory.create(NamedIconMappings.FILE)
 }
