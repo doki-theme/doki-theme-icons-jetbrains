@@ -9,9 +9,18 @@ fun Project.nameProvider(): OptimisticNameProvider =
 
 class OptimisticNameProvider(private val project: Project) {
 
+  private val priorityList = SchwiftyList<NamedIconMapping>()
+
   fun findMapping(fileName: String): Optional<NamedIconMapping> {
-    return NamedMappingStore.FILES.firstOrNull {
+    return priorityList.first {
       fileName.matches(it.mappingRegex)
-    }.toOptional()
+    }.or {
+      NamedMappingStore.FILES.firstOrNull {
+        fileName.matches(it.mappingRegex)
+      }.toOptional()
+        .map {
+          priorityList.enqueue(it)
+        }
+    }
   }
 }

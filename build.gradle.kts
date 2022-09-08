@@ -43,6 +43,12 @@ allprojects {
     plugin("org.jlleitschuh.gradle.ktlint")
   }
 
+  dependencies {
+    testImplementation("org.assertj:assertj-core:3.23.1")
+    testImplementation("io.mockk:mockk:1.12.7")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.9.0")
+  }
+
   repositories {
     mavenCentral()
   }

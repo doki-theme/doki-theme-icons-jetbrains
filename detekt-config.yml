@@ -22,5 +22,8 @@ style:
     active: true
     values: []
 
+  NewLineAtEndOfFile:
+    active: false
+
 empty-blocks:
   active: false
