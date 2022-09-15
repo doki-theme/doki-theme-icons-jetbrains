@@ -142,6 +142,7 @@ tasks {
 
   runIde {
     maxHeapSize = "2g"
+    systemProperty("idea.ui.icons.svg.disk.cache", "false")
     val idePath = properties("idePath")
     if (idePath.isNotEmpty()) {
       ideDir.set(file(idePath))

@@ -1,13 +1,54 @@
 package io.unthrottled.doki.icons.jetbrains.shared.svg
 
+import com.google.gson.reflect.TypeToken
 import com.intellij.ui.ColorUtil
 import com.intellij.ui.JBColor
 import com.intellij.util.SVGLoader
 import io.unthrottled.doki.icons.jetbrains.shared.themes.DokiTheme
+import io.unthrottled.doki.icons.jetbrains.shared.tools.AssetTools
+import io.unthrottled.doki.icons.jetbrains.shared.tools.Logging
+import io.unthrottled.doki.icons.jetbrains.shared.tools.logger
 import io.unthrottled.doki.icons.jetbrains.shared.tools.toColor
 import io.unthrottled.doki.icons.jetbrains.shared.tools.toHexString
 import org.w3c.dom.Element
 import java.awt.Color
+
+class SVGColorPaletteReplacer(private val dokiTheme: DokiTheme) : PatcherProvider, Logging {
+
+  companion object {
+    private val iconTemplate: Map<String, String> =
+      AssetTools.readJsonFromResources<Map<String, String>>(
+        "/doki/generated",
+        "icon.palette.template.json",
+        object : TypeToken<Map<String, String>>() {}.type
+      ).orElseGet {
+        emptyMap()
+      }
+  }
+
+  private val newPalette =
+    iconTemplate.entries
+      .associateBy({
+        it.key
+      }) {
+        val namedColor = it.value
+        val newColor = dokiTheme.colors[namedColor] ?: ""
+        if (newColor.isEmpty()) {
+          logger().error(
+            """Hey silly maintainer, you forgot to give theme 
+              |"${dokiTheme.listName}:${dokiTheme.id}" color "$namedColor", pls fix""".trimMargin()
+          )
+        }
+        newColor
+      }
+
+  override fun forPath(path: String?): SVGLoader.SvgElementColorPatcher? =
+    SVGLoader.newPatcher(
+      (dokiTheme.id + dokiTheme.version).toByteArray(Charsets.UTF_8),
+      newPalette,
+      mutableMapOf(),
+    )
+}
 
 class SVGColorizerProvider(private val dokiTheme: DokiTheme) : PatcherProvider {
   override fun forPath(path: String?): SVGLoader.SvgElementColorPatcher? = SVGColorizer(dokiTheme)
@@ -45,11 +86,13 @@ class SVGColorizer(private val dokiTheme: DokiTheme) : Patcher {
         svg.setAttribute("stop-color", themedStart)
         svg.setAttribute("fill", themedStart)
       }
+
       "true" == themedStopAttr -> {
         val themedStop = getThemedStopColor()
         svg.setAttribute("stop-color", themedStop)
         svg.setAttribute("fill", themedStop)
       }
+
       "true" == themedFillAttr -> {
         val themedStart = getThemedStartColor()
         svg.setAttribute("fill", themedStart)

@@ -15,7 +15,6 @@ import io.unthrottled.doki.build.jvm.tools.PathTools.cleanDirectory
 import io.unthrottled.doki.build.jvm.tools.PathTools.ensureDirectoryExists
 import io.unthrottled.doki.build.jvm.tools.PathTools.readJSONFromFile
 import java.io.File
-import java.io.InputStreamReader
 import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
@@ -78,6 +77,24 @@ open class BuildThemes : DefaultTask() {
     writeThemesAsJson(dokiThemes)
 
     copyUsedIconsFromIconSource()
+
+    copyIconPaletteFromIconSource()
+  }
+
+  private fun copyIconPaletteFromIconSource() {
+    Files.copy(
+      Paths.get(
+        iconSourceDirectory().toAbsolutePath().toString(),
+        "buildSrc",
+        "assets",
+        "templates",
+        "icon.palette.template.json"
+      ),
+      Paths.get(
+        getGenerateResourcesDirectory().toAbsolutePath().toString(),
+        "icon.palette.template.json"
+      )
+    )
   }
 
   private fun copyUsedIconsFromIconSource() {
@@ -109,7 +126,7 @@ open class BuildThemes : DefaultTask() {
       )
     )
 
-    Files.walk(iconSourceDirectory())
+    Files.walk(svgIconSourceDirectory())
       .filter {
         allUsedIcons.contains(it.fileName.toString())
       }
@@ -229,6 +246,9 @@ open class BuildThemes : DefaultTask() {
   private fun iconSourceDirectory(): Path = get(
     project.rootDir.absolutePath,
     "iconSource",
+  )
+  private fun svgIconSourceDirectory(): Path = get(
+    iconSourceDirectory().toAbsolutePath().toString(),
     "icons",
   )
 

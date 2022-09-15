@@ -33,7 +33,9 @@ class ComposedSVGColorizerProvider(
   override fun forPath(path: String?): SVGLoader.SvgElementColorPatcher? {
     return ComposedSVGColorizer(
       listOf(
-        otherSvgPatcherProvider, SVGColorizerProvider(dokiTheme)
+        otherSvgPatcherProvider,
+        SVGColorizerProvider(dokiTheme),
+        SVGColorPaletteReplacer(dokiTheme),
       )
         .distinct()
         .mapNotNull { patcherProvider ->

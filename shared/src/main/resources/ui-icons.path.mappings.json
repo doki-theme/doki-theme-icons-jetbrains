@@ -174,5 +174,9 @@
   {
     "originalPath": "/actions/moveDown.svg",
     "iconName": "chevron_down.svg"
+  },
+  {
+    "originalPath": "/nodes/folder.svg",
+    "iconName": "folder.svg"
   }
 ]
