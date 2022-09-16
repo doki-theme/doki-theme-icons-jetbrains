@@ -182,5 +182,13 @@
   {
     "originalPath": "/toolwindows/toolWindowStructure.svg",
     "iconName": "dna.svg"
+  },
+  {
+    "originalPath": "/debugger/db_set_breakpoint.svg",
+    "iconName": "breakpoint.svg"
+  },
+  {
+    "originalPath": "/debugger/db_disabled_breakpoint.svg",
+    "iconName": "disabled_breakpoint.svg"
   }
 ]

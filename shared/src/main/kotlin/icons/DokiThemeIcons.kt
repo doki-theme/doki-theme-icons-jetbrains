@@ -13,6 +13,10 @@ object DokiThemeIcons {
   val CURLY_BRACES = IconLoader.getIcon("/doki/icons/curly_braces.svg", javaClass)
   @JvmField
   val SOLID_DOKI_GLYPH = IconLoader.getIcon("/doki/icons/solid_doki_glyph.svg", javaClass)
+  @JvmField
+  val WATCH = IconLoader.getIcon("/doki/icons/watch.svg", javaClass)
+  @JvmField
+  val SOLID_ERROR = IconLoader.getIcon("/doki/icons/warning_circle_filled.svg", javaClass)
 
   object Tree {
     const val EXPANDED_KEY = "Tree.expandedIcon"

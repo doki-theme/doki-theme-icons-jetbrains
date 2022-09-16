@@ -1,17 +1,21 @@
 package io.unthrottled.doki.icons.jetbrains.shared.settings;
 
+import com.intellij.ide.BrowserUtil;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.options.Configurable;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.options.SearchableConfigurable;
 import com.intellij.openapi.project.DumbAware;
 import com.intellij.openapi.util.NlsContexts;
+import com.intellij.ui.components.ActionLink;
 import icons.DokiThemeIcons;
+import io.unthrottled.doki.icons.jetbrains.shared.Constants;
 import io.unthrottled.doki.icons.jetbrains.shared.config.Config;
 import io.unthrottled.doki.icons.jetbrains.shared.config.IconConfigListener;
 import io.unthrottled.doki.icons.jetbrains.shared.config.IconSettings;
 import io.unthrottled.doki.icons.jetbrains.shared.config.IconSettingsModel;
 import io.unthrottled.doki.icons.jetbrains.shared.integrations.PluginService;
+import io.unthrottled.doki.icons.jetbrains.shared.tools.PluginMessageBundle;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -39,6 +43,8 @@ public class IconSettingsUI implements SearchableConfigurable, Configurable.NoSc
   private JLabel namedFoldersIcon;
   private JLabel namedFilesIcon;
   private JLabel fileGlyphs;
+  private ActionLink iconRequest;
+  private ActionLink reportIssue;
 
   @Override
   public @NotNull @NonNls String getId() {
@@ -82,6 +88,18 @@ public class IconSettingsUI implements SearchableConfigurable, Configurable.NoSc
     syncWithDokiThemeCheckBox.setSelected(initialIconSettingsModel.getSyncWithDokiTheme());
     syncWithDokiThemeCheckBox.addActionListener(e ->
       initialIconSettingsModel.setSyncWithDokiTheme(syncWithDokiThemeCheckBox.isSelected()));
+
+    iconRequest.setIcon(DokiThemeIcons.WATCH);
+    iconRequest.setText(PluginMessageBundle.message("settings.icon.request"));
+    iconRequest.addActionListener(e -> {
+      BrowserUtil.browse(Constants.REPO_URL + "/issues/new?assignees=&labels=&template=icon_request.md&title=[Icon+Request]+");
+    });
+
+    reportIssue.setIcon(DokiThemeIcons.SOLID_ERROR);
+    reportIssue.setText(PluginMessageBundle.message("settings.report.bug"));
+    reportIssue.addActionListener(e -> {
+      BrowserUtil.browse(Constants.REPO_URL + "/issues/new?assignees=&labels=&template=bug_report.md&title=[Bug]+");
+    });
   }
 
   @Override
