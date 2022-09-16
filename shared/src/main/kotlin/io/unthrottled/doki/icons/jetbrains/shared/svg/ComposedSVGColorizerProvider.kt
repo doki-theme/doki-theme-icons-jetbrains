@@ -26,18 +26,21 @@ class ComposedSVGColorizer(
 
 @Suppress("UnstableApiUsage")
 class ComposedSVGColorizerProvider(
-  private val dokiTheme: DokiTheme,
-  private val otherSvgPatcherProvider: PatcherProvider
+  dokiTheme: DokiTheme,
+  otherSvgPatcherProvider: PatcherProvider
 ) : PatcherProvider {
+  private val colorizer = SVGColorizerProvider(dokiTheme)
+  private val replacer = SVGColorPaletteReplacer(dokiTheme)
+  private val patcherProviders = listOf(
+    otherSvgPatcherProvider,
+    colorizer,
+    replacer,
+  )
+    .distinct()
 
-  override fun forPath(path: String?): SVGLoader.SvgElementColorPatcher? {
-    return ComposedSVGColorizer(
-      listOf(
-        otherSvgPatcherProvider,
-        SVGColorizerProvider(dokiTheme),
-        SVGColorPaletteReplacer(dokiTheme),
-      )
-        .distinct()
+  override fun forPath(path: String?): SVGLoader.SvgElementColorPatcher? =
+    ComposedSVGColorizer(
+      patcherProviders
         .mapNotNull { patcherProvider ->
           runSafelyWithResult({
             patcherProvider.forPath(path)
@@ -46,7 +49,6 @@ class ComposedSVGColorizerProvider(
           }
         }
     )
-  }
 }
 
 object ComposedSVGColorizerProviderFactory {
