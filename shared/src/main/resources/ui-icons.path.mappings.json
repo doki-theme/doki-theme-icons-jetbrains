@@ -178,5 +178,9 @@
   {
     "originalPath": "/nodes/folder.svg",
     "iconName": "folder.svg"
+  },
+  {
+    "originalPath": "/toolwindows/toolWindowStructure.svg",
+    "iconName": "dna.svg"
   }
 ]
