@@ -7,6 +7,12 @@ import javax.swing.Icon
 object DokiThemeIcons {
   @JvmField
   val PLUGIN_ICON = IconLoader.getIcon("/META-INF/pluginIcon.svg", javaClass)
+  @JvmField
+  val PROJECT_GLYPH = IconLoader.getIcon("/doki/icons/project_glyph.svg", javaClass)
+  @JvmField
+  val CURLY_BRACES = IconLoader.getIcon("/doki/icons/curly_braces.svg", javaClass)
+  @JvmField
+  val SOLID_DOKI_GLYPH = IconLoader.getIcon("/doki/icons/solid_doki_glyph.svg", javaClass)
 
   object Tree {
     const val EXPANDED_KEY = "Tree.expandedIcon"

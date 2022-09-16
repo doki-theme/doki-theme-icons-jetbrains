@@ -6,6 +6,7 @@ import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.options.SearchableConfigurable;
 import com.intellij.openapi.project.DumbAware;
 import com.intellij.openapi.util.NlsContexts;
+import icons.DokiThemeIcons;
 import io.unthrottled.doki.icons.jetbrains.shared.config.Config;
 import io.unthrottled.doki.icons.jetbrains.shared.config.IconConfigListener;
 import io.unthrottled.doki.icons.jetbrains.shared.config.IconSettings;
@@ -18,6 +19,7 @@ import org.jetbrains.annotations.Nullable;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class IconSettingsUI implements SearchableConfigurable, Configurable.NoScroll, DumbAware {
@@ -33,6 +35,10 @@ public class IconSettingsUI implements SearchableConfigurable, Configurable.NoSc
   private JCheckBox foldersCheckBox;
   private JCheckBox filesCheckBox;
   private JCheckBox PSICheckBox;
+  private JLabel uiIcon;
+  private JLabel namedFoldersIcon;
+  private JLabel namedFilesIcon;
+  private JLabel fileGlyphs;
 
   @Override
   public @NotNull @NonNls String getId() {
@@ -54,19 +60,23 @@ public class IconSettingsUI implements SearchableConfigurable, Configurable.NoSc
     UIIconsCheckBox.setSelected(initialIconSettingsModel.isUIIcons());
     UIIconsCheckBox.addActionListener(e ->
       initialIconSettingsModel.setUIIcons(UIIconsCheckBox.isSelected()));
+    uiIcon.setIcon(DokiThemeIcons.PROJECT_GLYPH);
 
     filesCheckBox.setSelected(initialIconSettingsModel.isNamedFileIcons());
     filesCheckBox.addActionListener(e ->
       initialIconSettingsModel.setNamedFileIcons(filesCheckBox.isSelected()));
+    namedFilesIcon.setIcon(DokiThemeIcons.CURLY_BRACES);
 
     PSICheckBox.setSelected(initialIconSettingsModel.isGlyphIcons());
     PSICheckBox.addActionListener(e ->
       initialIconSettingsModel.setGlyphIcons(PSICheckBox.isSelected()));
+    fileGlyphs.setIcon(DokiThemeIcons.SOLID_DOKI_GLYPH);
 
     foldersCheckBox.setSelected(initialIconSettingsModel.isNamedFolderIcons());
     foldersCheckBox.addActionListener(e ->
       initialIconSettingsModel.setNamedFolderIcons(foldersCheckBox.isSelected()));
     foldersCheckBox.setVisible(false);
+    namedFoldersIcon.setVisible(false);
 
     syncWithDokiThemeCheckBox.setEnabled(PluginService.INSTANCE.isDokiThemeInstalled());
     syncWithDokiThemeCheckBox.setSelected(initialIconSettingsModel.getSyncWithDokiTheme());
