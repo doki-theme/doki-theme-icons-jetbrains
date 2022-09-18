@@ -3,6 +3,7 @@ package io.unthrottled.doki.icons.jetbrains.shared.themes
 import com.google.gson.reflect.TypeToken
 import com.intellij.ide.ui.LafManager
 import com.intellij.ide.ui.LafManagerListener
+import com.intellij.ide.ui.UITheme
 import com.intellij.ide.ui.laf.LafManagerImpl
 import com.intellij.ide.ui.laf.UIThemeBasedLookAndFeelInfo
 import com.intellij.openapi.Disposable
@@ -34,9 +35,14 @@ class DokiTheme(
     get() = dokiThemeInformation.colors
 }
 
+data class DokiThemePayload(
+  val dokiTheme: DokiTheme,
+  val uiTheme: UITheme,
+)
+
 interface ThemeManagerListener : EventListener {
 
-  fun onDokiThemeActivated(dokiTheme: DokiTheme)
+  fun onDokiThemeActivated(dokiThemePayload: DokiThemePayload)
 
   fun onDokiThemeRemoved()
 }
@@ -76,17 +82,23 @@ class IconThemeManager : LafManagerListener, Disposable, IconConfigListener {
   val defaultTheme: DokiTheme
     get() = getThemeById(DEFAULT_THEME_ID).get()
 
-  val currentTheme: Optional<DokiTheme>
+  val currentTheme: Optional<DokiThemePayload>
     get() = processLaf(LafManagerImpl.getInstance().currentLookAndFeel)
 
   val allThemes: List<DokiTheme>
     get() = themeMap.values.toList()
 
-  private fun processLaf(currentLaf: UIManager.LookAndFeelInfo?): Optional<DokiTheme> {
+  private fun processLaf(currentLaf: UIManager.LookAndFeelInfo?): Optional<DokiThemePayload> {
     return currentLaf.toOptional()
       .filter { it is UIThemeBasedLookAndFeelInfo }
       .map { it as UIThemeBasedLookAndFeelInfo }
-      .map { themeMap[it.getId()] }
+      .filter { themeMap.containsKey(it.getId()) }
+      .map {
+        DokiThemePayload(
+          themeMap[it.getId()]!!,
+          it.theme
+        )
+      }
   }
 
   override fun dispose() {
@@ -100,10 +112,10 @@ class IconThemeManager : LafManagerListener, Disposable, IconConfigListener {
 
     val messageBus = ApplicationManager.getApplication().messageBus
     processLaf(source.currentLookAndFeel)
-      .doOrElse({ dokiTheme ->
-        Config.instance.currentThemeId = dokiTheme.id
+      .doOrElse({ dokiThemePayload ->
+        Config.instance.currentThemeId = dokiThemePayload.dokiTheme.id
         messageBus.syncPublisher(TOPIC)
-          .onDokiThemeActivated(dokiTheme)
+          .onDokiThemeActivated(dokiThemePayload)
       }) {
         messageBus.syncPublisher(TOPIC)
           .onDokiThemeRemoved()
@@ -119,11 +131,22 @@ class IconThemeManager : LafManagerListener, Disposable, IconConfigListener {
   ) {
     val currentThemeId = newState.currentThemeId
     if (previousState.currentThemeId != currentThemeId) {
-      getThemeById(currentThemeId).ifPresent {
-        ApplicationManager.getApplication().messageBus
-          .syncPublisher(TOPIC)
-          .onDokiThemeActivated(it)
-      }
+      LafManager.getInstance().installedLookAndFeels
+        .filterIsInstance<UIThemeBasedLookAndFeelInfo>()
+        .firstOrNull {
+          it.getId() == currentThemeId
+        }.toOptional()
+        .flatMap { uiTheme ->
+          getThemeById(currentThemeId)
+            .map { dokiTheme ->
+              DokiThemePayload(dokiTheme, uiTheme.theme)
+            }
+        }
+        .ifPresent {
+          ApplicationManager.getApplication().messageBus
+            .syncPublisher(TOPIC)
+            .onDokiThemeActivated(it)
+        }
     }
   }
 }

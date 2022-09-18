@@ -3,7 +3,7 @@ package io.unthrottled.doki.icons.jetbrains.shared.svg
 import com.intellij.openapi.Disposable
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.util.SVGLoader
-import io.unthrottled.doki.icons.jetbrains.shared.themes.DokiTheme
+import io.unthrottled.doki.icons.jetbrains.shared.themes.DokiThemePayload
 import io.unthrottled.doki.icons.jetbrains.shared.themes.IconThemeManager
 import io.unthrottled.doki.icons.jetbrains.shared.themes.ThemeManagerListener
 
@@ -22,7 +22,7 @@ class ThemedSVGManager : ThemeManagerListener, Disposable {
       }
   }
 
-  private fun activateTheme(currentTheme: DokiTheme) {
+  private fun activateTheme(currentTheme: DokiThemePayload) {
     SVGLoader.colorPatcherProvider =
       ComposedSVGColorizerProviderFactory.createForTheme(currentTheme)
   }
@@ -31,8 +31,8 @@ class ThemedSVGManager : ThemeManagerListener, Disposable {
     connection.dispose()
   }
 
-  override fun onDokiThemeActivated(dokiTheme: DokiTheme) {
-    activateTheme(dokiTheme)
+  override fun onDokiThemeActivated(dokiThemePayload: DokiThemePayload) {
+    activateTheme(dokiThemePayload)
   }
 
   override fun onDokiThemeRemoved() {}

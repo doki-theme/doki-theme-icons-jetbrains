@@ -7,7 +7,7 @@ import icons.DokiThemeIcons
 import io.unthrottled.doki.icons.jetbrains.shared.config.Config
 import io.unthrottled.doki.icons.jetbrains.shared.config.IconConfigListener
 import io.unthrottled.doki.icons.jetbrains.shared.config.IconSettingsModel
-import io.unthrottled.doki.icons.jetbrains.shared.themes.DokiTheme
+import io.unthrottled.doki.icons.jetbrains.shared.themes.DokiThemePayload
 import io.unthrottled.doki.icons.jetbrains.shared.themes.IconThemeManager
 import io.unthrottled.doki.icons.jetbrains.shared.themes.ThemeManagerListener
 import javax.swing.Icon
@@ -65,7 +65,7 @@ object LAFIconReplacementComponent : IconConfigListener, ThemeManagerListener {
     )
   }
 
-  override fun onDokiThemeActivated(dokiTheme: DokiTheme) {
+  override fun onDokiThemeActivated(dokiThemePayload: DokiThemePayload) {
     installLAFIcons()
   }
 
