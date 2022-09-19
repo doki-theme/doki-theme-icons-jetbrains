@@ -188,7 +188,143 @@
     "iconName": "breakpoint.svg"
   },
   {
+    "originalPath": "/actions/menu-open.svg",
+    "iconName": "open.svg"
+  },
+  {
+    "originalPath": "/actions/menu-saveall.svg",
+    "iconName": "save.svg"
+  },
+  {
     "originalPath": "/debugger/db_disabled_breakpoint.svg",
     "iconName": "disabled_breakpoint.svg"
+  },
+  {
+    "originalPath": "/actions/diff.svg",
+    "iconName": "dual_chevrons.svg"
+  },
+  {
+    "originalPath": "/toolwindows/toolWindowProject.svg",
+    "iconName": "project_glyph_13x13.svg"
+  },
+  {
+    "originalPath": "/general/projectTab.svg",
+    "iconName": "project_glyph.svg"
+  },
+  {
+    "originalPath": "/actions/previousOccurence.svg",
+    "iconName": "chevron_up.svg"
+  },
+  {
+    "originalPath": "/actions/nextOccurence.svg",
+    "iconName": "chevron_down.svg"
+  },
+  {
+    "originalPath": "/general/filter.svg",
+    "iconName": "filter.svg"
+  },
+  {
+    "originalPath": "/actions/groupBy.svg",
+    "iconName": "group.svg"
+  },
+  {
+    "originalPath": "/actions/edit.svg",
+    "iconName": "edit.svg"
+  },
+  {
+    "originalPath": "/general/buttonDropTriangle.svg",
+    "iconName": "chevron_down_13x13.svg"
+  },
+  {
+    "originalPath": "/toolwindows/toolWindowCommit.svg",
+    "iconName": "commit_horizontal_13x13.svg"
+  },
+  {
+    "originalPath": "/codeWithMe/cwmAccess.svg",
+    "iconName": "avatar.svg"
+  },
+  {
+    "originalPath": "/actions/show.svg",
+    "iconName": "view.svg"
+  },
+  {
+    "originalPath": "/actions/gc.svg",
+    "iconName": "trash.svg"
+  },
+  {
+    "originalPath": "/toolwindows/notificationsNewImportant.svg",
+    "iconName": "new_notifications.svg"
+  },
+  {
+    "originalPath": "/icons/toolWindowGradle.svg",
+    "iconName": "cupcake_13x13.svg"
+  },
+  {
+    "originalPath": "/icons/gradleFile.svg",
+    "iconName": "cupcake.svg"
+  },
+  {
+    "originalPath": "/icons/gradle.svg",
+    "iconName": "cupcake.svg"
+  },
+  {
+    "originalPath": "/actions/copy.svg",
+    "iconName": "copy.svg"
+  },
+  {
+    "originalPath": "/icons/task.svg",
+    "iconName": "settings.svg"
+  },
+  {
+    "originalPath": "/nodes/ppLib.svg",
+    "iconName": "library.svg"
+  },
+  {
+    "originalPath": "/general/settings.svg",
+    "iconName": "config.svg"
+  },
+  {
+    "originalPath": "/nodes/favorite.svg",
+    "iconName": "heart.svg"
+  },
+  {
+    "originalPath": "/icons/currentBranchFavoriteLabel.svg",
+    "iconName": "tag.svg"
+  },
+  {
+    "originalPath": "/icons/cherryPick.svg",
+    "iconName": "cherry.svg"
+  },
+  {
+    "originalPath": "/actions/arrowCollapse.svg",
+    "iconName": "chevron_left.svg"
+  },
+  {
+    "originalPath": "/vcs/fetch.svg",
+    "iconName": "update_project.svg"
+  },
+  {
+    "originalPath": "/vcs/branchNode.svg",
+    "iconName": "vcs_solid.svg"
+  },
+  {
+    "originalPath": "/actions/openNewTab.svg",
+    "iconName": "tab_add_to.svg"
+  },
+  {
+    "originalPath": "/actions/projectWideAnalysisOff.svg",
+    "iconName": "light_house.svg"
+  },
+  {
+    "originalPath": "/actions/intentionBulb.svg",
+    "iconName": "ice_cream.svg"
+  },
+  {
+    "originalPath": "/toolbar/expand.svg",
+    "iconName": "chevron_down.svg"
+  },
+  {
+    "originalPath": "/ide/readonly.svg",
+    "iconName": "locked.svg"
   }
 ]
