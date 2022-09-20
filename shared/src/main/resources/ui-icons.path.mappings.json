@@ -4,6 +4,10 @@
     "iconName": "build.svg"
   },
   {
+    "originalPath": "/toolwindows/toolWindowBuild.svg",
+    "iconName": "build_13x13.svg"
+  },
+  {
     "originalPath": "/resharper/ProjectModel/Folder.svg",
     "iconName": "folder.svg"
   },
@@ -253,7 +257,7 @@
   },
   {
     "originalPath": "/toolwindows/notificationsNewImportant.svg",
-    "iconName": "new_notifications.svg"
+    "iconName": "new_notifications_13x13.svg"
   },
   {
     "originalPath": "/icons/toolWindowGradle.svg",
@@ -326,5 +330,57 @@
   {
     "originalPath": "/ide/readonly.svg",
     "iconName": "locked.svg"
+  },
+  {
+    "originalPath": "/general/pin_tab.svg",
+    "iconName": "pin.svg"
+  },
+  {
+    "originalPath": "/actions/pinTab.svg",
+    "iconName": "pin.svg"
+  },
+  {
+    "originalPath": "/actions/toggleSoftWrap.svg",
+    "iconName": "soft_wrap.svg"
+  },
+  {
+    "originalPath": "/runConfigurations/scroll_down.svg",
+    "iconName": "scroll_to_end.svg"
+  },
+  {
+    "originalPath": "/images/toolWindowMaven.svg",
+    "iconName": "pretzel_13x13.svg"
+  },
+  {
+    "originalPath": "/icons/repositoryLibraryLogo.svg",
+    "iconName": "pretzel.svg"
+  },
+  {
+    "originalPath": "/scope/scratches.svg",
+    "iconName": "scratches.svg"
+  },
+  {
+    "originalPath": "/icons/toolWindowEndpoints.svg",
+    "iconName": "network_graph_13x13.svg"
+  },
+  {
+    "originalPath": "/icons/springBean.svg",
+    "iconName": "bean.svg"
+  },
+  {
+    "originalPath": "/actions/restart.svg",
+    "iconName": "restart.svg"
+  },
+  {
+    "originalPath": "/debugger/evaluateExpression.svg",
+    "iconName": "evaluate_expression.svg"
+  },
+  {
+    "originalPath": "/icons/stream_debugger.svg",
+    "iconName": "boat.svg"
+  },
+  {
+    "originalPath": "/debugger/restoreLayout.svg",
+    "iconName": "layout.svg"
   }
 ]
