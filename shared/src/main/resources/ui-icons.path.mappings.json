@@ -185,10 +185,14 @@
   },
   {
     "originalPath": "/toolwindows/toolWindowStructure.svg",
-    "iconName": "dna.svg"
+    "iconName": "dna_13x13.svg"
   },
   {
     "originalPath": "/debugger/db_set_breakpoint.svg",
+    "iconName": "breakpoint.svg"
+  },
+  {
+    "originalPath": "/debugger/viewBreakpoints.svg",
     "iconName": "breakpoint.svg"
   },
   {
@@ -201,6 +205,10 @@
   },
   {
     "originalPath": "/debugger/db_disabled_breakpoint.svg",
+    "iconName": "disabled_breakpoint.svg"
+  },
+  {
+    "originalPath": "/debugger/muteBreakpoints.svg",
     "iconName": "disabled_breakpoint.svg"
   },
   {
@@ -364,6 +372,10 @@
     "iconName": "network_graph_13x13.svg"
   },
   {
+    "originalPath": "/icons/SpringBootEndpoint.svg",
+    "iconName": "network_graph.svg"
+  },
+  {
     "originalPath": "/icons/springBean.svg",
     "iconName": "bean.svg"
   },
@@ -382,5 +394,41 @@
   {
     "originalPath": "/debugger/restoreLayout.svg",
     "iconName": "layout.svg"
+  },
+  {
+    "originalPath": "/actions/dump.svg",
+    "iconName": "image_upper_right_star.svg"
+  },
+  {
+    "originalPath": "/actions/traceOver.svg",
+    "iconName": "step_over.svg"
+  },
+  {
+    "originalPath": "/actions/traceInto.svg",
+    "iconName": "step_into.svg"
+  },
+  {
+    "originalPath": "/actions/stepOut.svg",
+    "iconName": "step_out.svg"
+  },
+  {
+    "originalPath": "/fileTypes/archive.svg",
+    "iconName": "jar.svg"
+  },
+  {
+    "originalPath": "/toolwindows/toolWindowDebugger.svg",
+    "iconName": "debug_13x13.svg"
+  },
+  {
+    "originalPath": "/actions/resume.svg",
+    "iconName": "resume.svg"
+  },
+  {
+    "originalPath": "/actions/pause.svg",
+    "iconName": "pause.svg"
+  },
+  {
+    "originalPath": "/general/tbHidden.svg",
+    "iconName": "hidden_toolbar.svg"
   }
 ]
