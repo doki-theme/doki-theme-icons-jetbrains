@@ -6,7 +6,7 @@ import javax.swing.Icon
 
 object DokiThemeIcons {
   @JvmField
-  val PLUGIN_ICON = IconLoader.getIcon("/META-INF/pluginIcon.svg", javaClass)
+  val PLUGIN_ICON = IconLoader.getIcon("/doki/icons/doki_icon.svg", javaClass)
   @JvmField
   val PROJECT_GLYPH = IconLoader.getIcon("/doki/icons/project_glyph.svg", javaClass)
   @JvmField

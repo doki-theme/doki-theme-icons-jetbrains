@@ -117,7 +117,7 @@
   },
   {
     "originalPath": "/toolwindows/toolWindowProblemsEmpty.svg",
-    "iconName": "warning_circle_13x13.svg"
+    "iconName": "warning_circle_filled_13x13.svg"
   },
   {
     "originalPath": "/icons/OpenTerminal_13x13.svg",
@@ -430,5 +430,21 @@
   {
     "originalPath": "/general/tbHidden.svg",
     "iconName": "hidden_toolbar.svg"
+  },
+  {
+    "originalPath": "/icons/actions/force_step_into.svg",
+    "iconName": "force_step_into.svg"
+  },
+  {
+    "originalPath": "/runConfigurations/testPassed.svg",
+    "iconName": "tada.svg"
+  },
+  {
+    "originalPath": "/general/print.svg",
+    "iconName": "printer.svg"
+  },
+  {
+    "originalPath": "/actions/lightning.svg",
+    "iconName": "lightning.svg"
   }
 ]
