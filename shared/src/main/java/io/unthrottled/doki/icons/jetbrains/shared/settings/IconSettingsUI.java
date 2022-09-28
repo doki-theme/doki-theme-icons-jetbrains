@@ -65,29 +65,29 @@ public class IconSettingsUI implements SearchableConfigurable, Configurable.NoSc
   private void initializeAutoCreatedComponents() {
     UIIconsCheckBox.setSelected(initialIconSettingsModel.isUIIcons());
     UIIconsCheckBox.addActionListener(e ->
-      initialIconSettingsModel.setUIIcons(UIIconsCheckBox.isSelected()));
+      iconSettingsModel.setUIIcons(UIIconsCheckBox.isSelected()));
     uiIcon.setIcon(DokiThemeIcons.PROJECT_GLYPH);
 
     filesCheckBox.setSelected(initialIconSettingsModel.isNamedFileIcons());
     filesCheckBox.addActionListener(e ->
-      initialIconSettingsModel.setNamedFileIcons(filesCheckBox.isSelected()));
+      iconSettingsModel.setNamedFileIcons(filesCheckBox.isSelected()));
     namedFilesIcon.setIcon(DokiThemeIcons.CURLY_BRACES);
 
     PSICheckBox.setSelected(initialIconSettingsModel.isGlyphIcons());
     PSICheckBox.addActionListener(e ->
-      initialIconSettingsModel.setGlyphIcons(PSICheckBox.isSelected()));
+      iconSettingsModel.setGlyphIcons(PSICheckBox.isSelected()));
     fileGlyphs.setIcon(DokiThemeIcons.SOLID_DOKI_GLYPH);
 
     foldersCheckBox.setSelected(initialIconSettingsModel.isNamedFolderIcons());
     foldersCheckBox.addActionListener(e ->
-      initialIconSettingsModel.setNamedFolderIcons(foldersCheckBox.isSelected()));
+      iconSettingsModel.setNamedFolderIcons(foldersCheckBox.isSelected()));
     foldersCheckBox.setVisible(false);
     namedFoldersIcon.setVisible(false);
 
     syncWithDokiThemeCheckBox.setEnabled(PluginService.INSTANCE.isDokiThemeInstalled());
     syncWithDokiThemeCheckBox.setSelected(initialIconSettingsModel.getSyncWithDokiTheme());
     syncWithDokiThemeCheckBox.addActionListener(e ->
-      initialIconSettingsModel.setSyncWithDokiTheme(syncWithDokiThemeCheckBox.isSelected()));
+      iconSettingsModel.setSyncWithDokiTheme(syncWithDokiThemeCheckBox.isSelected()));
 
     iconRequest.setIcon(DokiThemeIcons.WATCH);
     iconRequest.setText(PluginMessageBundle.message("settings.icon.request"));
