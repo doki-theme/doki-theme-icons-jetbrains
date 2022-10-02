@@ -201,7 +201,7 @@
   },
   {
     "originalPath": "/actions/menu-saveall.svg",
-    "iconName": "save.svg"
+    "iconName": "file_heart.svg"
   },
   {
     "originalPath": "/debugger/db_disabled_breakpoint.svg",
@@ -265,7 +265,7 @@
   },
   {
     "originalPath": "/toolwindows/notificationsNewImportant.svg",
-    "iconName": "new_notifications_13x13.svg"
+    "iconName": "notifications_heart_13x13.svg"
   },
   {
     "originalPath": "/icons/toolWindowGradle.svg",
@@ -321,7 +321,7 @@
   },
   {
     "originalPath": "/actions/openNewTab.svg",
-    "iconName": "tab_add_to.svg"
+    "iconName": "tab_add.svg"
   },
   {
     "originalPath": "/actions/projectWideAnalysisOff.svg",
@@ -397,7 +397,7 @@
   },
   {
     "originalPath": "/actions/dump.svg",
-    "iconName": "image_upper_right_star.svg"
+    "iconName": "image_flash_star.svg"
   },
   {
     "originalPath": "/actions/traceOver.svg",
@@ -445,6 +445,71 @@
   },
   {
     "originalPath": "/actions/lightning.svg",
-    "iconName": "lightning.svg"
+    "iconName": "lightning_bolt.svg"
+  },
+  {
+    "originalPath": "/runConfigurations/testFailed.svg",
+    "iconName": "rip.svg"
+  },
+  {
+    "originalPath": "/runConfigurations/rerunFailedTests.svg",
+    "iconName": "rip_play_solid.svg"
+  },
+  {
+    "originalPath": "/runConfigurations/testError.svg",
+    "iconName": "skull.svg"
+  },
+  {
+    "originalPath": "/runConfigurations/toolbarError.svg",
+    "iconName": "skull.svg"
+  },
+  {
+    "originalPath": "/debugger/killProcess.svg",
+    "iconName": "skull.svg"
+  },
+  {
+    "originalPath": "/actions/close.svg",
+    "iconName": "close.svg"
+  },
+  {
+    "originalPath": "/debugger/db_verified_breakpoint.svg",
+    "iconName": "breakpoint_check.svg"
+  },
+  {
+    "originalPath": "/actions/help.svg",
+    "iconName": "help.svg"
+  },
+  {
+    "originalPath": "/actions/swapPanels.svg",
+    "iconName": "layout_dual_chevrons.svg"
+  },
+  {
+    "originalPath": "/actions/exit.svg",
+    "iconName": "close.svg"
+  },
+  {
+    "originalPath": "/runConfigurations/showPassed.svg",
+    "iconName": "tada_view_filled.svg"
+  },
+  {
+    "originalPath": "/runConfigurations/showIgnored.svg",
+    "iconName": "test_outline_view_filled.svg"
+  },
+  {
+    "originalPath": "/runConfigurations/testIgnored.svg",
+    "iconName": "test_outline.svg"
+  },
+  {
+    "originalPath": "/toolwindows/toolWindowRun.svg",
+    "iconName": "play_solid_13x13.svg"
+  },
+  {
+    "originalPath": "/toolwindows/toolWindowProblems.svg",
+    "iconName": "warning_circle_filled_13x13.svg"
+  },
+  {
+    "originalPath": "/ide/configFile.svg",
+    "iconName": "file_config.svg"
   }
+
 ]
