@@ -469,6 +469,10 @@
   },
   {
     "originalPath": "/actions/close.svg",
+    "iconName": "close_small.svg"
+  },
+  {
+    "originalPath": "/actions/closeHovered.svg",
     "iconName": "close.svg"
   },
   {
