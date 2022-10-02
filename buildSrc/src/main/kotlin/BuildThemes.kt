@@ -126,11 +126,11 @@ open class BuildThemes : DefaultTask() {
       )
     )
 
-    Files.walk(svgIconSourceDirectory())
+    val copiedIcons = Files.walk(svgIconSourceDirectory())
       .filter {
         allUsedIcons.contains(it.fileName.toString())
       }
-      .forEach { dokiIconPath ->
+      .map { dokiIconPath ->
         Files.copy(
           dokiIconPath,
           Paths.get(
@@ -138,7 +138,19 @@ open class BuildThemes : DefaultTask() {
             dokiIconPath.fileName.toString()
           ),
         )
+        dokiIconPath.fileName.toString()
       }
+      .collect(Collectors.toList())
+
+    val diff =
+      allUsedIcons.toMutableSet()
+        .subtract(copiedIcons)
+
+    if(diff.isNotEmpty()) {
+      throw RuntimeException("""Hey Silly, you missed these icons "${
+        diff.joinToString(", ")
+      }".""")
+    }
   }
 
   private fun getFileFromResources(mappingFile: String): Path = get(
