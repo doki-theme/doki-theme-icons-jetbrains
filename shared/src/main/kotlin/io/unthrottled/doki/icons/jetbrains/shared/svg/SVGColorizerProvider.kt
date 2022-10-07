@@ -1,6 +1,7 @@
 package io.unthrottled.doki.icons.jetbrains.shared.svg
 
 import com.google.gson.reflect.TypeToken
+import com.intellij.openapi.util.text.Strings
 import com.intellij.ui.ColorUtil
 import com.intellij.ui.JBColor
 import com.intellij.util.SVGLoader
@@ -12,6 +13,7 @@ import io.unthrottled.doki.icons.jetbrains.shared.tools.toColor
 import io.unthrottled.doki.icons.jetbrains.shared.tools.toHexString
 import org.w3c.dom.Element
 import java.awt.Color
+import kotlin.math.ceil
 
 class SVGColorPaletteReplacer(private val dokiTheme: DokiTheme) : PatcherProvider, Logging {
 
@@ -43,11 +45,66 @@ class SVGColorPaletteReplacer(private val dokiTheme: DokiTheme) : PatcherProvide
       }
 
   override fun forPath(path: String?): SVGLoader.SvgElementColorPatcher? =
-    SVGLoader.newPatcher(
+    PalletPatcher(
       (dokiTheme.id + dokiTheme.version).toByteArray(Charsets.UTF_8),
       newPalette,
-      mutableMapOf(),
     )
+}
+
+class PalletPatcher(
+  private val digest: ByteArray,
+  private val newPalette: Map<String, String>,
+) : SVGLoader.SvgElementColorPatcher {
+  override fun digest(): ByteArray? {
+    return digest
+  }
+
+  override fun patchColors(svg: Element) {
+    patchColorAttribute(svg, "fill")
+    patchColorAttribute(svg, "stop-color")
+    patchColorAttribute(svg, "stroke")
+    val nodes = svg.childNodes
+    val length = nodes.length
+    for (i in 0 until length) {
+      val item = nodes.item(i)
+      if (item is Element) {
+        patchColors(item)
+      }
+    }
+  }
+
+  private fun patchColorAttribute(svg: Element, attrName: String) {
+    val color = svg.getAttribute(attrName)
+    val opacity = svg.getAttribute("$attrName-opacity")
+    if (!Strings.isEmpty(color)) {
+      var alpha = 255
+      if (!Strings.isEmpty(opacity)) {
+        try {
+          alpha = ceil((255f * opacity.toFloat()).toDouble()).toInt()
+        }
+        catch (ignore: Exception) {
+        }
+      }
+      var newColor: String? = null
+      val key = toCanonicalColor(color)
+      if (alpha != 255) {
+        newColor = newPalette[key + Integer.toHexString(alpha)]
+      }
+      if (newColor == null) {
+        newColor = newPalette[key]
+      }
+      if (newColor != null) {
+        svg.setAttribute(attrName, newColor)
+      }
+    }
+  }
+  private fun toCanonicalColor(color: String): String {
+    var s = color.lowercase()
+    if (s.startsWith("#") && s.length < 7) {
+      s = "#" + ColorUtil.toHex(ColorUtil.fromHex(s))
+    }
+    return s
+  }
 }
 
 class SVGColorizerProvider(private val dokiTheme: DokiTheme) : PatcherProvider {
