@@ -514,6 +514,10 @@
   {
     "originalPath": "/ide/configFile.svg",
     "iconName": "file_config.svg"
+  },
+  {
+    "originalPath": "/studio/icons/shell/toolbar/gradle-sync.svg",
+    "iconName": "cupcake_refresh.svg"
   }
 
 ]
