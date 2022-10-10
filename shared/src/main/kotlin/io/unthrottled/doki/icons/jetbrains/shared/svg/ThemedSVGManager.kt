@@ -1,11 +1,13 @@
 package io.unthrottled.doki.icons.jetbrains.shared.svg
 
 import com.intellij.openapi.Disposable
+import com.intellij.openapi.actionSystem.impl.ActionToolbarImpl
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.util.SVGLoader
 import io.unthrottled.doki.icons.jetbrains.shared.themes.DokiThemePayload
 import io.unthrottled.doki.icons.jetbrains.shared.themes.IconThemeManager
 import io.unthrottled.doki.icons.jetbrains.shared.themes.ThemeManagerListener
+import javax.swing.SwingUtilities
 
 class ThemedSVGManager : ThemeManagerListener, Disposable {
   companion object {
@@ -15,8 +17,12 @@ class ThemedSVGManager : ThemeManagerListener, Disposable {
 
   private val connection = ApplicationManager.getApplication().messageBus.connect()
 
+  init {
+    connection.subscribe(IconThemeManager.TOPIC, this)
+  }
+
   fun initialize() {
-    IconThemeManager.instance.currentTheme
+    IconThemeManager.instance.userSetTheme
       .ifPresent {
         activateTheme(it)
       }
@@ -25,6 +31,7 @@ class ThemedSVGManager : ThemeManagerListener, Disposable {
   private fun activateTheme(currentTheme: DokiThemePayload) {
     SVGLoader.colorPatcherProvider =
       ComposedSVGColorizerProviderFactory.createForTheme(currentTheme)
+    SwingUtilities.invokeLater { ActionToolbarImpl.updateAllToolbarsImmediately() }
   }
 
   override fun dispose() {

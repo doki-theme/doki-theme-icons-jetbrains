@@ -85,6 +85,19 @@ class IconThemeManager : LafManagerListener, Disposable, IconConfigListener {
   val currentTheme: Optional<DokiThemePayload>
     get() = processLaf(LafManagerImpl.getInstance().currentLookAndFeel)
 
+  val userSetTheme: Optional<DokiThemePayload>
+    get() = LafManagerImpl.getInstance().installedLookAndFeels
+      .filterIsInstance<UIThemeBasedLookAndFeelInfo>()
+      .firstOrNull {
+        it.getId() == Config.instance.currentThemeId
+      }.toOptional()
+      .map {
+        val themeId = it.getId()
+        DokiThemePayload(
+          themeMap[themeId] ?: throw IllegalStateException("Expecting theme with ID $themeId to be present"),
+          it.theme
+        )
+      }
   val allThemes: List<DokiTheme>
     get() = themeMap.values.toList()
 
@@ -106,14 +119,17 @@ class IconThemeManager : LafManagerListener, Disposable, IconConfigListener {
   }
 
   override fun lookAndFeelChanged(source: LafManager) {
-    if (!Config.instance.syncWithDokiTheme) {
-      return
-    }
-
     val messageBus = ApplicationManager.getApplication().messageBus
-    processLaf(source.currentLookAndFeel)
+    if (Config.instance.syncWithDokiTheme) {
+      processLaf(source.currentLookAndFeel)
+        .map {
+          Config.instance.currentThemeId = it.dokiTheme.id
+          it
+        }
+    } else {
+      userSetTheme
+    }
       .doOrElse({ dokiThemePayload ->
-        Config.instance.currentThemeId = dokiThemePayload.dokiTheme.id
         messageBus.syncPublisher(TOPIC)
           .onDokiThemeActivated(dokiThemePayload)
       }) {

@@ -81,8 +81,7 @@ class PalletPatcher(
       if (!Strings.isEmpty(opacity)) {
         try {
           alpha = ceil((255f * opacity.toFloat()).toDouble()).toInt()
-        }
-        catch (ignore: Exception) {
+        } catch (ignore: Exception) {
         }
       }
       var newColor: String? = null
