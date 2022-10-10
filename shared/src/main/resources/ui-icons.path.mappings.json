@@ -468,6 +468,10 @@
     "iconName": "skull.svg"
   },
   {
+    "originalPath": "/runConfigurations/toolbarFailed.svg",
+    "iconName": "skull.svg"
+  },
+  {
     "originalPath": "/actions/close.svg",
     "iconName": "close_small.svg"
   },
