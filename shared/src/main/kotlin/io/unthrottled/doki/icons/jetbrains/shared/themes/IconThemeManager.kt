@@ -15,7 +15,9 @@ import io.unthrottled.doki.icons.jetbrains.shared.config.Config
 import io.unthrottled.doki.icons.jetbrains.shared.config.IconConfigListener
 import io.unthrottled.doki.icons.jetbrains.shared.config.IconSettingsModel
 import io.unthrottled.doki.icons.jetbrains.shared.tools.AssetTools
+import io.unthrottled.doki.icons.jetbrains.shared.tools.Logging
 import io.unthrottled.doki.icons.jetbrains.shared.tools.doOrElse
+import io.unthrottled.doki.icons.jetbrains.shared.tools.logger
 import io.unthrottled.doki.icons.jetbrains.shared.tools.toOptional
 import java.util.EventListener
 import java.util.Optional
@@ -47,7 +49,7 @@ interface ThemeManagerListener : EventListener {
   fun onDokiThemeRemoved()
 }
 
-class IconThemeManager : LafManagerListener, Disposable, IconConfigListener {
+class IconThemeManager : LafManagerListener, Disposable, IconConfigListener, Logging {
   companion object {
     const val DEFAULT_THEME_ID = "13adffd9-acbe-47af-8101-fa71269a4c5c" // Zero Two Obsidian
     val TOPIC = Topic(ThemeManagerListener::class.java)
@@ -122,6 +124,8 @@ class IconThemeManager : LafManagerListener, Disposable, IconConfigListener {
         .map {
           Config.instance.currentThemeId = it.dokiTheme.id
           it
+        }.or {
+          userSetTheme
         }
     } else {
       userSetTheme
@@ -130,8 +134,7 @@ class IconThemeManager : LafManagerListener, Disposable, IconConfigListener {
         messageBus.syncPublisher(TOPIC)
           .onDokiThemeActivated(dokiThemePayload)
       }) {
-        messageBus.syncPublisher(TOPIC)
-          .onDokiThemeRemoved()
+        this.logger().warn("Unable to set Doki Theme for icons for current theme")
       }
   }
 
