@@ -43,9 +43,15 @@ class SVGColorPaletteReplacer(private val dokiTheme: DokiTheme) : PatcherProvide
         }
         newColor
       }.toMutableMap().apply {
+        // todo: document deez
         this["#000000"] = JBColor.namedColor(
           "Panel.background",
           ColorUtil.fromHex(dokiTheme.colors["baseBackground"]!!)
+        )
+          .toHexString()
+        this["#776bc4"] = ColorUtil.darker(
+          ColorUtil.fromHex(dokiTheme.colors["iconSecondaryBlend"]!!),
+          3,
         )
           .toHexString()
       }
