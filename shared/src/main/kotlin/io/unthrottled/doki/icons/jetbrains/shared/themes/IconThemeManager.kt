@@ -82,9 +82,6 @@ class IconThemeManager : LafManagerListener, Disposable, IconConfigListener {
   val defaultTheme: DokiTheme
     get() = getThemeById(DEFAULT_THEME_ID).get()
 
-  val currentTheme: Optional<DokiThemePayload>
-    get() = processLaf(LafManagerImpl.getInstance().currentLookAndFeel)
-
   val userSetTheme: Optional<DokiThemePayload>
     get() = LafManagerImpl.getInstance().installedLookAndFeels
       .filterIsInstance<UIThemeBasedLookAndFeelInfo>()

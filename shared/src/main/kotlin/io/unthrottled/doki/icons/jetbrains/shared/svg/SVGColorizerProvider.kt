@@ -11,9 +11,9 @@ import io.unthrottled.doki.icons.jetbrains.shared.tools.Logging
 import io.unthrottled.doki.icons.jetbrains.shared.tools.logger
 import io.unthrottled.doki.icons.jetbrains.shared.tools.toColor
 import io.unthrottled.doki.icons.jetbrains.shared.tools.toHexString
-import org.w3c.dom.Element
 import java.awt.Color
 import kotlin.math.ceil
+import org.w3c.dom.Element
 
 class SVGColorPaletteReplacer(private val dokiTheme: DokiTheme) : PatcherProvider, Logging {
 
@@ -42,6 +42,12 @@ class SVGColorPaletteReplacer(private val dokiTheme: DokiTheme) : PatcherProvide
           )
         }
         newColor
+      }.toMutableMap().apply {
+        this["#000000"] = JBColor.namedColor(
+          "Panel.background",
+          ColorUtil.fromHex(dokiTheme.colors["baseBackground"]!!)
+        )
+          .toHexString()
       }
 
   override fun forPath(path: String?): SVGLoader.SvgElementColorPatcher? =
@@ -97,6 +103,7 @@ class PalletPatcher(
       }
     }
   }
+
   private fun toCanonicalColor(color: String): String {
     var s = color.lowercase()
     if (s.startsWith("#") && s.length < 7) {
