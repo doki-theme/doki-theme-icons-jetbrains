@@ -522,6 +522,22 @@
   {
     "originalPath": "/studio/icons/shell/toolbar/gradle-sync.svg",
     "iconName": "cupcake_refresh.svg"
+  },
+  {
+    "originalPath": "/codeWithMe/cwmInvite.svg",
+    "iconName": "link.svg"
+  },
+  {
+    "originalPath": "/codeWithMe/cwmPermissions.svg",
+    "iconName": "key.svg"
+  },
+  {
+    "originalPath": "/nodes/Module.svg",
+    "iconName": "folder_heart.svg"
+  },
+  {
+    "originalPath": "/nodes/package.svg",
+    "iconName": "package.svg"
   }
 
 ]
