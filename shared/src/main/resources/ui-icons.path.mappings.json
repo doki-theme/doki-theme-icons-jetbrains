@@ -538,6 +538,14 @@
   {
     "originalPath": "/nodes/package.svg",
     "iconName": "package.svg"
+  },
+  {
+    "originalPath": "/modules/sourceRoot.svg",
+    "iconName": "sourceRoot.svg"
+  },
+  {
+    "originalPath": "/modules/excludeRoot.svg",
+    "iconName": "excludedFolder.svg"
   }
 
 ]
