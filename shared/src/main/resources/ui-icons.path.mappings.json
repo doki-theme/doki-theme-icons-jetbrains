@@ -546,6 +546,10 @@
   {
     "originalPath": "/modules/excludeRoot.svg",
     "iconName": "excludedFolder.svg"
+  },
+  {
+    "originalPath": "/modules/testRoot.svg",
+    "iconName": "folder_test.svg"
   }
 
 ]
