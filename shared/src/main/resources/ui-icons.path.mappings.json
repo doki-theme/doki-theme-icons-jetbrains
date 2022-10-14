@@ -133,7 +133,7 @@
   },
   {
     "originalPath": "/icons/artifactSmall.svg",
-    "iconName": "dependencies_13x13.svg"
+    "iconName": "library_13x13.svg"
   },
   {
     "originalPath": "/actions/more.svg",
@@ -550,6 +550,10 @@
   {
     "originalPath": "/modules/testRoot.svg",
     "iconName": "folder_test.svg"
+  },
+  {
+    "originalPath": "/icons/doki/pen.svg",
+    "iconName": "doki_icon_config.svg"
   }
 
 ]
