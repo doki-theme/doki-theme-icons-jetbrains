@@ -4,27 +4,27 @@
     "iconName": "jar.svg"
   },
   {
-    "originalPath": "/fileTypes/text.svg ",
+    "originalPath": "/fileTypes/text.svg",
     "iconName": "file.svg"
   },
   {
-    "originalPath": "/icons/shFile.svg ",
+    "originalPath": "/icons/shFile.svg",
     "iconName": "terminal_solid.svg"
   },
   {
-    "originalPath": "/fileTypes/json.svg ",
+    "originalPath": "/fileTypes/json.svg",
     "iconName": "curly_braces.svg"
   },
   {
-    "originalPath": "/nodes/ppJdk.svg ",
+    "originalPath": "/nodes/ppJdk.svg",
     "iconName": "folder_cowfee.svg"
   },
   {
-    "originalPath": "/nodes/ppLibFolder.svg ",
+    "originalPath": "/nodes/ppLibFolder.svg",
     "iconName": "folder_library.svg"
   },
   {
-    "originalPath": "/fileTypes/properties.svg ",
+    "originalPath": "/fileTypes/properties.svg",
     "iconName": "file_config.svg"
   }
 ]
