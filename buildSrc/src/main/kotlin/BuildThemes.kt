@@ -105,6 +105,7 @@ open class BuildThemes : DefaultTask() {
       "files.named.mappings.json",
       "glyph-icons.path.mappings.json",
       "ui-icons.path.mappings.json",
+      "node.path.mappings.json",
     )
       .flatMap { mappingPak ->
         readJSONFromFile(

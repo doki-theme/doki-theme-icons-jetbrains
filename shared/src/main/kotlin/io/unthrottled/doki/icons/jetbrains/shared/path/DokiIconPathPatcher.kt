@@ -32,7 +32,10 @@ class DokiIconPathPatcher(mappingFile: String) : IconPathPatcher(), Logging {
   override fun patchPath(
     path: String,
     classLoader: ClassLoader?
-  ): String? = pathMappings[path]
+  ): String? = pathMappings[
+    if (path.startsWith('/')) path
+    else "/$path"
+  ]
 
   override fun getContextClassLoader(
     path: String,
