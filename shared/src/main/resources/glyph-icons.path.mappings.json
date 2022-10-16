@@ -58,5 +58,9 @@
   {
     "originalPath": "/org/jetbrains/kotlin/idea/icons/objectKotlin.svg",
     "iconName": "space_glyph.svg"
+  },
+  {
+    "originalPath": "/nodes/exceptionClass.svg",
+    "iconName": "lightning_bolt.svg"
   }
 ]

@@ -104,6 +104,7 @@ open class BuildThemes : DefaultTask() {
     val allUsedIcons = arrayListOf(
       "files.named.mappings.json",
       "glyph-icons.path.mappings.json",
+      "file-icons.path.mappings.json",
       "ui-icons.path.mappings.json",
       "node.path.mappings.json",
     )
