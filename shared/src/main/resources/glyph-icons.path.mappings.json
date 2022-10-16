@@ -6,5 +6,29 @@
   {
     "originalPath": "/resharper/PsiCSharp/Csharp.svg",
     "iconName": "build.svg"
+  },
+  {
+    "originalPath": "/nodes/interface.svg",
+    "iconName": "outline_circle_glyph.svg"
+  },
+  {
+    "originalPath": "/nodes/interface.svg",
+    "iconName": "outline_circle_glyph.svg"
+  },
+  {
+    "originalPath": "/nodes/abstractClass.svg",
+    "iconName": "spiral_glyph.svg"
+  },
+  {
+    "originalPath": "/gutter/recursiveMethod.svg",
+    "iconName": "recursion.svg"
+  },
+  {
+    "originalPath": "/nodes/method.svg",
+    "iconName": "outline_square_glyph.svg"
+  },
+  {
+    "originalPath": "/nodes/lambda.svg",
+    "iconName": "star_bar_glyph.svg"
   }
 ]
