@@ -2,6 +2,10 @@
   {
     "originalPath": "/nodes/class.svg",
     "iconName": "neko_glyph.svg"
+  }  ,
+  {
+    "originalPath": "/org/jetbrains/kotlin/idea/icons/classKotlin.svg",
+    "iconName": "neko_glyph_kotlin.svg"
   },
   {
     "originalPath": "/resharper/PsiCSharp/Csharp.svg",
@@ -10,14 +14,18 @@
   {
     "originalPath": "/nodes/interface.svg",
     "iconName": "outline_circle_glyph.svg"
-  },
+  }  ,
   {
-    "originalPath": "/nodes/interface.svg",
-    "iconName": "outline_circle_glyph.svg"
+    "originalPath": "/org/jetbrains/kotlin/idea/icons/interfaceKotlin.svg",
+    "iconName": "outline_circle_glyph_kotlin.svg"
   },
   {
     "originalPath": "/nodes/abstractClass.svg",
     "iconName": "spiral_glyph.svg"
+  }  ,
+  {
+    "originalPath": "/org/jetbrains/kotlin/idea/icons/abstractClassKotlin.svg",
+    "iconName": "spiral_glyph_kotlin.svg"
   },
   {
     "originalPath": "/gutter/recursiveMethod.svg",
@@ -30,5 +38,25 @@
   {
     "originalPath": "/nodes/lambda.svg",
     "iconName": "star_bar_glyph.svg"
+  },
+  {
+    "originalPath": "/nodes/enum.svg",
+    "iconName": "solid_doki_glyph.svg"
+  }  ,
+  {
+    "originalPath": "/org/jetbrains/kotlin/idea/icons/enumKotlin.svg",
+    "iconName": "solid_doki_glyph_kotlin.svg"
+  },
+  {
+    "originalPath": "/nodes/annotationtype.svg",
+    "iconName": "outline_rectangle_glyph.svg"
+  },
+  {
+    "originalPath": "/org/jetbrains/kotlin/idea/icons/annotationKotlin.svg",
+    "iconName": "outline_rectangle_glyph_kotlin.svg"
+  },
+  {
+    "originalPath": "/org/jetbrains/kotlin/idea/icons/objectKotlin.svg",
+    "iconName": "space_glyph.svg"
   }
 ]
