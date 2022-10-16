@@ -554,6 +554,22 @@
   {
     "originalPath": "/icons/doki/pen.svg",
     "iconName": "doki_icon_config.svg"
+  },
+  {
+    "originalPath": "/modules/resourcesRoot.svg",
+    "iconName": "folder_db_solid.svg"
+  },
+  {
+    "originalPath": "/nodes/configFolder.svg",
+    "iconName": "folder_settings.svg"
+  },
+  {
+    "originalPath": "/nodes/moduleGroup.svg",
+    "iconName": "folder_hex_stack_glyph.svg"
+  },
+  {
+    "originalPath": "/actions/scratch.svg",
+    "iconName": "scratches.svg"
   }
 
 ]
