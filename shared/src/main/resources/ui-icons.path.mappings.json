@@ -92,6 +92,10 @@
     "iconName": "unlocked_13x13.svg"
   },
   {
+    "originalPath": "/nodes/c_public.svg",
+    "iconName": "unlocked_13x13.svg"
+  },
+  {
     "originalPath": "/vcs/branch.svg",
     "iconName": "vcs_solid_13x13.svg"
   },
