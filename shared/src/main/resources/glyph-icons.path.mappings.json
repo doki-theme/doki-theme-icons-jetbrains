@@ -57,10 +57,22 @@
   },
   {
     "originalPath": "/org/jetbrains/kotlin/idea/icons/objectKotlin.svg",
-    "iconName": "space_glyph.svg"
+    "iconName": "solid_trapezoid_glyph.svg"
   },
   {
     "originalPath": "/nodes/exceptionClass.svg",
     "iconName": "lightning_bolt.svg"
+  },
+  {
+  "originalPath": "/nodes/variable.svg",
+    "iconName": "partial_hex_glyph.svg"
+  },
+  {
+    "originalPath": "/nodes/abstractMethod.svg",
+    "iconName": "intertwine.svg"
+  },
+  {
+    "originalPath": "/nodes/field.svg",
+    "iconName": "hollow_square_circle_glyph.svg"
   }
 ]
