@@ -128,9 +128,11 @@ open class BuildThemes : DefaultTask() {
       )
     )
 
+    val stagingIconDirectory = Paths.get("staging")
     val copiedIcons = Files.walk(svgIconSourceDirectory())
       .filter {
-        allUsedIcons.contains(it.fileName.toString())
+        allUsedIcons.contains(it.fileName.toString()) &&
+          it.contains(stagingIconDirectory).not()
       }
       .map { dokiIconPath ->
         Files.copy(
