@@ -78,5 +78,9 @@
   {
     "originalPath": "/nodes/field.svg",
     "iconName": "link.svg"
+  },
+  {
+    "originalPath": "/nodes/function.svg",
+    "iconName": "game_kun.svg"
   }
 ]
