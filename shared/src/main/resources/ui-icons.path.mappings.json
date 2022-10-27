@@ -574,6 +574,14 @@
   {
     "originalPath": "/actions/scratch.svg",
     "iconName": "scratches.svg"
+  },
+  {
+    "originalPath": "/ide/notification/pluginUpdate.svg",
+    "iconName": "update.svg"
+  },
+  {
+    "originalPath": "/icons/main.svg",
+    "iconName": "breakpoint.svg"
   }
 
 ]
