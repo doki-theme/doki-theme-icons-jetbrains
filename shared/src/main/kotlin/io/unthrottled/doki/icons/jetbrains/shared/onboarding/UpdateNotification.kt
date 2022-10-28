@@ -20,13 +20,10 @@ private fun buildUpdateMessage(): String =
   """
       What's New?<br>
       <ul>
-        <li>Added Custom Content Support.</li>
-        <li>Replay Previous Meme Replays Sound Now.</li>
-        <li>Fixed Apex Unit Test Reactions</li>
+        <li>Initial Release!</li>
       </ul>
-      <br>See the <a href="https://github.com/ani-memes/AMII#documentation">documentation</a> for features, usages, and configurations.
-      <br>The <a href="https://github.com/ani-memes/AMII/blob/master/CHANGELOG.md">changelog</a> is available for more details.
-      <br>Welcome <a href='https://plugins.jetbrains.com/plugin/13381-waifu-motivator'>Waifu Motivator</a> users! ❤️
+      <br>See the <a href="https://github.com/doki-theme/doki-theme-icons-jetbrains#documentation">documentation</a> for features, usages, and configurations.
+      <br>The <a href="https://github.com/doki-theme/doki-theme-icons-jetbrains/blob/master/CHANGELOG.md">changelog</a> is available for more details.
       <br><br>
       Thanks for downloading!
       </div>

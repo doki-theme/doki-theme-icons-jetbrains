@@ -139,6 +139,9 @@ class SVGColorizer(private val dokiTheme: DokiTheme) : Patcher {
     patchAccent(svg.getAttribute("accentTintDarker"), svg) {
       ColorUtil.darker(it, 1).toHexString()
     }
+    patchAccent(svg.getAttribute("accentTintDarkest"), svg) {
+      ColorUtil.darker(it, 3).toHexString()
+    }
     patchAccent(svg.getAttribute("accentContrastTint"), svg) {
       getIconAccentContrastColor().toHexString()
     }

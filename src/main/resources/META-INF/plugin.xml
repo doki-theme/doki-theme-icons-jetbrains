@@ -25,6 +25,7 @@
 
   <actions>
     <action id="io.unthrottled.doki.icons.jetbrains.shared.actions.SetPatcherAction" class="io.unthrottled.doki.icons.jetbrains.shared.actions.SetPatcherAction" text="Set Patcher" />
+    <action id="io.unthrottled.doki.icons.jetbrains.shared.actions.ShowUpdateNotification" class="io.unthrottled.doki.icons.jetbrains.shared.actions.ShowUpdateNotification" text="Show Update Notification" />
   </actions>
 
   <applicationListeners>
