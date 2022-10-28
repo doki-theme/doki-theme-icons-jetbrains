@@ -582,6 +582,18 @@
   {
     "originalPath": "/icons/main.svg",
     "iconName": "breakpoint.svg"
+  },
+  {
+    "originalPath": "/rider/toolWindows/toolWindowUnitTesting.svg",
+    "iconName": "test_13x13.svg"
+  },
+  {
+    "originalPath": "/toolWindowDotTrace.svg",
+    "iconName": "profile_13x13.svg"
+  },
+  {
+    "originalPath": "/icons/toolwindowUnitTestCoverage.svg",
+    "iconName": "coverage_13x13.svg"
   }
 
 ]
