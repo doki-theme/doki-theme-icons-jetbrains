@@ -1,0 +1,46 @@
+name: Bug Report
+description: File a bug report
+title: "[ICON Request]: "
+labels: ["enhancement"]
+assignees:
+  - Unthrottled
+body:
+  - type: markdown
+    attributes:
+      value: |
+        So you want me to add a new icon for you? Well here is what I need from you.
+  - type: input
+    id: svg_path
+    attributes:
+      label: Icon Path
+      description: Path of the icon you want me to replace. [See locating icon path for details](https://github.com/doki-theme/doki-theme-icons-jetbrains/wiki/Locating-Icon-Path)
+      placeholder: "/actions/checkOut.svg"
+    validations:
+      required: true
+  - type: textarea
+    id: what-it-look-like
+    attributes:
+      label: What does it look like?
+      description: Drag a screenshot/image into the text area.
+      placeholder: What does it look like?
+      value: "![Icon](https://doki.assets.unthrottled.io/misc/logo_v2.svg)"
+    validations:
+      required: true
+  - type: input
+    id: plugin
+    attributes:
+      label: What Plugin?
+      description: Which plugin (if not bundled) & version does this icon come from?
+      placeholder: ""
+    validations:
+      required: false
+  - type: textarea
+    id: how_get
+    attributes:
+      label: How to get to it?
+      description: Tell me the steps I need to follow to find it or provide a video.
+      placeholder: "Step One: Open Project"
+      value: "![Icon](https://doki.assets.unthrottled.io/misc/logo_v2.svg)"
+    validations:
+      required: false
+
