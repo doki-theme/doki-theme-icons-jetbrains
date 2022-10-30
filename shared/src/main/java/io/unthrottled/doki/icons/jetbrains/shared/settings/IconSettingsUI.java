@@ -92,13 +92,13 @@ public class IconSettingsUI implements SearchableConfigurable, Configurable.NoSc
     iconRequest.setIcon(DokiThemeIcons.WATCH);
     iconRequest.setText(PluginMessageBundle.message("settings.icon.request"));
     iconRequest.addActionListener(e -> {
-      BrowserUtil.browse(Constants.REPO_URL + "/issues/new?assignees=&labels=&template=icon_request.md&title=[Icon+Request]+");
+      BrowserUtil.browse(Constants.REPO_URL + "/issues/new?assignees=Unthrottled&labels=enhancement&template=ICON_REQUEST.yml&title=%5BICON%5D%3A+");
     });
 
     reportIssue.setIcon(DokiThemeIcons.SOLID_ERROR);
     reportIssue.setText(PluginMessageBundle.message("settings.report.bug"));
     reportIssue.addActionListener(e -> {
-      BrowserUtil.browse(Constants.REPO_URL + "/issues/new?assignees=&labels=&template=bug_report.md&title=[Bug]+");
+      BrowserUtil.browse(Constants.REPO_URL + "/issues/new?assignees=Unthrottled&labels=bug%2Ctriage&template=BUG_REPORT.yml&title=[Bug]%3A+");
     });
   }
 
