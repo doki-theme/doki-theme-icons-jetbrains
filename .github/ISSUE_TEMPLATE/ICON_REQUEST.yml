@@ -31,7 +31,7 @@ body:
     attributes:
       label: What Plugin?
       description: Which plugin (if not bundled) & version does this icon come from?
-      placeholder: ""
+      placeholder: "https://plugins.jetbrains.com/plugin/6351-dart 223.7255.15"
     validations:
       required: false
   - type: textarea
