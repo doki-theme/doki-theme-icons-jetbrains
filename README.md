@@ -8,6 +8,10 @@ Doki Theme Icons: JetBrains
 
 # [More Screenshots](https://github.com/doki-theme/doki-theme-jupyter/blob/main/albums/screenshot_album.md)
 
+<!-- Plugin description -->
+A nice mix of cool and cute icons to compliment your favorite theme!
+<!-- Plugin description end -->
+
 ---
 
 # Documentation
