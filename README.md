@@ -62,5 +62,5 @@ Help make this plugin better!
 ---
 
 <div align="center">
-    <img src="https://doki.assets.unthrottled.io/misc/logo.svg" ></img>
+    <img src="https://doki.assets.unthrottled.io/misc/logo_v2.svg" ></img>
 </div>
