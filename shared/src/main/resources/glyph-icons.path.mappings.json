@@ -37,19 +37,23 @@
   },
   {
     "originalPath": "/nodes/enum.svg",
-    "iconName": "solid_doki_glyph.svg"
+    "iconName": "partial_hex_glyph.svg"
   },
   {
     "originalPath": "/org/jetbrains/kotlin/idea/icons/enumKotlin.svg",
-    "iconName": "solid_doki_glyph_kotlin.svg"
+    "iconName": "partial_hex_glyph_kotlin.svg"
+  },
+  {
+    "originalPath": "/org/jetbrains/kotlin/idea/icons/kotlin_file.svg",
+    "iconName": "file_kotlin.svg"
   },
   {
     "originalPath": "/nodes/annotationtype.svg",
-    "iconName": "outline_rectangle_glyph.svg"
+    "iconName": "evaluate_expression.svg"
   },
   {
     "originalPath": "/org/jetbrains/kotlin/idea/icons/annotationKotlin.svg",
-    "iconName": "outline_rectangle_glyph_kotlin.svg"
+    "iconName": "evaluate_expression_kotlin.svg"
   },
   {
     "originalPath": "/org/jetbrains/kotlin/idea/icons/objectKotlin.svg",
