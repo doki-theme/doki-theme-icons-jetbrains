@@ -25,6 +25,7 @@ A nice mix of cool and cute icons to compliment your favorite theme!
   - [Contributing](#contributing)
     - [Icon Requests](#icon-requests)
   - [Helping the community](#enjoying-these-icons)
+  - [Release Channel](#release-channel)
 
 # Installation
 
@@ -96,6 +97,11 @@ Thank you!
 Great! I am glad you like it!
 
 Be sure to ⭐ and share it with other weebs!
+
+## Release channel
+
+Want updates sooner? I have a [canary release channel](https://github.com/Unthrottled/jetbrains-plugin-repository) that you can set up to get the latest and greatest!
+
 
 ---
 
