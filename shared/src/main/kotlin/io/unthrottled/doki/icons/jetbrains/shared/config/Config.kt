@@ -29,6 +29,7 @@ class Config : PersistentStateComponent<Config>, Cloneable {
   var isNamedFileIcons: Boolean = true
   var isGlyphIcon: Boolean = true
   var isNamedFolderIcons: Boolean = true
+  var isMyIcons: Boolean = false
   var syncWithDokiTheme: Boolean = true
 
   override fun getState(): Config? =

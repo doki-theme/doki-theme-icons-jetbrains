@@ -45,6 +45,8 @@ public class IconSettingsUI implements SearchableConfigurable, Configurable.NoSc
   private JLabel fileGlyphs;
   private ActionLink iconRequest;
   private ActionLink reportIssue;
+  private JCheckBox myIconsCheckBox;
+  private JLabel myIconsIcon;
 
   @Override
   public @NotNull @NonNls String getId() {
@@ -72,6 +74,8 @@ public class IconSettingsUI implements SearchableConfigurable, Configurable.NoSc
     filesCheckBox.addActionListener(e ->
       iconSettingsModel.setNamedFileIcons(filesCheckBox.isSelected()));
     namedFilesIcon.setIcon(DokiThemeIcons.CURLY_BRACES);
+    namedFilesIcon.setVisible(false);
+    filesCheckBox.setVisible(false);
 
     PSICheckBox.setSelected(initialIconSettingsModel.isGlyphIcons());
     PSICheckBox.addActionListener(e ->
@@ -83,6 +87,11 @@ public class IconSettingsUI implements SearchableConfigurable, Configurable.NoSc
       iconSettingsModel.setNamedFolderIcons(foldersCheckBox.isSelected()));
     foldersCheckBox.setVisible(false);
     namedFoldersIcon.setVisible(false);
+
+    myIconsCheckBox.setSelected(initialIconSettingsModel.isMyIcons());
+    myIconsCheckBox.addActionListener(e ->
+      iconSettingsModel.setMyIcons(myIconsCheckBox.isSelected()));
+    myIconsIcon.setIcon(DokiThemeIcons.MAMSNRHBR_CHEHFDE);
 
     syncWithDokiThemeCheckBox.setEnabled(PluginService.INSTANCE.isDokiThemeInstalled());
     syncWithDokiThemeCheckBox.setSelected(initialIconSettingsModel.getSyncWithDokiTheme());
@@ -116,6 +125,7 @@ public class IconSettingsUI implements SearchableConfigurable, Configurable.NoSc
     config.setNamedFolderIcons(foldersCheckBox.isSelected());
     config.setCurrentThemeId(iconSettingsModel.getCurrentThemeId());
     config.setSyncWithDokiTheme(syncWithDokiThemeCheckBox.isSelected());
+    config.setMyIcons(myIconsCheckBox.isSelected());
 
     ApplicationManager.getApplication()
       .getMessageBus()

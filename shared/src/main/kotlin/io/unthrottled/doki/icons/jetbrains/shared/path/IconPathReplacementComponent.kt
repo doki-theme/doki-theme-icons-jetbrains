@@ -18,6 +18,11 @@ object IconPathReplacementComponent : IconConfigListener {
   private val iconInstallPacs =
     listOf(
       IconReplacementPack(
+        DokiIconPathPatcher("alex-icons.path.mappings.json"),
+        { it.isMyIcons },
+        { it.isMyIcons }
+      ),
+      IconReplacementPack(
         DokiIconPathPatcher("ui-icons.path.mappings.json"),
         { it.isUIIcons },
         { it.isUIIcons }
@@ -59,13 +64,20 @@ object IconPathReplacementComponent : IconConfigListener {
   }
 
   override fun iconConfigUpdated(previousState: IconSettingsModel, newState: IconSettingsModel) {
-    iconInstallPacs.filter {
+    val hasChanged = iconInstallPacs.any {
       it.iconSettingsExtractor(previousState) != it.iconSettingsExtractor(newState)
-    }.forEach { pak ->
+    }
+    if(!hasChanged) {
+      return
+    }
+
+    iconInstallPacs.forEach {
+      IconLoader.removePathPatcher(it.iconPatcher)
+    }
+
+    iconInstallPacs.forEach { pak ->
       val newIconPatchState = pak.iconSettingsExtractor(newState)
       if (newIconPatchState) {
-        IconLoader.removePathPatcher(pak.iconPatcher)
-      } else {
         IconLoader.installPathPatcher(pak.iconPatcher)
       }
     }

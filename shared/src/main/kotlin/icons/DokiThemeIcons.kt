@@ -17,6 +17,8 @@ object DokiThemeIcons {
   val WATCH = IconLoader.getIcon("/doki/icons/watch.svg", javaClass)
   @JvmField
   val SOLID_ERROR = IconLoader.getIcon("/doki/icons/warning_circle_filled.svg", javaClass)
+  @JvmField
+  val MAMSNRHBR_CHEHFDE = IconLoader.getIcon("/doki/icons/mamsnrhbr_chehfde.svg", javaClass)
 
   object Tree {
     const val EXPANDED_KEY = "Tree.expandedIcon"

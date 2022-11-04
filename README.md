@@ -56,8 +56,11 @@ I do not know why you would want to that, because I specially designed each one 
 ### Icon Settings
 
 - **UI Icons** Are all the icons that are present as part of the user interface (UI).
+<!--
 - **Named Files** Turns on the ability for the plugin to associate various names of files to various icons. This is only used for when the platform does not already provide a special icon for the file.
+-->
 - **File Glyphs** Are the icons in the project tree & completion window which symbolize the abstract programming concepts. Such as: Interfaces, Classes, Methods, Variables etc.
+- **My Icons** Are a special set of icons that do not necessarily fit the general icon theme, but have special meaning to me.
 
 # Miscellaneous
 

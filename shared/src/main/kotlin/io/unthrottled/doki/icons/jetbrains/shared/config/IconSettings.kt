@@ -35,6 +35,7 @@ data class IconSettingsModel(
   var isNamedFileIcons: Boolean,
   var isGlyphIcons: Boolean,
   var isNamedFolderIcons: Boolean,
+  var isMyIcons: Boolean,
   var currentThemeId: String,
   var syncWithDokiTheme: Boolean,
 )
@@ -50,6 +51,7 @@ object IconSettings {
       isNamedFileIcons = Config.instance.isNamedFileIcons,
       isGlyphIcons = Config.instance.isGlyphIcon,
       isNamedFolderIcons = Config.instance.isNamedFolderIcons,
+      isMyIcons = Config.instance.isMyIcons,
       currentThemeId = IconThemeManager.instance.getThemeById(
         Config.instance.currentThemeId
       ).orElseGet {
