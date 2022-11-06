@@ -81,6 +81,10 @@
   },
   {
     "originalPath": "/nodes/function.svg",
-    "iconName": "game_kun.svg"
+    "iconName": "outline_square_glyph.svg"
+  },
+  {
+    "originalPath": "/nodes/template.svg",
+    "iconName": "copy.svg"
   }
 ]

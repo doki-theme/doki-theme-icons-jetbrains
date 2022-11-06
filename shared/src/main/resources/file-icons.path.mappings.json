@@ -6,5 +6,25 @@
   {
     "originalPath": "/fileTypes/html.svg",
     "iconName": "linked_angle_braces.svg"
+  },
+  {
+    "originalPath": "/org/intellij/images/icons/ImagesFileType.svg",
+    "iconName": "image.svg"
+  },
+  {
+    "originalPath": "/icons/fileTypes/TypeScriptFile.svg",
+    "iconName": "partial_ring_heart_glyph.svg"
+  },
+  {
+    "originalPath": "/fileTypes/javaScript.svg",
+    "iconName": "partial_triangle_glyph.svg"
+  },
+  {
+    "originalPath": "/icons/MarkdownPlugin.svg",
+    "iconName": "file_edit.svg"
+  },
+  {
+    "originalPath": "/vcs/ignore_file.svg",
+    "iconName": "file_close.svg"
   }
 ]
