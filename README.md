@@ -1,6 +1,10 @@
 Doki Theme Icons: JetBrains
 ---
 
+<div align="center">
+    <img src="https://doki.assets.unthrottled.io/misc/doki_icons_logo.svg" ></img>
+</div>
+
 ## Sample
 
 **Takanashi Rikka**
