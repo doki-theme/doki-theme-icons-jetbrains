@@ -93,10 +93,18 @@ public class IconSettingsUI implements SearchableConfigurable, Configurable.NoSc
       iconSettingsModel.setMyIcons(myIconsCheckBox.isSelected()));
     myIconsIcon.setIcon(DokiThemeIcons.MAMSNRHBR_CHEHFDE);
 
-    syncWithDokiThemeCheckBox.setEnabled(PluginService.INSTANCE.isDokiThemeInstalled());
+    boolean dokiThemeInstalled = PluginService.INSTANCE.isDokiThemeInstalled();
+    syncWithDokiThemeCheckBox.setEnabled(dokiThemeInstalled);
     syncWithDokiThemeCheckBox.setSelected(initialIconSettingsModel.getSyncWithDokiTheme());
-    syncWithDokiThemeCheckBox.addActionListener(e ->
-      iconSettingsModel.setSyncWithDokiTheme(syncWithDokiThemeCheckBox.isSelected()));
+    syncWithDokiThemeCheckBox.addActionListener(e -> {
+      iconSettingsModel.setSyncWithDokiTheme(syncWithDokiThemeCheckBox.isSelected());
+      currentThemeWomboComboBox.setEnabled(!syncWithDokiThemeCheckBox.isSelected());
+    });
+
+    currentThemeWomboComboBox.setEnabled(
+      !(dokiThemeInstalled &&
+        initialIconSettingsModel.getSyncWithDokiTheme())
+    );
 
     iconRequest.setIcon(DokiThemeIcons.WATCH);
     iconRequest.setText(PluginMessageBundle.message("settings.icon.request"));
