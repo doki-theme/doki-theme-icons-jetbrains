@@ -93,7 +93,7 @@ class IconThemeManager : LafManagerListener, Disposable, IconConfigListener, Log
       .map {
         val themeId = it.getId()
         DokiThemePayload(
-          themeMap[themeId] ?: throw IllegalStateException("Expecting theme with ID $themeId to be present"),
+          themeMap[themeId] ?: error("Expecting theme with ID $themeId to be present"),
           it.theme
         )
       }

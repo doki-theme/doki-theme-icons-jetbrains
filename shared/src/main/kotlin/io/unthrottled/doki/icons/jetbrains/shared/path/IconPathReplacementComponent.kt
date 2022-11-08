@@ -67,7 +67,7 @@ object IconPathReplacementComponent : IconConfigListener {
     val hasChanged = iconInstallPacs.any {
       it.iconSettingsExtractor(previousState) != it.iconSettingsExtractor(newState)
     }
-    if(!hasChanged) {
+    if (!hasChanged) {
       return
     }
 

@@ -11,9 +11,9 @@ import io.unthrottled.doki.icons.jetbrains.shared.tools.Logging
 import io.unthrottled.doki.icons.jetbrains.shared.tools.logger
 import io.unthrottled.doki.icons.jetbrains.shared.tools.toColor
 import io.unthrottled.doki.icons.jetbrains.shared.tools.toHexString
+import org.w3c.dom.Element
 import java.awt.Color
 import kotlin.math.ceil
-import org.w3c.dom.Element
 
 class SVGColorPaletteReplacer(private val dokiTheme: DokiTheme) : PatcherProvider, Logging {
 
@@ -26,6 +26,8 @@ class SVGColorPaletteReplacer(private val dokiTheme: DokiTheme) : PatcherProvide
       ).orElseGet {
         emptyMap()
       }
+
+    private const val SECONDARY_BLEND_DARKENING = 3
   }
 
   private val newPalette =
@@ -51,7 +53,7 @@ class SVGColorPaletteReplacer(private val dokiTheme: DokiTheme) : PatcherProvide
           .toHexString()
         this["#776bc4"] = ColorUtil.darker(
           ColorUtil.fromHex(dokiTheme.colors["iconSecondaryBlend"]!!),
-          3,
+          SECONDARY_BLEND_DARKENING,
         )
           .toHexString()
       }
@@ -67,6 +69,10 @@ class PalletPatcher(
   private val digest: ByteArray,
   private val newPalette: Map<String, String>,
 ) : SVGLoader.SvgElementColorPatcher {
+
+  companion object {
+    private const val HEX_STRING_LENGTH = 7
+  }
   override fun digest(): ByteArray? {
     return digest
   }
@@ -85,6 +91,7 @@ class PalletPatcher(
     }
   }
 
+  @Suppress("MagicNumber") // cuz is majik
   private fun patchColorAttribute(svg: Element, attrName: String) {
     val color = svg.getAttribute(attrName)
     val opacity = svg.getAttribute("$attrName-opacity")
@@ -112,7 +119,7 @@ class PalletPatcher(
 
   private fun toCanonicalColor(color: String): String {
     var s = color.lowercase()
-    if (s.startsWith("#") && s.length < 7) {
+    if (s.startsWith("#") && s.length < HEX_STRING_LENGTH) {
       s = "#" + ColorUtil.toHex(ColorUtil.fromHex(s))
     }
     return s
@@ -130,6 +137,7 @@ class SVGColorizer(private val dokiTheme: DokiTheme) : Patcher {
     )
   }
 
+  @Suppress("MagicNumber")
   private fun patchChildren(
     svg: Element,
   ) {

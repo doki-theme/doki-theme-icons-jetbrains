@@ -18,4 +18,3 @@ class ShowUpdateNotification : AnAction(), DumbAware {
       }
   }
 }
-
