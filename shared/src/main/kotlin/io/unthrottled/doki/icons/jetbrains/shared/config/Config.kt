@@ -12,7 +12,7 @@ import io.unthrottled.doki.icons.jetbrains.shared.themes.IconThemeManager
 fun Application.getConfig(): Config = this.getService(Config::class.java)
 
 @State(
-  name = "Plugin-Config",
+  name = "doki-theme-icon-config",
   storages = [Storage("doki-theme-icons.xml")]
 )
 class Config : PersistentStateComponent<Config>, Cloneable {
