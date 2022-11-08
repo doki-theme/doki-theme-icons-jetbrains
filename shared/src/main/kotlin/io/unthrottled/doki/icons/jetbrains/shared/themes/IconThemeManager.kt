@@ -84,7 +84,15 @@ class IconThemeManager : LafManagerListener, Disposable, IconConfigListener, Log
   val defaultTheme: DokiTheme
     get() = getThemeById(DEFAULT_THEME_ID).get()
 
-  val userSetTheme: Optional<DokiThemePayload>
+  val currentTheme: Optional<DokiThemePayload> =
+    if (Config.instance.syncWithDokiTheme) {
+      mapLAFToDokiTheme(LafManager.getInstance().currentLookAndFeel)
+    } else {
+      userSetTheme
+    }.or {
+      userSetTheme
+    }
+  private val userSetTheme: Optional<DokiThemePayload>
     get() = LafManagerImpl.getInstance().installedLookAndFeels
       .filterIsInstance<UIThemeBasedLookAndFeelInfo>()
       .firstOrNull {
@@ -100,7 +108,7 @@ class IconThemeManager : LafManagerListener, Disposable, IconConfigListener, Log
   val allThemes: List<DokiTheme>
     get() = themeMap.values.toList()
 
-  private fun processLaf(currentLaf: UIManager.LookAndFeelInfo?): Optional<DokiThemePayload> {
+  private fun mapLAFToDokiTheme(currentLaf: UIManager.LookAndFeelInfo?): Optional<DokiThemePayload> {
     return currentLaf.toOptional()
       .filter { it is UIThemeBasedLookAndFeelInfo }
       .map { it as UIThemeBasedLookAndFeelInfo }
@@ -120,7 +128,7 @@ class IconThemeManager : LafManagerListener, Disposable, IconConfigListener, Log
   override fun lookAndFeelChanged(source: LafManager) {
     val messageBus = ApplicationManager.getApplication().messageBus
     if (Config.instance.syncWithDokiTheme) {
-      processLaf(source.currentLookAndFeel)
+      mapLAFToDokiTheme(source.currentLookAndFeel)
         .map {
           Config.instance.currentThemeId = it.dokiTheme.id
           it

@@ -22,7 +22,7 @@ class ThemedSVGManager : ThemeManagerListener, Disposable {
   }
 
   fun initialize() {
-    IconThemeManager.instance.userSetTheme
+    IconThemeManager.instance.currentTheme
       .ifPresent {
         activateTheme(it)
       }
