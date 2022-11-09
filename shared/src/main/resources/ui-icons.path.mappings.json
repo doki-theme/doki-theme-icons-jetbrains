@@ -594,6 +594,10 @@
   {
     "originalPath": "/icons/toolwindowUnitTestCoverage.svg",
     "iconName": "coverage_13x13.svg"
+  },
+  {
+    "originalPath": "/icons/ideavim.svg",
+    "iconName": "vim.svg"
   }
 
 ]
