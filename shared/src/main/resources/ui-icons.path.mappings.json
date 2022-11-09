@@ -598,6 +598,10 @@
   {
     "originalPath": "/icons/ideavim.svg",
     "iconName": "vim.svg"
+  },
+  {
+    "originalPath": "/nodes/plugin.svg",
+    "iconName": "plugin.svg"
   }
 
 ]

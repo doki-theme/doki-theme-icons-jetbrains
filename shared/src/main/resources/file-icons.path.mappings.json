@@ -26,5 +26,21 @@
   {
     "originalPath": "/vcs/ignore_file.svg",
     "iconName": "file_close.svg"
+  },
+  {
+    "originalPath": "/fileTypes/yaml.svg",
+    "iconName": "star_pentagon_glyph.svg"
+  },
+  {
+    "originalPath": "/nodes/property.svg",
+    "iconName": "hex_cube_glyph.svg"
+  },
+  {
+    "originalPath": "/nodes/multipleTypeDefinitions.svg",
+    "iconName": "optical_glyph.svg"
+  },
+  {
+    "originalPath": "/nodes/editorconfig.svg",
+    "iconName": "config.svg"
   }
 ]
