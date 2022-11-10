@@ -248,6 +248,10 @@
     "iconName": "edit.svg"
   },
   {
+    "originalPath": "/actions/editSource.svg",
+    "iconName": "edit.svg"
+  },
+  {
     "originalPath": "/general/buttonDropTriangle.svg",
     "iconName": "chevron_down_13x13.svg"
   },
@@ -572,11 +576,19 @@
     "iconName": "folder_hex_stack_glyph.svg"
   },
   {
+    "originalPath": "/general/projectStructure.svg",
+    "iconName": "folder_hex_stack_glyph.svg"
+  },
+  {
     "originalPath": "/actions/scratch.svg",
     "iconName": "scratches.svg"
   },
   {
     "originalPath": "/ide/notification/pluginUpdate.svg",
+    "iconName": "update.svg"
+  },
+  {
+    "originalPath": "/ide/notification/ideUpdate.svg",
     "iconName": "update.svg"
   },
   {
@@ -602,6 +614,14 @@
   {
     "originalPath": "/nodes/plugin.svg",
     "iconName": "plugin.svg"
+  },
+  {
+    "originalPath": "/actions/run_anything.svg",
+    "iconName": "solid_triangle_glyph.svg"
+  },
+  {
+    "originalPath": "/actions/runAll.svg",
+    "iconName": "solid_triangle_glyph.svg"
   }
 
 ]

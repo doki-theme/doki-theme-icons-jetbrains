@@ -33,7 +33,7 @@
   },
   {
     "originalPath": "/nodes/property.svg",
-    "iconName": "hex_cube_glyph.svg"
+    "iconName": "hex_outline_glyph_circle.svg"
   },
   {
     "originalPath": "/nodes/multipleTypeDefinitions.svg",
@@ -42,5 +42,33 @@
   {
     "originalPath": "/nodes/editorconfig.svg",
     "iconName": "config.svg"
+  },
+  {
+    "originalPath": "/org/jetbrains/kotlin/idea/icons/kotlin_gradle_script.svg",
+    "iconName": "file_kotlin.svg"
+  },
+  {
+    "originalPath": "/ide/rating.svg",
+    "iconName": "rating.svg"
+  },
+  {
+    "originalPath": "/plugins/rating.svg",
+    "iconName": "rating.svg"
+  },
+  {
+    "originalPath": "/ide/rating1.svg",
+    "iconName": "rating_1.svg"
+  },
+  {
+    "originalPath": "/ide/rating2.svg",
+    "iconName": "rating_2.svg"
+  },
+  {
+    "originalPath": "/ide/rating3.svg",
+    "iconName": "rating_3.svg"
+  },
+  {
+    "originalPath": "/ide/rating4.svg",
+    "iconName": "rating_4.svg"
   }
 ]

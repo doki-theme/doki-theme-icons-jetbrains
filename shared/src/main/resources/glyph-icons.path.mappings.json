@@ -12,6 +12,10 @@
     "iconName": "outline_circle_glyph.svg"
   },
   {
+    "originalPath": "/gutter/implementingMethod.svg",
+    "iconName": "outline_circle_glyph.svg"
+  },
+  {
     "originalPath": "/org/jetbrains/kotlin/idea/icons/interfaceKotlin.svg",
     "iconName": "outline_circle_glyph_kotlin.svg"
   },
@@ -29,6 +33,10 @@
   },
   {
     "originalPath": "/nodes/method.svg",
+    "iconName": "outline_square_glyph.svg"
+  },
+  {
+    "originalPath": "/gutter/implementedMethod.svg",
     "iconName": "outline_square_glyph.svg"
   },
   {
@@ -86,5 +94,13 @@
   {
     "originalPath": "/nodes/template.svg",
     "iconName": "copy.svg"
+  },
+  {
+    "originalPath": "/gutter/overridingMethod.svg",
+    "iconName": "hex_outline_glyph_chevron_up.svg"
+  },
+  {
+    "originalPath": "/gutter/overridenMethod.svg",
+    "iconName": "hex_outline_glyph_chevron_down.svg"
   }
 ]
