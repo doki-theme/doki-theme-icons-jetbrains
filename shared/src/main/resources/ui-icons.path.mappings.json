@@ -536,6 +536,10 @@
     "iconName": "link.svg"
   },
   {
+    "originalPath": "/nodes/symlink.svg",
+    "iconName": "link.svg"
+  },
+  {
     "originalPath": "/codeWithMe/cwmPermissions.svg",
     "iconName": "key.svg"
   },
