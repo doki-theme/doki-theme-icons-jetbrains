@@ -537,7 +537,7 @@
   },
   {
     "originalPath": "/nodes/symlink.svg",
-    "iconName": "link.svg"
+    "iconName": "symlink.svg"
   },
   {
     "originalPath": "/codeWithMe/cwmPermissions.svg",
@@ -626,6 +626,14 @@
   {
     "originalPath": "/actions/runAll.svg",
     "iconName": "solid_triangle_glyph.svg"
+  },
+  {
+    "originalPath": "/icons/buildTools/npm/npm_16.svg",
+    "iconName": "npm.svg"
+  },
+  {
+    "originalPath": "/icons/buildTools/npm/npm_13.svg",
+    "iconName": "npm_13x13.svg"
   }
 
 ]
