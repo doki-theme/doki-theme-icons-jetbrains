@@ -102,5 +102,13 @@
   {
     "originalPath": "/gutter/overridenMethod.svg",
     "iconName": "hex_outline_glyph_chevron_down.svg"
+  },
+  {
+    "originalPath": "/icons/classes/alias.svg",
+    "iconName": "optical_glyph.svg"
+  },
+  {
+    "originalPath": "/nodes/multipleTypeDefinitions.svg",
+    "iconName": "optical_glyph.svg"
   }
 ]

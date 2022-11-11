@@ -248,6 +248,10 @@
     "iconName": "edit.svg"
   },
   {
+    "originalPath": "/icons/edit.svg",
+    "iconName": "edit.svg"
+  },
+  {
     "originalPath": "/actions/editSource.svg",
     "iconName": "edit.svg"
   },
@@ -337,6 +341,10 @@
   },
   {
     "originalPath": "/actions/intentionBulb.svg",
+    "iconName": "ice_cream.svg"
+  },
+  {
+    "originalPath": "/actions/intentionBulbGrey.svg",
     "iconName": "ice_cream.svg"
   },
   {
@@ -634,6 +642,13 @@
   {
     "originalPath": "/icons/buildTools/npm/npm_13.svg",
     "iconName": "npm_13x13.svg"
+  },
+  {
+    "originalPath": "/icons/graphqlToolWindow.svg",
+    "iconName": "graph_13x13.svg"
+  },
+  {
+    "originalPath": "/icons/graphqlFile.svg",
+    "iconName": "file_graph.svg"
   }
-
 ]

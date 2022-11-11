@@ -13,11 +13,19 @@
   },
   {
     "originalPath": "/icons/fileTypes/TypeScriptFile.svg",
-    "iconName": "partial_ring_heart_glyph.svg"
+    "iconName": "partial_ring_glyph_heart.svg"
+  },
+  {
+    "originalPath": "/icons/fileTypes/TypeScriptTest.svg",
+    "iconName": "partial_ring_glyph_test.svg"
   },
   {
     "originalPath": "/fileTypes/javaScript.svg",
     "iconName": "partial_triangle_glyph.svg"
+  },
+  {
+    "originalPath": "/icons/fileTypes/jsTestFile.svg",
+    "iconName": "partial_triangle_glyph_test.svg"
   },
   {
     "originalPath": "/icons/MarkdownPlugin.svg",
@@ -34,10 +42,6 @@
   {
     "originalPath": "/nodes/property.svg",
     "iconName": "hex_outline_glyph_circle.svg"
-  },
-  {
-    "originalPath": "/nodes/multipleTypeDefinitions.svg",
-    "iconName": "optical_glyph.svg"
   },
   {
     "originalPath": "/nodes/editorconfig.svg",
