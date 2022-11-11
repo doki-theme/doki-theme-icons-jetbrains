@@ -19,6 +19,7 @@ import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
 import java.nio.file.Paths.get
+import java.nio.file.StandardCopyOption
 import java.nio.file.StandardOpenOption
 import java.util.stream.Collectors
 import org.gradle.api.DefaultTask
@@ -143,6 +144,7 @@ open class BuildThemes : DefaultTask() {
             getIconsDirectory().toAbsolutePath().toString(),
             dokiIconPath.fileName.toString()
           ),
+          StandardCopyOption.REPLACE_EXISTING
         )
         dokiIconPath.fileName.toString()
       }

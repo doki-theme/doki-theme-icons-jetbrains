@@ -650,5 +650,21 @@
   {
     "originalPath": "/icons/graphqlFile.svg",
     "iconName": "file_graph.svg"
+  },
+  {
+    "originalPath": "/general/balloonInformation.svg",
+    "iconName": "info_circle.svg"
+  },
+  {
+    "originalPath": "/general/information.svg",
+    "iconName": "info_circle.svg"
+  },
+  {
+    "originalPath": "/actions/synchronizeScrolling.svg",
+    "iconName": "dual_panels_refresh.svg"
+  },
+  {
+    "originalPath": "/actions/listFiles.svg",
+    "iconName": "file.svg"
   }
 ]
