@@ -465,7 +465,7 @@
   },
   {
     "originalPath": "/runConfigurations/testFailed.svg",
-    "iconName": "rip.svg"
+    "iconName": "rip_outline.svg"
   },
   {
     "originalPath": "/runConfigurations/rerunFailedTests.svg",
@@ -666,5 +666,17 @@
   {
     "originalPath": "/actions/listFiles.svg",
     "iconName": "file.svg"
+  },
+  {
+    "originalPath": "/general/warning.svg",
+    "iconName": "warning_triangle.svg"
+  },
+  {
+    "originalPath": "/icons/gradleLoadChanges.svg",
+    "iconName": "cupcake_refresh.svg"
+  },
+  {
+    "originalPath": "/icons/mavenLoadChanges.svg",
+    "iconName": "pretzel_refresh.svg"
   }
 ]
