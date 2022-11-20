@@ -1,9 +1,5 @@
 [
   {
-    "originalPath": "/actions/compile.svg",
-    "iconName": "build.svg"
-  },
-  {
     "originalPath": "/toolwindows/toolWindowBuild.svg",
     "iconName": "build_13x13.svg"
   },
@@ -678,5 +674,9 @@
   {
     "originalPath": "/icons/mavenLoadChanges.svg",
     "iconName": "pretzel_refresh.svg"
+  },
+  {
+    "originalPath": "/rider/actions/cancelCompile.svg",
+    "iconName": "build_close.svg"
   }
 ]
