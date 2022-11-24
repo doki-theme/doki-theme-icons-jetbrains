@@ -16,7 +16,7 @@ plugins {
   // Gradle Qodana Plugin
   id("org.jetbrains.qodana") version "0.1.13"
   // detekt linter - read more: https://detekt.github.io/detekt/gradle.html
-  id("io.gitlab.arturbosch.detekt") version "1.21.0"
+  id("io.gitlab.arturbosch.detekt") version "1.22.0"
   // ktlint linter - read more: https://github.com/JLLeitschuh/ktlint-gradle
   id("org.jlleitschuh.gradle.ktlint") version "11.0.0"
 }
@@ -88,11 +88,11 @@ intellij {
   type.set(properties("platformType"))
 
   // Plugin Dependencies. Uses `platformPlugins` property from the gradle.properties file.
-  val filter: MutableList<Any> = properties("platformPlugins").split(',').map(String::trim).filter(String::isNotEmpty).toMutableList()
-  filter.add(
+  val activePlugins: MutableList<Any> = properties("platformPlugins").split(',').map(String::trim).filter(String::isNotEmpty).toMutableList()
+  activePlugins.add(
     project(":doki-theme")
   )
-  plugins.set(filter)
+  plugins.set(activePlugins)
 }
 
 // Configure Gradle Changelog Plugin - read more: https://github.com/JetBrains/gradle-changelog-plugin

@@ -84,10 +84,6 @@
     "iconName": "intertwine.svg"
   },
   {
-    "originalPath": "/nodes/field.svg",
-    "iconName": "link.svg"
-  },
-  {
     "originalPath": "/nodes/function.svg",
     "iconName": "outline_square_glyph.svg"
   },
@@ -104,11 +100,27 @@
     "iconName": "hex_outline_glyph_chevron_down.svg"
   },
   {
-    "originalPath": "/icons/classes/alias.svg",
+    "originalPath": "/nodes/field.svg",
     "iconName": "optical_glyph.svg"
   },
   {
     "originalPath": "/nodes/multipleTypeDefinitions.svg",
     "iconName": "outline_rectangle_glyph.svg"
+  },
+  {
+    "originalPath": "/icons/classes/alias.svg",
+    "iconName": "star_outline_glyph.svg"
+  },
+  {
+    "originalPath": "/org/jetbrains/kotlin/idea/icons/field_variable.svg",
+    "iconName": "star_outline_glyph.svg"
+  },
+  {
+    "originalPath": "/org/jetbrains/kotlin/idea/icons/field_value.svg",
+    "iconName": "star_outline_glyph.svg"
+  },
+  {
+    "originalPath": "/icons/variable.svg",
+    "iconName": "star_outline_glyph.svg"
   }
 ]

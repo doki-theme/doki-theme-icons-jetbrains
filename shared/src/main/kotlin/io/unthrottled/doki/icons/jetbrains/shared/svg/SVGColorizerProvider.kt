@@ -141,7 +141,7 @@ class SVGColorizer(private val dokiTheme: DokiTheme) : Patcher {
   private fun patchChildren(
     svg: Element,
   ) {
-    patchAccent(svg.getAttribute("accentTintTesto"), svg) {
+    patchAccent(svg.getAttribute("accentTint"), svg) {
       it.toHexString()
     }
     patchAccent(svg.getAttribute("accentTintDarker"), svg) {
