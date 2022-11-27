@@ -698,5 +698,13 @@
   {
     "originalPath": "/toolwindows/toolWindowFind.svg",
     "iconName": "search_right_13x13.svg"
+  },
+  {
+    "originalPath": "/icons/DockerComposeFile.svg",
+    "iconName": "docker_config.svg"
+  },
+  {
+    "originalPath": "/icons/DockerFile_1.svg",
+    "iconName": "docker.svg"
   }
 ]

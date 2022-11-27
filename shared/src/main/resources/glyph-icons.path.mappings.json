@@ -122,5 +122,9 @@
   {
     "originalPath": "/icons/variable.svg",
     "iconName": "star_outline_glyph.svg"
+  },
+  {
+    "originalPath": "/json/object.svg",
+    "iconName": "curly_braces.svg"
   }
 ]
