@@ -7,6 +7,7 @@ import com.intellij.openapi.project.ProjectManager
 import com.intellij.openapi.project.ProjectManagerListener
 import io.unthrottled.doki.icons.jetbrains.shared.laf.LAFIconReplacementComponent
 import io.unthrottled.doki.icons.jetbrains.shared.onboarding.UserOnBoarding
+import io.unthrottled.doki.icons.jetbrains.shared.path.ExperimentalUIBastardizer
 import io.unthrottled.doki.icons.jetbrains.shared.path.IconPathReplacementComponent
 import io.unthrottled.doki.icons.jetbrains.shared.svg.ThemedSVGManager
 import io.unthrottled.doki.icons.jetbrains.shared.themes.IconThemeManager
@@ -17,6 +18,10 @@ import java.util.concurrent.ConcurrentMap
 class PluginMaster : ProjectManagerListener, Disposable, Logging {
 
   companion object {
+
+    init {
+      ExperimentalUIBastardizer.bastardizeExperimentalUI()
+    }
     val instance: PluginMaster
       get() = ApplicationManager.getApplication().getService(PluginMaster::class.java)
   }

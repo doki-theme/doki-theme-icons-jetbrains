@@ -47,6 +47,7 @@ object IconPathReplacementComponent : IconConfigListener {
   private val connection = ApplicationManager.getApplication().messageBus.connect()
 
   fun initialize() {
+    ExperimentalUIBastardizer.bastardizeExperimentalUI()
     this.connection.subscribe(IconConfigListener.TOPIC, this)
 
     iconInstallPacs.forEach { pak ->
@@ -86,6 +87,7 @@ object IconPathReplacementComponent : IconConfigListener {
   }
 
   private fun refresh() {
+    ExperimentalUIBastardizer.bastardizeExperimentalUI()
     ApplicationManager.getApplication().invokeLater {
       val app = ApplicationManager.getApplication()
       app.runWriteAction { FileTypeManagerEx.getInstanceEx().fireFileTypesChanged() }
