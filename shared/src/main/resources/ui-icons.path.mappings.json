@@ -224,6 +224,10 @@
     "iconName": "project_glyph.svg"
   },
   {
+    "originalPath": "/nodes/project.svg",
+    "iconName": "project_glyph.svg"
+  },
+  {
     "originalPath": "/actions/previousOccurence.svg",
     "iconName": "chevron_up.svg"
   },
@@ -444,6 +448,10 @@
     "iconName": "pause.svg"
   },
   {
+    "originalPath": "/expui/progress/pause.svg",
+    "iconName": "pause.svg"
+  },
+  {
     "originalPath": "/general/tbHidden.svg",
     "iconName": "hidden_toolbar.svg"
   },
@@ -489,6 +497,10 @@
   },
   {
     "originalPath": "/actions/close.svg",
+    "iconName": "close_small.svg"
+  },
+  {
+    "originalPath": "/expui/general/closeSmall.svg",
     "iconName": "close_small.svg"
   },
   {
@@ -706,5 +718,17 @@
   {
     "originalPath": "/icons/DockerFile_1.svg",
     "iconName": "docker.svg"
+  },
+  {
+    "originalPath": "/expui/general/moreHorizontal@20x20.svg",
+    "iconName": "ellipsis_horizontal.svg"
+  },
+  {
+    "originalPath": "/actions/moreHorizontal.svg",
+    "iconName": "ellipsis_horizontal.svg"
+  },
+  {
+    "originalPath": "/expui/nodes/module8x8.svg",
+    "iconName": "project_glyph_13x13.svg"
   }
 ]
