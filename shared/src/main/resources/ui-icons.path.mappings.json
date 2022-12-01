@@ -704,6 +704,10 @@
     "iconName": "ghost.svg"
   },
   {
+    "originalPath": "/runConfigurations/testTerminated.svg",
+    "iconName": "ghost.svg"
+  },
+  {
     "originalPath": "/icons/jest/jest.svg",
     "iconName": "jest.svg"
   },
