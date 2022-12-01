@@ -1,5 +1,5 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
-<idea-plugin>
+<idea-plugin require-restart="true">
   <id>io.unthrottled.doki.icons</id>
   <name>Doki Theme Icons</name>
   <vendor>Unthrottled</vendor>
@@ -9,6 +9,7 @@
   </depends>
 
   <extensions defaultExtensionNs="com.intellij">
+    <applicationInitializedListener implementation="io.unthrottled.doki.icons.jetbrains.shared.integrations.PlatformHacker" />
     <applicationConfigurable id="io.unthrottled.doki.icons.jetbrains.shared.settings.ThemeSettings"
                              instance="io.unthrottled.doki.icons.jetbrains.shared.settings.IconSettingsUI"
                              groupId="appearance"/>
