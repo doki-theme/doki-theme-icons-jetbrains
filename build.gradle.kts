@@ -90,9 +90,9 @@ intellij {
 
   // Plugin Dependencies. Uses `platformPlugins` property from the gradle.properties file.
   val activePlugins: MutableList<Any> = properties("platformPlugins").split(',').map(String::trim).filter(String::isNotEmpty).toMutableList()
-//  activePlugins.add(
-//    project(":doki-theme")
-//  )
+  activePlugins.add(
+    project(":doki-theme")
+  )
   plugins.set(activePlugins)
 }
 
