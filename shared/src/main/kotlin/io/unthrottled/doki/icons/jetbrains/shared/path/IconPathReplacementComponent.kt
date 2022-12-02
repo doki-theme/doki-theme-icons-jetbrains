@@ -51,6 +51,7 @@ object IconPathReplacementComponent : IconConfigListener {
     this.connection.subscribe(IconConfigListener.TOPIC, this)
 
     iconInstallPacs.forEach { pak ->
+      IconLoader.removePathPatcher(pak.iconPatcher)
       if (pak.iconConfigExtractor(Config.instance)) {
         IconLoader.installPathPatcher(pak.iconPatcher)
       }

@@ -12,7 +12,7 @@ data class PathMapping(
   val iconName: String,
 )
 
-class DokiIconPathPatcher(mappingFile: String) : IconPathPatcher(), Logging {
+class DokiIconPathPatcher(private val mappingFile: String) : IconPathPatcher(), Logging {
 
   private val pathMappings: Map<String, String> =
     readJsonFromResources<List<PathMapping>>(
@@ -42,4 +42,19 @@ class DokiIconPathPatcher(mappingFile: String) : IconPathPatcher(), Logging {
     originalClassLoader: ClassLoader?
   ): ClassLoader? =
     javaClass.classLoader
+
+  override fun equals(other: Any?): Boolean {
+    if (this === other) return true
+    if (javaClass != other?.javaClass) return false
+
+    other as DokiIconPathPatcher
+
+    if (mappingFile != other.mappingFile) return false
+
+    return true
+  }
+
+  override fun hashCode(): Int {
+    return mappingFile.hashCode()
+  }
 }
