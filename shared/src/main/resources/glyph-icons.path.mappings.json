@@ -77,7 +77,11 @@
   },
   {
     "originalPath": "/nodes/variable.svg",
-    "iconName": "mamsnrhbr_chehfde.svg"
+    "iconName": "cowfee.svg"
+  },
+  {
+    "originalPath": "/org/jetbrains/kotlin/idea/icons/value.svg",
+    "iconName": "cowfee.svg"
   },
   {
     "originalPath": "/nodes/abstractMethod.svg",
