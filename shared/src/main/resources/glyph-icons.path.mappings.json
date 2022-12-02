@@ -77,11 +77,11 @@
   },
   {
     "originalPath": "/nodes/variable.svg",
-    "iconName": "hex_stack_glyph.svg"
+    "iconName": "trigram.svg"
   },
   {
     "originalPath": "/org/jetbrains/kotlin/idea/icons/value.svg",
-    "iconName": "hex_stack_glyph.svg"
+    "iconName": "trigram.svg"
   },
   {
     "originalPath": "/nodes/abstractMethod.svg",
