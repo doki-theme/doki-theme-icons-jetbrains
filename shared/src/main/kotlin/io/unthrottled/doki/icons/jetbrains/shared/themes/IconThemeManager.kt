@@ -8,12 +8,14 @@ import com.intellij.ide.ui.laf.LafManagerImpl
 import com.intellij.ide.ui.laf.UIThemeBasedLookAndFeelInfo
 import com.intellij.openapi.Disposable
 import com.intellij.openapi.application.ApplicationManager
+import com.intellij.util.SVGLoader
 import com.intellij.util.messages.Topic
 import io.unthrottled.doki.icons.jetbrains.shared.DokiThemeIcons
 import io.unthrottled.doki.icons.jetbrains.shared.DokiThemeInformation
 import io.unthrottled.doki.icons.jetbrains.shared.config.Config
 import io.unthrottled.doki.icons.jetbrains.shared.config.IconConfigListener
 import io.unthrottled.doki.icons.jetbrains.shared.config.IconSettingsModel
+import io.unthrottled.doki.icons.jetbrains.shared.svg.noOptPatcherProvider
 import io.unthrottled.doki.icons.jetbrains.shared.tools.AssetTools
 import io.unthrottled.doki.icons.jetbrains.shared.tools.Logging
 import io.unthrottled.doki.icons.jetbrains.shared.tools.doOrElse
@@ -39,7 +41,7 @@ class DokiTheme(
 
 data class DokiThemePayload(
   val dokiTheme: DokiTheme,
-  val uiTheme: UITheme,
+  val colorPatcher: SVGLoader.SvgElementColorPatcherProvider,
 )
 
 interface ThemeManagerListener : EventListener {
@@ -102,8 +104,22 @@ class IconThemeManager : LafManagerListener, Disposable, IconConfigListener, Log
         val themeId = it.getId()
         DokiThemePayload(
           themeMap[themeId] ?: error("Expecting theme with ID $themeId to be present"),
-          it.theme
+          it.theme.colorPatcher
         )
+      }.or {
+        val themeId = Config.instance.currentThemeId
+        DokiThemePayload(
+          themeMap[themeId] ?: error("Expecting theme with ID $themeId to be present"),
+          LafManager.getInstance().currentLookAndFeel
+            .toOptional()
+            .filter { it is UIThemeBasedLookAndFeelInfo }
+            .map {
+              val uiTheme = it as UIThemeBasedLookAndFeelInfo
+              uiTheme.theme.colorPatcher
+            }.orElse(
+              noOptPatcherProvider
+            )
+        ).toOptional()
       }
   val allThemes: List<DokiTheme>
     get() = themeMap.values.toList()
@@ -116,7 +132,7 @@ class IconThemeManager : LafManagerListener, Disposable, IconConfigListener, Log
       .map {
         DokiThemePayload(
           themeMap[it.getId()]!!,
-          it.theme
+          it.theme.colorPatcher
         )
       }
   }
@@ -163,7 +179,7 @@ class IconThemeManager : LafManagerListener, Disposable, IconConfigListener, Log
         .flatMap { uiTheme ->
           getThemeById(currentThemeId)
             .map { dokiTheme ->
-              DokiThemePayload(dokiTheme, uiTheme.theme)
+              DokiThemePayload(dokiTheme, uiTheme.theme.colorPatcher)
             }
         }
         .ifPresent {
