@@ -1,6 +1,7 @@
 package io.unthrottled.doki.icons.jetbrains.shared.integrations
 
 import com.intellij.ide.ApplicationInitializedListener
+import io.unthrottled.doki.icons.jetbrains.shared.path.IconPathReplacementComponent
 import io.unthrottled.doki.icons.jetbrains.shared.tools.Logging
 import io.unthrottled.doki.icons.jetbrains.shared.tools.logger
 import io.unthrottled.doki.icons.jetbrains.shared.tools.runSafely
@@ -13,6 +14,7 @@ import javassist.expr.NewExpr
 object PlatformHacker : ApplicationInitializedListener, Logging {
 
   init {
+    IconPathReplacementComponent.initialize()
     hackPlatform()
   }
 

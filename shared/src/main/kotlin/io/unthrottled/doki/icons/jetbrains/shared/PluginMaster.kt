@@ -18,7 +18,6 @@ import java.util.concurrent.ConcurrentMap
 class PluginMaster : ProjectManagerListener, Disposable, Logging {
 
   companion object {
-
     init {
       ExperimentalUIBastardizer.bastardizeExperimentalUI()
     }

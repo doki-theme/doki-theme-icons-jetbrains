@@ -7,6 +7,10 @@ import io.unthrottled.doki.icons.jetbrains.shared.tools.runSafely
 
 object ExperimentalUIBastardizer {
 
+  init {
+      bastardizeExperimentalUI()
+  }
+
   @Suppress("UnstableApiUsage")
   fun bastardizeExperimentalUI() {
     if (!ExperimentalUI.isNewUI()) return

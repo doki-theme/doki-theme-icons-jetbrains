@@ -332,6 +332,10 @@
     "iconName": "arrow_bottom_left.svg"
   },
   {
+    "originalPath": "/general/openInToolWindow.svg",
+    "iconName": "arrow_bottom_left.svg"
+  },
+  {
     "originalPath": "/vcs/branchNode.svg",
     "iconName": "vcs_solid.svg"
   },
