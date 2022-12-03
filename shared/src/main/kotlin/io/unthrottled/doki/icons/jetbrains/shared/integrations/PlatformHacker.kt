@@ -9,12 +9,22 @@ import javassist.ClassClassPath
 import javassist.ClassPool
 import javassist.expr.ExprEditor
 import javassist.expr.MethodCall
+import kotlinx.coroutines.CoroutineScope
 
 object PlatformHacker : ApplicationInitializedListener, Logging {
 
   init {
     IconPathReplacementComponent.initialize()
     hackPlatform()
+  }
+
+  @Deprecated("Use {@link #execute()}", replaceWith = ReplaceWith("execute()"))
+  override fun componentsInitialized() {
+
+  }
+
+  override suspend fun execute(asyncScope: CoroutineScope) {
+
   }
 
   fun hackPlatform() {
