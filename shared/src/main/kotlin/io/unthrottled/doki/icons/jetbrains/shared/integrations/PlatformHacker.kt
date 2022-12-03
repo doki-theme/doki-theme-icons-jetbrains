@@ -9,7 +9,6 @@ import javassist.ClassClassPath
 import javassist.ClassPool
 import javassist.expr.ExprEditor
 import javassist.expr.MethodCall
-import javassist.expr.NewExpr
 
 object PlatformHacker : ApplicationInitializedListener, Logging {
 
@@ -44,7 +43,6 @@ object PlatformHacker : ApplicationInitializedListener, Logging {
             if (m?.methodName == "toStrokeIcon") {
               m.replace("{ \$_ = \$1; }")
             }
-
           }
         }
       )
@@ -70,7 +68,6 @@ object PlatformHacker : ApplicationInitializedListener, Logging {
             if (m?.methodName == "toStrokeIcon") {
               m.replace("{ \$_ = \$1; }")
             }
-
           }
         }
       )
@@ -96,7 +93,6 @@ object PlatformHacker : ApplicationInitializedListener, Logging {
             if (m?.methodName == "toStrokeIcon") {
               m.replace("{ \$_ = \$1; }")
             }
-
           }
         }
       )
