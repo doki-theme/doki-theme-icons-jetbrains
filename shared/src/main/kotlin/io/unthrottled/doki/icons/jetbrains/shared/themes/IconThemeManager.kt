@@ -3,7 +3,6 @@ package io.unthrottled.doki.icons.jetbrains.shared.themes
 import com.google.gson.reflect.TypeToken
 import com.intellij.ide.ui.LafManager
 import com.intellij.ide.ui.LafManagerListener
-import com.intellij.ide.ui.UITheme
 import com.intellij.ide.ui.laf.LafManagerImpl
 import com.intellij.ide.ui.laf.UIThemeBasedLookAndFeelInfo
 import com.intellij.openapi.Disposable

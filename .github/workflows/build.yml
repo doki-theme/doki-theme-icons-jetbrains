@@ -15,9 +15,8 @@
 name: Build
 on:
   # Trigger the workflow on pushes to only the 'main' branch (this avoids duplicate checks being run e.g. for dependabot pull requests)
-#  todo: restore
-#  push:
-#    branches: [main]
+  push:
+    branches: [main]
   # Trigger the workflow on any pull request
   pull_request:
 
@@ -56,10 +55,17 @@ jobs:
           distribution: zulu
           java-version: 17
 
+      - name: Grant execute permission for scripts
+        run: chmod +x getMasterThemes.sh
+      - name: Pull down the Master Themes
+        run: ./getMasterThemes.sh
+
       # Set environment variables
       - name: Export Properties
         id: properties
         shell: bash
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           PROPERTIES="$(./gradlew properties --console=plain -q)"
           VERSION="$(echo "$PROPERTIES" | grep "^version:" | cut -f2- -d ' ')"
@@ -77,6 +83,8 @@ jobs:
           ./gradlew listProductsReleases # prepare list of IDEs for Plugin Verifier
 
       - name: Perform QA
+        env:
+          IS_CI: 'true'
         run: ./gradlew check
 
       # Collect Tests Result of failed tests
@@ -96,6 +104,8 @@ jobs:
 
       # Run Verify Plugin task and IntelliJ Plugin Verifier tool
       - name: Run Plugin Verification tasks
+        env:
+          IS_CI: 'true'
         run: ./gradlew runPluginVerifier -Pplugin.verifier.home.dir=${{ steps.properties.outputs.pluginVerifierHomeDir }}
 
       # Collect Plugin Verifier Result
