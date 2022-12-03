@@ -14,7 +14,6 @@
             <option value="$PROJECT_DIR$/buildSrc" />
             <option value="$PROJECT_DIR$/rider" />
             <option value="$PROJECT_DIR$/shared" />
-            <option value="$PROJECT_DIR$/../doki-theme-jetbrains" />
           </set>
         </option>
       </GradleProjectSettings>
