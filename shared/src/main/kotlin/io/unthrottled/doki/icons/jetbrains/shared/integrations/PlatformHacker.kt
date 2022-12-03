@@ -20,11 +20,9 @@ object PlatformHacker : ApplicationInitializedListener, Logging {
 
   @Deprecated("Use {@link #execute()}", replaceWith = ReplaceWith("execute()"))
   override fun componentsInitialized() {
-
   }
 
   override suspend fun execute(asyncScope: CoroutineScope) {
-
   }
 
   fun hackPlatform() {
