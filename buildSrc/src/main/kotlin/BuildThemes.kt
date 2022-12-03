@@ -83,6 +83,10 @@ open class BuildThemes : DefaultTask() {
   }
 
   private fun copyIconPaletteFromIconSource() {
+    if(isCI()) {
+      return
+    }
+
     Files.copy(
       Paths.get(
         iconSourceDirectory().toAbsolutePath().toString(),
@@ -98,7 +102,15 @@ open class BuildThemes : DefaultTask() {
     )
   }
 
+  private fun isCI(): Boolean {
+    return System.getenv("IS_CI") == "true"
+  }
+
   private fun copyUsedIconsFromIconSource() {
+    if(isCI()) {
+      return
+    }
+
     ensureDirectoryExists(getIconsDirectory())
     cleanDirectory(getIconsDirectory())
 

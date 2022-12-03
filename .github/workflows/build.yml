@@ -83,6 +83,8 @@ jobs:
           ./gradlew listProductsReleases # prepare list of IDEs for Plugin Verifier
 
       - name: Perform QA
+        env:
+          IS_CI: 'true'
         run: ./gradlew check
 
       # Collect Tests Result of failed tests
