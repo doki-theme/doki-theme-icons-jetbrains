@@ -138,6 +138,10 @@ tasks {
         subList(indexOf(start) + 1, indexOf(end))
       }.joinToString("\n").run { markdownToHTML(this) }
     )
+
+    changeNotes.set(
+      projectDir.resolve("RELEASE-NOTES.md").readText().run { markdownToHTML(this) }
+    )
   }
 
   runIde {
