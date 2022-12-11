@@ -4,5 +4,12 @@
 
 ## [Unreleased]
 
+## 88.3-1.0.1 [More UI Icons]
+
+### Added
+- More UI icon mappings.
+
+## 88.3-1.0.0 [Initial Release]
+
 ### Added
 - Initial scaffold created from [IntelliJ Platform Plugin Template](https://github.com/JetBrains/intellij-platform-plugin-template)

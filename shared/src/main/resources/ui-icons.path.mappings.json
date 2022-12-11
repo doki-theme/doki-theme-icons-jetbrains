@@ -156,7 +156,15 @@
     "iconName": "chevron_left.svg"
   },
   {
+    "originalPath": "/actions/play_back.svg",
+    "iconName": "chevron_left.svg"
+  },
+  {
     "originalPath": "/actions/forward.svg",
+    "iconName": "chevron_right.svg"
+  },
+  {
+    "originalPath": "/actions/play_forward.svg",
     "iconName": "chevron_right.svg"
   },
   {
@@ -177,6 +185,10 @@
   },
   {
     "originalPath": "/actions/moveDown.svg",
+    "iconName": "chevron_down.svg"
+  },
+  {
+    "originalPath": "/actions/findAndShowNextMatches.svg",
     "iconName": "chevron_down.svg"
   },
   {
@@ -277,6 +289,10 @@
   },
   {
     "originalPath": "/toolwindows/notificationsNewImportant.svg",
+    "iconName": "notifications_heart_13x13.svg"
+  },
+  {
+    "originalPath": "/toolwindows/notificationsNew.svg",
     "iconName": "notifications_heart_13x13.svg"
   },
   {
@@ -524,6 +540,10 @@
     "iconName": "layout_dual_chevrons.svg"
   },
   {
+    "originalPath": "/expui/toolwindow/changes.svg",
+    "iconName": "dual_chevrons.svg"
+  },
+  {
     "originalPath": "/actions/exit.svg",
     "iconName": "close.svg"
   },
@@ -738,5 +758,29 @@
   {
     "originalPath": "/expui/nodes/module8x8.svg",
     "iconName": "project_glyph_13x13.svg"
+  },
+  {
+    "originalPath": "/icons/rollbackDB.svg",
+    "iconName": "restart.svg"
+  },
+  {
+    "originalPath": "/icons/toolwindowDatabaseChanges.svg",
+    "iconName": "db_solid_search_right.svg"
+  },
+  {
+    "originalPath": "/actions/cancel.svg",
+    "iconName": "close.svg"
+  },
+  {
+    "originalPath": "/actions/restartDebugger.svg",
+    "iconName": "restart.svg"
+  },
+  {
+    "originalPath": "/actions/play_last.svg",
+    "iconName": "chevron_right_chevron_right.svg"
+  },
+  {
+    "originalPath": "/actions/play_first.svg",
+    "iconName": "chevron_left_chevron_left.svg"
   }
 ]
