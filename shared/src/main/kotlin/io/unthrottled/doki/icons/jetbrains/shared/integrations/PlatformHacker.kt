@@ -1,6 +1,5 @@
 package io.unthrottled.doki.icons.jetbrains.shared.integrations
 
-import com.intellij.ide.ApplicationInitializedListener
 import io.unthrottled.doki.icons.jetbrains.shared.path.IconPathReplacementComponent
 import io.unthrottled.doki.icons.jetbrains.shared.tools.Logging
 import io.unthrottled.doki.icons.jetbrains.shared.tools.logger
@@ -9,20 +8,12 @@ import javassist.ClassClassPath
 import javassist.ClassPool
 import javassist.expr.ExprEditor
 import javassist.expr.MethodCall
-import kotlinx.coroutines.CoroutineScope
 
-object PlatformHacker : ApplicationInitializedListener, Logging {
+object PlatformHacker : Logging {
 
   init {
     IconPathReplacementComponent.initialize()
     hackPlatform()
-  }
-
-  @Deprecated("Use {@link #execute()}", replaceWith = ReplaceWith("execute()"))
-  override fun componentsInitialized() {
-  }
-
-  override suspend fun execute(asyncScope: CoroutineScope) {
   }
 
   fun hackPlatform() {

@@ -4,6 +4,11 @@
 
 ## [Unreleased]
 
+## 88.3-1.0.2 [Platform SDK Migration]
+
+### Removed
+- Some usages of internal platform APIs 
+
 ## 88.3-1.0.1 [More UI Icons]
 
 ### Added

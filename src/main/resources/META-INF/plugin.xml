@@ -9,7 +9,6 @@
   </depends>
 
   <extensions defaultExtensionNs="com.intellij">
-    <applicationInitializedListener implementation="io.unthrottled.doki.icons.jetbrains.shared.integrations.PlatformHacker" />
     <applicationConfigurable id="io.unthrottled.doki.icons.jetbrains.shared.settings.ThemeSettings"
                              instance="io.unthrottled.doki.icons.jetbrains.shared.settings.IconSettingsUI"
                              groupId="appearance"/>
@@ -21,6 +20,7 @@
     <iconProvider implementation="io.unthrottled.doki.icons.jetbrains.shared.tree.TreeNamedIconProvider" order="first"/>
     <notificationGroup displayType="BALLOON" id="Doki Theme Icons Updates" isLogByDefault="false"
                        toolWindowId="Doki Theme Icons Updates"/>
+    <postStartupActivity implementation="io.unthrottled.doki.icons.jetbrains.shared.listeners.PluginPostStartUpActivity"/>
     <projectService serviceImplementation="io.unthrottled.doki.icons.jetbrains.shared.tree.OptimisticNameProvider"/>
   </extensions>
 

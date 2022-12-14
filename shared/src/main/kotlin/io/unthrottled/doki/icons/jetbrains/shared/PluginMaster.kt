@@ -34,7 +34,7 @@ class PluginMaster : ProjectManagerListener, Disposable, Logging {
     LAFIconReplacementComponent.initialize()
   }
 
-  override fun projectOpened(project: Project) {
+  fun handleProjectOpened(project: Project) {
     registerListenersForProject(project)
   }
 
