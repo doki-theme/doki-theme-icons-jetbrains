@@ -14,7 +14,7 @@ internal class ProjectListener :
   }
 }
 
-internal class PluginPostStartUpActivity: StartupActivity {
+internal class PluginPostStartUpActivity : StartupActivity {
   override fun runActivity(project: Project) {
     PluginMaster.instance.handleProjectOpened(project)
   }
