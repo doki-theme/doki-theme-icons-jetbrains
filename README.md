@@ -33,7 +33,7 @@ A nice mix of cool and cute icons to compliment your favorite theme!
 
 # Installation
 
-- Using IDE built-in plugin system (**Notice**: Plugin hasn't been published yet):
+- Using IDE built-in plugin system:
 
   <kbd>Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>Marketplace</kbd> > <kbd>Search for "Doki Theme Icons"</kbd> >
   <kbd>Install Plugin</kbd>
