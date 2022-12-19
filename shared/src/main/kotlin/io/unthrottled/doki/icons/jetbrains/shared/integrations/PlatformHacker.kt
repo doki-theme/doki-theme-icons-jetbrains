@@ -12,7 +12,7 @@ import javassist.expr.MethodCall
 object PlatformHacker : Logging {
 
   init {
-    IconPathReplacementComponent.initialize()
+    IconPathReplacementComponent.installComponents()
     hackPlatform()
   }
 
