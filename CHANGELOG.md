@@ -4,6 +4,11 @@
 
 ## [Unreleased]
 
+## 88.3-1.0.3 [Start Up Fix]
+
+### Fixed
+- Issue on plugin startup for IDEs with non-JetBrains java runtimes.
+
 ## 88.3-1.0.2 [Platform SDK Migration]
 
 ### Removed
