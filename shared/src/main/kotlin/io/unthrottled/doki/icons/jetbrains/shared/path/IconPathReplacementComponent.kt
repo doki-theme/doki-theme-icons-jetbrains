@@ -47,8 +47,12 @@ object IconPathReplacementComponent : IconConfigListener {
   private val connection = ApplicationManager.getApplication().messageBus.connect()
 
   fun initialize() {
-    ExperimentalUIBastardizer.bastardizeExperimentalUI()
     this.connection.subscribe(IconConfigListener.TOPIC, this)
+    installComponents()
+  }
+
+  fun installComponents() {
+    ExperimentalUIBastardizer.bastardizeExperimentalUI()
 
     iconInstallPacs.forEach { pak ->
       IconLoader.removePathPatcher(pak.iconPatcher)

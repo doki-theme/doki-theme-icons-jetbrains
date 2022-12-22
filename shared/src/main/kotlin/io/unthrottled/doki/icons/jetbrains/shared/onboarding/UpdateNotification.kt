@@ -20,7 +20,7 @@ private fun buildUpdateMessage(): String =
   """
       What's New?<br>
       <ul>
-        <li>Initial Release!</li>
+        <li>Fixed a startup issue.</li>
       </ul>
       <br>See the <a href="https://github.com/doki-theme/doki-theme-icons-jetbrains#documentation">documentation</a> for features, usages, and configurations.
       <br>The <a href="https://github.com/doki-theme/doki-theme-icons-jetbrains/blob/master/CHANGELOG.md">changelog</a> is available for more details.
