@@ -1,1 +1,1 @@
-.\gradlew markdownToHtml && .\gradlew clean buildPlugin
+.\gradlew clean buildPlugin
