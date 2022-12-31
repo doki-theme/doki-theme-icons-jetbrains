@@ -12,8 +12,16 @@
     "iconName": "image.svg"
   },
   {
+    "originalPath": "/fileTypes/css.svg",
+    "iconName": "css.svg"
+  },
+  {
     "originalPath": "/icons/fileTypes/TypeScriptFile.svg",
     "iconName": "partial_ring_glyph_heart.svg"
+  },
+  {
+    "originalPath": "/icons/fileTypes/TSX.svg",
+    "iconName": "partial_ring_glyph_linked_angle_braces.svg"
   },
   {
     "originalPath": "/icons/fileTypes/TypeScriptTest.svg",
