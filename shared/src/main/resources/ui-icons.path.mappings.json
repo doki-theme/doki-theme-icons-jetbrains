@@ -200,12 +200,76 @@
     "iconName": "dna_13x13.svg"
   },
   {
+    "originalPath": "/debugger/db_method_breakpoint.svg",
+    "iconName": "star.svg"
+  },
+  {
+    "originalPath": "/debugger/db_disabled_method_breakpoint.svg",
+    "iconName": "star_outline.svg"
+  },
+  {
+    "originalPath": "/debugger/db_muted_method_breakpoint.svg",
+    "iconName": "star_outline_disabled.svg"
+  },
+  {
+    "originalPath": "/debugger/db_verified_method_breakpoint.svg",
+    "iconName": "star_check.svg"
+  },
+  {
+    "originalPath": "/debugger/db_muted_breakpoint.svg",
+    "iconName": "muted_breakpoint.svg"
+  },
+  {
+    "originalPath": "/debugger/db_field_breakpoint.svg",
+    "iconName": "view.svg"
+  },
+  {
+    "originalPath": "/debugger/db_verified_field_breakpoint.svg",
+    "iconName": "view_check.svg"
+  },
+  {
+    "originalPath": "/debugger/db_disabled_field_breakpoint.svg",
+    "iconName": "no_view.svg"
+  },
+  {
+    "originalPath": "/debugger/db_muted_disabled_field_breakpoint.svg",
+    "iconName": "view_disabled.svg"
+  },
+  {
+    "originalPath": "/debugger/db_muted_field_breakpoint.svg",
+    "iconName": "view_muted.svg"
+  },
+  {
     "originalPath": "/debugger/db_set_breakpoint.svg",
     "iconName": "breakpoint.svg"
   },
   {
     "originalPath": "/debugger/viewBreakpoints.svg",
     "iconName": "breakpoint.svg"
+  },
+  {
+    "originalPath": "/debugger/db_no_suspend_breakpoint.svg",
+    "iconName": "breakpoint_inverted.svg"
+  },
+  {
+    "originalPath": "/debugger/db_verified_no_suspend_breakpoint.svg",
+    "iconName": "breakpoint_inverted_check.svg"
+  },
+  {
+    "originalPath": "/debugger/db_no_suspend_method_breakpoint.svg",
+    "iconName": "star_inverted.svg"
+  },
+  {
+    "originalPath": "/debugger/db_verified_no_suspend_method_breakpoint.svg",
+    "iconName": "star_inverted_check.svg"
+  },
+  {
+    "originalPath": "/debugger/LambdaBreakpoint.svg",
+    "iconName": "star_bar_glyph.svg"
+  },
+  {
+    "originalPath": "/debugger/MultipleBreakpoints.svg",
+    "iconName": "breakpoint_star.svg"
   },
   {
     "originalPath": "/actions/menu-open.svg",
@@ -470,6 +534,10 @@
   {
     "originalPath": "/expui/progress/pause.svg",
     "iconName": "pause.svg"
+  },
+  {
+    "originalPath": "/expui/general/windowsMenu@20x20.svg",
+    "iconName": "cheemsburbger.svg"
   },
   {
     "originalPath": "/general/tbHidden.svg",

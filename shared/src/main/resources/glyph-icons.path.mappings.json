@@ -44,6 +44,10 @@
     "iconName": "star_bar_glyph.svg"
   },
   {
+    "originalPath": "/nodes/record.svg",
+    "iconName": "square_star_glyph.svg"
+  },
+  {
     "originalPath": "/nodes/enum.svg",
     "iconName": "partial_hex_glyph.svg"
   },
