@@ -4,6 +4,14 @@
 
 ## [Unreleased]
 
+## 88.3-1.0.4 [Misc Icons]
+
+### Added
+- More debugging Icons
+- TSX Icon
+- Java file Icon
+- CSS Icon
+
 ## 88.3-1.0.3 [Start Up Fix]
 
 ### Fixed
