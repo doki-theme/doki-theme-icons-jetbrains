@@ -264,6 +264,14 @@
     "iconName": "star_inverted_check.svg"
   },
   {
+    "originalPath": "/debugger/LambdaBreakpoint.svg",
+    "iconName": "star_bar_glyph.svg"
+  },
+  {
+    "originalPath": "/debugger/MultipleBreakpoints.svg",
+    "iconName": "breakpoint_star.svg"
+  },
+  {
     "originalPath": "/actions/menu-open.svg",
     "iconName": "open.svg"
   },
