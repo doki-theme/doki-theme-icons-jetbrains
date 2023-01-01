@@ -536,6 +536,10 @@
     "iconName": "pause.svg"
   },
   {
+    "originalPath": "/expui/general/windowsMenu@20x20.svg",
+    "iconName": "cheemsburbger.svg"
+  },
+  {
     "originalPath": "/general/tbHidden.svg",
     "iconName": "hidden_toolbar.svg"
   },
