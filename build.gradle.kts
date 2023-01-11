@@ -47,7 +47,7 @@ allprojects {
     implementation("org.javassist:javassist:3.29.2-GA")
     testImplementation("org.assertj:assertj-core:3.23.1")
     testImplementation("io.mockk:mockk:1.13.3")
-    testImplementation("org.junit.jupiter:junit-jupiter:5.9.1")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.9.2")
   }
 
   repositories {
