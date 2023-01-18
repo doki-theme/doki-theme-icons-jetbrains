@@ -6,7 +6,7 @@ plugins {
 
 dependencies {
   implementation("commons-io:commons-io:2.11.0")
-  implementation("io.sentry:sentry:6.12.0")
+  implementation("io.sentry:sentry:6.12.1")
 }
 
 configurations {
