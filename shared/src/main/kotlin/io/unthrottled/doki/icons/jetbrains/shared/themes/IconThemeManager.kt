@@ -3,7 +3,6 @@ package io.unthrottled.doki.icons.jetbrains.shared.themes
 import com.google.gson.reflect.TypeToken
 import com.intellij.ide.ui.LafManager
 import com.intellij.ide.ui.LafManagerListener
-import com.intellij.ide.ui.laf.LafManagerImpl
 import com.intellij.ide.ui.laf.UIThemeBasedLookAndFeelInfo
 import com.intellij.openapi.Disposable
 import com.intellij.openapi.application.ApplicationManager
@@ -94,7 +93,7 @@ class IconThemeManager : LafManagerListener, Disposable, IconConfigListener, Log
       userSetTheme
     }
   private val userSetTheme: Optional<DokiThemePayload>
-    get() = LafManagerImpl.getInstance().installedLookAndFeels
+    get() = LafManager.getInstance().installedLookAndFeels
       .filterIsInstance<UIThemeBasedLookAndFeelInfo>()
       .firstOrNull {
         it.getId() == Config.instance.currentThemeId

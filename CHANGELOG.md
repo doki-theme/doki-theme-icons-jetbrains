@@ -4,6 +4,12 @@
 
 ## [Unreleased]
 
+## 88.3-1.0.5 [Initial 2023.1 Build Support]
+
+### Added
+
+- Initial 2023.1 build support
+
 ## 88.3-1.0.4 [Misc Icons]
 
 ### Added
