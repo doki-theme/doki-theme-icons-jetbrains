@@ -3,6 +3,7 @@
 - TSX Icon
 - Java file Icon
 - CSS Icon
+- Initial 2023.1 build support
 
 ### Fixed
 
