@@ -4,6 +4,12 @@
 
 ## [Unreleased]
 
+## 88.3-1.0.6 [More Icons]
+
+### Added
+
+- dll, so, dylib, java.class files, & .iml file icons.
+
 ## 88.3-1.0.5 [Initial 2023.1 Build Support]
 
 ### Added
