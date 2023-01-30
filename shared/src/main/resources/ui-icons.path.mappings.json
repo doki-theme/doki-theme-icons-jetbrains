@@ -392,6 +392,10 @@
     "iconName": "heart.svg"
   },
   {
+    "originalPath": "/nodes/notFavoriteOnHover.svg",
+    "iconName": "heart.svg"
+  },
+  {
     "originalPath": "/icons/currentBranchFavoriteLabel.svg",
     "iconName": "tag.svg"
   },
