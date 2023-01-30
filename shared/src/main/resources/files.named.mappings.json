@@ -3,5 +3,15 @@
     "name": "JSON",
     "mappingPattern": "^.*\\.json$",
     "iconName": "curly_braces.svg"
+  },
+  {
+    "name": "JSON",
+    "mappingPattern": "^.*\\.(dll|so|dylib)$",
+    "iconName": "structure.svg"
+  },
+  {
+    "name": "JSON",
+    "mappingPattern": "^.*\\.class$",
+    "iconName": "cowfee_build.svg"
   }
 ]

@@ -56,6 +56,10 @@
     "iconName": "hex_outline_glyph_circle.svg"
   },
   {
+    "originalPath": "/nodes/ideaModule.svg",
+    "iconName": "hex_heart_glyph.svg"
+  },
+  {
     "originalPath": "/nodes/editorconfig.svg",
     "iconName": "config.svg"
   },

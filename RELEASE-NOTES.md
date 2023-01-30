@@ -4,6 +4,8 @@
 - Java file Icon
 - CSS Icon
 - Initial 2023.1 build support
+- dll, so, dylib, java.class files, & .iml file icons.
+
 
 ### Fixed
 
