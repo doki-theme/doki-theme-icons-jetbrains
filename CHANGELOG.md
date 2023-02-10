@@ -4,6 +4,12 @@
 
 ## [Unreleased]
 
+## 88.3-1.0.7 [EXP UI Fix]
+
+### Fixed
+
+- The VSC Branch icon on the EXP UI.
+
 ## 88.3-1.0.6 [More Icons]
 
 ### Added

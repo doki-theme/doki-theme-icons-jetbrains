@@ -424,6 +424,10 @@
     "iconName": "vcs_solid.svg"
   },
   {
+    "originalPath": "/expui/general/vcs.svg",
+    "iconName": "vcs_solid.svg"
+  },
+  {
     "originalPath": "/actions/openNewTab.svg",
     "iconName": "tab_add.svg"
   },
