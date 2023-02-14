@@ -4,6 +4,12 @@
 
 ## [Unreleased]
 
+## 88.3-1.0.8 [EXP UI Fix]
+
+### Fixed
+
+- Icon theming not working in run widget of the new UI.
+
 ## 88.3-1.0.7 [EXP UI Fix]
 
 ### Fixed
