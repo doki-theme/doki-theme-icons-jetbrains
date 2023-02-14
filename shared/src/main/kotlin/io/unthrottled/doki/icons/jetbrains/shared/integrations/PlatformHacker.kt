@@ -74,6 +74,29 @@ object PlatformHacker : Logging {
     }) {
       logger().warn("Unable to hack 'fixEXPUIRunWidget' for raisins", it)
     }
+
+    runSafely({
+      val cp = ClassPool(true)
+      cp.insertClassPath(
+        ClassClassPath(
+          Class.forName("com.intellij.execution.ui.RunState")
+        )
+      )
+      val ctClass = cp.get("com.intellij.execution.ui.RedesignedRunConfigurationSelector")
+      val doPaintText = ctClass.getDeclaredMethods("update")[0]
+      doPaintText.instrument(
+        object : ExprEditor() {
+          override fun edit(m: MethodCall?) {
+            if (m?.methodName == "toStrokeIcon") {
+              m.replace("{ \$_ = \$1; }")
+            }
+          }
+        }
+      )
+      ctClass.toClass()
+    }) {
+      logger().warn("Unable to hack 'fixEXPUIRunWidget' try two for raisins", it)
+    }
   }
 
   private fun fixEXPUIButton() {
