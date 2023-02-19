@@ -40,7 +40,8 @@ class SVGColorPaletteReplacer(private val dokiTheme: DokiTheme) : PatcherProvide
         if (newColor.isEmpty()) {
           logger().error(
             """Hey silly maintainer, you forgot to give theme 
-              |"${dokiTheme.listName}:${dokiTheme.id}" color "$namedColor", pls fix""".trimMargin()
+              |"${dokiTheme.listName}:${dokiTheme.id}" color "$namedColor", pls fix
+            """.trimMargin()
           )
         }
         newColor
@@ -53,7 +54,7 @@ class SVGColorPaletteReplacer(private val dokiTheme: DokiTheme) : PatcherProvide
           .toHexString()
         this["#776bc4"] = ColorUtil.darker(
           ColorUtil.fromHex(dokiTheme.colors["iconSecondaryBlend"]!!),
-          SECONDARY_BLEND_DARKENING,
+          SECONDARY_BLEND_DARKENING
         )
           .toHexString()
       }
@@ -61,13 +62,13 @@ class SVGColorPaletteReplacer(private val dokiTheme: DokiTheme) : PatcherProvide
   override fun forPath(path: String?): SVGLoader.SvgElementColorPatcher? =
     PalletPatcher(
       (dokiTheme.id + dokiTheme.version).toByteArray(Charsets.UTF_8),
-      newPalette,
+      newPalette
     )
 }
 
 class PalletPatcher(
   private val digest: ByteArray,
-  private val newPalette: Map<String, String>,
+  private val newPalette: Map<String, String>
 ) : SVGLoader.SvgElementColorPatcher {
 
   companion object {
@@ -133,13 +134,13 @@ class SVGColorizerProvider(private val dokiTheme: DokiTheme) : PatcherProvider {
 class SVGColorizer(private val dokiTheme: DokiTheme) : Patcher {
   override fun patchColors(svg: Element) {
     patchChildren(
-      svg,
+      svg
     )
   }
 
   @Suppress("MagicNumber")
   private fun patchChildren(
-    svg: Element,
+    svg: Element
   ) {
     patchAccent(svg.getAttribute("accentTint"), svg) {
       it.toHexString()

@@ -7,16 +7,22 @@ import javax.swing.Icon
 object DokiThemeIcons {
   @JvmField
   val PLUGIN_ICON = IconLoader.getIcon("/doki/icons/doki_icon_logo.svg", javaClass)
+
   @JvmField
   val PROJECT_GLYPH = IconLoader.getIcon("/doki/icons/project_glyph.svg", javaClass)
+
   @JvmField
   val CURLY_BRACES = IconLoader.getIcon("/doki/icons/curly_braces.svg", javaClass)
+
   @JvmField
   val SOLID_DOKI_GLYPH = IconLoader.getIcon("/doki/icons/solid_doki_glyph.svg", javaClass)
+
   @JvmField
   val WATCH = IconLoader.getIcon("/doki/icons/watch.svg", javaClass)
+
   @JvmField
   val SOLID_ERROR = IconLoader.getIcon("/doki/icons/warning_circle_filled.svg", javaClass)
+
   @JvmField
   val MAMSNRHBR_CHEHFDE = IconLoader.getIcon("/doki/icons/mamsnrhbr_chehfde.svg", javaClass)
 

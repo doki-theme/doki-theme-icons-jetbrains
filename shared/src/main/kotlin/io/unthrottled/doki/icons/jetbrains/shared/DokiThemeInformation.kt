@@ -6,5 +6,5 @@ data class DokiThemeInformation(
   val displayName: String,
   val group: String,
   val listName: String,
-  val colors: Map<String, String>,
+  val colors: Map<String, String>
 )

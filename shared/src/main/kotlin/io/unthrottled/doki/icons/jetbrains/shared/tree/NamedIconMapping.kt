@@ -8,21 +8,21 @@ import io.unthrottled.doki.icons.jetbrains.shared.tools.toOptional
 import java.util.Optional
 
 enum class NamedIconMappings(
-  val fileName: String,
+  val fileName: String
 ) {
-  FILE("files.named.mappings.json"),
+  FILE("files.named.mappings.json")
 }
 
 data class SerializedNamedIconMapping(
   val name: String,
   val mappingPattern: String,
-  val iconName: String,
+  val iconName: String
 )
 
 data class NamedIconMapping(
   val name: String,
   val mappingRegex: Regex,
-  val iconName: String,
+  val iconName: String
 )
 
 object NamedIconMappingLocator {

@@ -11,7 +11,7 @@ import io.unthrottled.doki.icons.jetbrains.shared.config.IconSettingsModel
 data class IconReplacementPack(
   val iconPatcher: DokiIconPathPatcher,
   val iconSettingsExtractor: (IconSettingsModel) -> Boolean,
-  val iconConfigExtractor: (Config) -> Boolean,
+  val iconConfigExtractor: (Config) -> Boolean
 )
 
 object IconPathReplacementComponent : IconConfigListener {

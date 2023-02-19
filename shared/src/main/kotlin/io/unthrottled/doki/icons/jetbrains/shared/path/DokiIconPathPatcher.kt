@@ -9,7 +9,7 @@ import io.unthrottled.doki.icons.jetbrains.shared.tools.logger
 
 data class PathMapping(
   val originalPath: String,
-  val iconName: String,
+  val iconName: String
 )
 
 class DokiIconPathPatcher(private val mappingFile: String) : IconPathPatcher(), Logging {
@@ -33,8 +33,11 @@ class DokiIconPathPatcher(private val mappingFile: String) : IconPathPatcher(), 
     path: String,
     classLoader: ClassLoader?
   ): String? = pathMappings[
-    if (path.startsWith('/')) path
-    else "/$path"
+    if (path.startsWith('/')) {
+      path
+    } else {
+      "/$path"
+    }
   ]
 
   override fun getContextClassLoader(
