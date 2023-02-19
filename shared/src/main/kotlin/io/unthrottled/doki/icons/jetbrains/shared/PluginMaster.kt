@@ -62,7 +62,7 @@ class PluginMaster : ProjectManagerListener, Disposable, Logging {
 }
 
 internal data class ProjectListeners(
-  private val project: Project,
+  private val project: Project
 ) : Disposable {
 
   override fun dispose() {

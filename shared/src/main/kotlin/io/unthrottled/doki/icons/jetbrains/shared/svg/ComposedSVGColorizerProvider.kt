@@ -35,7 +35,7 @@ class ComposedSVGColorizerProvider(
     otherSvgPatcherProvider,
     colorizer,
     replacer,
-    dokiThemePayload.colorPatcher,
+    dokiThemePayload.colorPatcher
   )
     .distinct()
 

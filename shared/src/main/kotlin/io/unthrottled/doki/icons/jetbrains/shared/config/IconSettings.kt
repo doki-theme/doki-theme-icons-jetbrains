@@ -37,7 +37,7 @@ data class IconSettingsModel(
   var isNamedFolderIcons: Boolean,
   var isMyIcons: Boolean,
   var currentThemeId: String,
-  var syncWithDokiTheme: Boolean,
+  var syncWithDokiTheme: Boolean
 )
 
 object IconSettings {

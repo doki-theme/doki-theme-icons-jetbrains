@@ -20,7 +20,7 @@ class ProjectRefreshListener : IconConfigListener {
     ProjectManager.getInstance().openProjects
       .mapNotNull { ProjectView.getInstance(it) }
       .forEach {
-        projectView ->
+          projectView ->
         projectView.refresh()
         projectView.currentProjectViewPane?.updateFromRoot(true)
       }

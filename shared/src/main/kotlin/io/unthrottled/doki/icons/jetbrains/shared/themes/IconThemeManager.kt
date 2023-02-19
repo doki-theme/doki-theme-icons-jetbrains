@@ -25,7 +25,7 @@ import javax.swing.UIManager
 
 class DokiTheme(
   private val dokiThemeInformation: DokiThemeInformation,
-  val version: String,
+  val version: String
 ) {
   val id: String
     get() = dokiThemeInformation.id
@@ -39,7 +39,7 @@ class DokiTheme(
 
 data class DokiThemePayload(
   val dokiTheme: DokiTheme,
-  val colorPatcher: SVGLoader.SvgElementColorPatcherProvider,
+  val colorPatcher: SVGLoader.SvgElementColorPatcherProvider
 )
 
 interface ThemeManagerListener : EventListener {

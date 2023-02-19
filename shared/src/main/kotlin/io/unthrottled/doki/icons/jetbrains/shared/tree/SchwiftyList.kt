@@ -8,7 +8,7 @@ internal class SchwiftyNode<T>(
   var parent: SchwiftyNode<T>? = null,
   var child: SchwiftyNode<T>? = null,
   private val onNewHead: (SchwiftyNode<T>) -> Unit,
-  private val onNewTail: (SchwiftyNode<T>) -> Unit,
+  private val onNewTail: (SchwiftyNode<T>) -> Unit
 ) {
 
   fun bumpPriority() {

@@ -61,7 +61,7 @@ object LAFIconReplacementComponent : IconConfigListener, ThemeManagerListener {
   private fun removeLAFIcons() {
     setTreeIcons(
       collapsed = LafIconLookup.getSelectedIcon("treeCollapsed"),
-      expanded = LafIconLookup.getSelectedIcon("treeExpanded"),
+      expanded = LafIconLookup.getSelectedIcon("treeExpanded")
     )
   }
 
