@@ -4,6 +4,13 @@
 
 ## [Unreleased]
 
+## 88.3-1.0.9 [More Icons]
+
+### Added
+- Python Icon
+- More UI Icon mappings.
+
+
 ## 88.3-1.0.8 [EXP UI Fix]
 
 ### Fixed
