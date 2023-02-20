@@ -44,6 +44,14 @@
     "iconName": "history.svg"
   },
   {
+    "originalPath": "/vcs/historyInlineHovered.svg",
+    "iconName": "history.svg"
+  },
+  {
+    "originalPath": "/vcs/historyInline.svg",
+    "iconName": "history.svg"
+  },
+  {
     "originalPath": "/actions/rollback.svg",
     "iconName": "revert.svg"
   },
@@ -124,6 +132,10 @@
     "iconName": "terminal_solid_13x13.svg"
   },
   {
+    "originalPath": "/debugger/console.svg",
+    "iconName": "terminal.svg"
+  },
+  {
     "originalPath": "/toolwindows/toolWindowServices.svg",
     "iconName": "services_13x13.svg"
   },
@@ -168,6 +180,10 @@
     "iconName": "chevron_right.svg"
   },
   {
+    "originalPath": "/general/chevron-right.svg",
+    "iconName": "chevron_right.svg"
+  },
+  {
     "originalPath": "/actions/refresh.svg",
     "iconName": "refresh.svg"
   },
@@ -189,6 +205,10 @@
   },
   {
     "originalPath": "/actions/findAndShowNextMatches.svg",
+    "iconName": "chevron_down.svg"
+  },
+  {
+    "originalPath": "/general/chevron-down.svg",
     "iconName": "chevron_down.svg"
   },
   {
@@ -604,6 +624,10 @@
     "iconName": "close.svg"
   },
   {
+    "originalPath": "/expui/general/close.svg",
+    "iconName": "close.svg"
+  },
+  {
     "originalPath": "/debugger/db_verified_breakpoint.svg",
     "iconName": "breakpoint_check.svg"
   },
@@ -788,6 +812,10 @@
     "iconName": "warning_triangle.svg"
   },
   {
+    "originalPath": "/general/balloonWarning.svg",
+    "iconName": "warning_triangle.svg"
+  },
+  {
     "originalPath": "/icons/gradleLoadChanges.svg",
     "iconName": "cupcake_refresh.svg"
   },
@@ -858,5 +886,13 @@
   {
     "originalPath": "/actions/play_first.svg",
     "iconName": "chevron_left_chevron_left.svg"
+  },
+  {
+    "originalPath": "/actions/rerun.svg",
+    "iconName": "restart.svg"
+  },
+  {
+    "originalPath": "/actions/searchWithHistory.svg",
+    "iconName": "search_right_chevron_down.svg"
   }
 ]

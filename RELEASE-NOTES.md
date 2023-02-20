@@ -1,5 +1,7 @@
 ### Added
 - More debugging Icons
+- More UI Icons
+- Python icon
 - TSX Icon
 - Java file Icon
 - CSS Icon

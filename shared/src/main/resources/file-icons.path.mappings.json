@@ -12,6 +12,10 @@
     "iconName": "image.svg"
   },
   {
+    "originalPath": "/icons/com/jetbrains/python/pythonFile.svg",
+    "iconName": "python.svg"
+  },
+  {
     "originalPath": "/fileTypes/java.svg",
     "iconName": "cowfee.svg"
   },
