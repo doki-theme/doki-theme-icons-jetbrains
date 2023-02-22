@@ -4,7 +4,7 @@ import com.intellij.openapi.util.IconLoader
 import com.intellij.ui.IconManager.getInstance
 import javax.swing.Icon
 
-object DokiThemeIcons {
+object DokiThemeIconz {
   @JvmField
   val PLUGIN_ICON = IconLoader.getIcon("/doki/icons/doki_icon_logo.svg", javaClass)
 
@@ -36,5 +36,5 @@ object DokiThemeIcons {
   }
 
   private fun load(path: String): Icon =
-    getInstance().getIcon(path, DokiThemeIcons::class.java)
+    getInstance().getIcon(path, DokiThemeIconz::class.java)
 }

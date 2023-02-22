@@ -30,54 +30,41 @@ repositories {
 }
 
 dependencies {
-  implementation(project(":shared"))
+  implementation("org.javassist:javassist:3.29.2-GA")
+  testImplementation("org.assertj:assertj-core:3.24.2")
+  testImplementation("io.mockk:mockk:1.13.4")
+  testImplementation("org.junit.jupiter:junit-jupiter:5.9.2")
 }
 
-allprojects {
-  apply {
-    plugin("java")
-    plugin("org.jetbrains.kotlin.jvm")
-    plugin("org.jetbrains.intellij")
-    plugin("io.gitlab.arturbosch.detekt")
-    plugin("org.jlleitschuh.gradle.ktlint")
-  }
+repositories {
+  mavenCentral()
+}
 
-  dependencies {
-    implementation("org.javassist:javassist:3.29.2-GA")
-    testImplementation("org.assertj:assertj-core:3.24.2")
-    testImplementation("io.mockk:mockk:1.13.4")
-    testImplementation("org.junit.jupiter:junit-jupiter:5.9.2")
-  }
 
-  repositories {
-    mavenCentral()
+// Set the JVM language level used to compile sources and generate files - Java 11 is required since 2020.3
+kotlin {
+  jvmToolchain {
+    languageVersion.set(JavaLanguageVersion.of(17))
   }
-
-  // Set the JVM language level used to compile sources and generate files - Java 11 is required since 2020.3
-  kotlin {
-    jvmToolchain {
-      languageVersion.set(JavaLanguageVersion.of(17))
-    }
-  }
+}
 
 // Configure detekt plugin.
 // Read more: https://detekt.github.io/detekt/kotlindsl.html
-  detekt {
-    config = files("./detekt-config.yml")
-    buildUponDefaultConfig = true
-    autoCorrect = true
+detekt {
+  config = files("./detekt-config.yml")
+  buildUponDefaultConfig = true
+  autoCorrect = true
 
-    reports {
-      html.enabled = false
-      xml.enabled = false
-      txt.enabled = false
-    }
+  reports {
+    html.enabled = false
+    xml.enabled = false
+    txt.enabled = false
   }
+}
 
-  tasks {
-    buildSearchableOptions {
-      enabled = false
-    }
+tasks {
+  buildSearchableOptions {
+    enabled = false
   }
 }
 
@@ -88,7 +75,8 @@ intellij {
   type.set(properties("platformType"))
 
   // Plugin Dependencies. Uses `platformPlugins` property from the gradle.properties file.
-  val activePlugins: MutableList<Any> = properties("platformPlugins").split(',').map(String::trim).filter(String::isNotEmpty).toMutableList()
+  val activePlugins: MutableList<Any> =
+    properties("platformPlugins").split(',').map(String::trim).filter(String::isNotEmpty).toMutableList()
 
 //  activePlugins.add(
 //    project(":doki-theme")

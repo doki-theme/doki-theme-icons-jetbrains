@@ -9,7 +9,7 @@ import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.popup.Balloon
 import com.intellij.openapi.util.Disposer
 import com.intellij.ui.BalloonLayoutData
-import icons.DokiThemeIcons.PLUGIN_ICON
+import icons.DokiThemeIconz.PLUGIN_ICON
 import io.unthrottled.doki.icons.jetbrains.shared.Constants.PLUGIN_NAME
 import io.unthrottled.doki.icons.jetbrains.shared.tools.BalloonTools.fetchBalloonParameters
 import org.intellij.lang.annotations.Language

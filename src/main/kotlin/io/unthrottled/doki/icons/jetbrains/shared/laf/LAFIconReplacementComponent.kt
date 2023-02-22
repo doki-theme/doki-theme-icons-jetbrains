@@ -3,7 +3,7 @@ package io.unthrottled.doki.icons.jetbrains.shared.laf
 import com.intellij.openapi.actionSystem.impl.ActionToolbarImpl
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.util.ui.LafIconLookup
-import icons.DokiThemeIcons
+import icons.DokiThemeIconz
 import io.unthrottled.doki.icons.jetbrains.shared.config.Config
 import io.unthrottled.doki.icons.jetbrains.shared.config.IconConfigListener
 import io.unthrottled.doki.icons.jetbrains.shared.config.IconSettingsModel
@@ -30,17 +30,17 @@ object LAFIconReplacementComponent : IconConfigListener, ThemeManagerListener {
       return
     }
     setTreeIcons(
-      collapsed = DokiThemeIcons.Tree.COLLAPSED,
-      expanded = DokiThemeIcons.Tree.EXPANDED
+      collapsed = DokiThemeIconz.Tree.COLLAPSED,
+      expanded = DokiThemeIconz.Tree.EXPANDED
     )
   }
 
   private fun setTreeIcons(collapsed: Icon, expanded: Icon) {
     val defaults = UIManager.getLookAndFeelDefaults()
-    defaults[DokiThemeIcons.Tree.COLLAPSED_KEY] = collapsed
-    defaults[DokiThemeIcons.Tree.SELECTED_COLLAPSED_KEY] = collapsed
-    defaults[DokiThemeIcons.Tree.EXPANDED_KEY] = expanded
-    defaults[DokiThemeIcons.Tree.SELECTED_EXPANDED_KEY] = expanded
+    defaults[DokiThemeIconz.Tree.COLLAPSED_KEY] = collapsed
+    defaults[DokiThemeIconz.Tree.SELECTED_COLLAPSED_KEY] = collapsed
+    defaults[DokiThemeIconz.Tree.EXPANDED_KEY] = expanded
+    defaults[DokiThemeIconz.Tree.SELECTED_EXPANDED_KEY] = expanded
     SwingUtilities.invokeLater { ActionToolbarImpl.updateAllToolbarsImmediately() }
   }
 

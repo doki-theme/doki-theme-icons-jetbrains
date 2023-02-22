@@ -8,7 +8,7 @@ import com.intellij.openapi.options.SearchableConfigurable;
 import com.intellij.openapi.project.DumbAware;
 import com.intellij.openapi.util.NlsContexts;
 import com.intellij.ui.components.ActionLink;
-import icons.DokiThemeIcons;
+import icons.DokiThemeIconz;
 import io.unthrottled.doki.icons.jetbrains.shared.Constants;
 import io.unthrottled.doki.icons.jetbrains.shared.config.Config;
 import io.unthrottled.doki.icons.jetbrains.shared.config.IconConfigListener;
@@ -68,19 +68,19 @@ public class IconSettingsUI implements SearchableConfigurable, Configurable.NoSc
     UIIconsCheckBox.setSelected(initialIconSettingsModel.isUIIcons());
     UIIconsCheckBox.addActionListener(e ->
       iconSettingsModel.setUIIcons(UIIconsCheckBox.isSelected()));
-    uiIcon.setIcon(DokiThemeIcons.PROJECT_GLYPH);
+    uiIcon.setIcon(DokiThemeIconz.PROJECT_GLYPH);
 
     filesCheckBox.setSelected(initialIconSettingsModel.isNamedFileIcons());
     filesCheckBox.addActionListener(e ->
       iconSettingsModel.setNamedFileIcons(filesCheckBox.isSelected()));
-    namedFilesIcon.setIcon(DokiThemeIcons.CURLY_BRACES);
+    namedFilesIcon.setIcon(DokiThemeIconz.CURLY_BRACES);
     namedFilesIcon.setVisible(false);
     filesCheckBox.setVisible(false);
 
     PSICheckBox.setSelected(initialIconSettingsModel.isGlyphIcons());
     PSICheckBox.addActionListener(e ->
       iconSettingsModel.setGlyphIcons(PSICheckBox.isSelected()));
-    fileGlyphs.setIcon(DokiThemeIcons.SOLID_DOKI_GLYPH);
+    fileGlyphs.setIcon(DokiThemeIconz.SOLID_DOKI_GLYPH);
 
     foldersCheckBox.setSelected(initialIconSettingsModel.isNamedFolderIcons());
     foldersCheckBox.addActionListener(e ->
@@ -91,7 +91,7 @@ public class IconSettingsUI implements SearchableConfigurable, Configurable.NoSc
     myIconsCheckBox.setSelected(initialIconSettingsModel.isMyIcons());
     myIconsCheckBox.addActionListener(e ->
       iconSettingsModel.setMyIcons(myIconsCheckBox.isSelected()));
-    myIconsIcon.setIcon(DokiThemeIcons.MAMSNRHBR_CHEHFDE);
+    myIconsIcon.setIcon(DokiThemeIconz.MAMSNRHBR_CHEHFDE);
 
     boolean dokiThemeInstalled = PluginService.INSTANCE.isDokiThemeInstalled();
     syncWithDokiThemeCheckBox.setEnabled(dokiThemeInstalled);
@@ -106,13 +106,13 @@ public class IconSettingsUI implements SearchableConfigurable, Configurable.NoSc
         initialIconSettingsModel.getSyncWithDokiTheme())
     );
 
-    iconRequest.setIcon(DokiThemeIcons.WATCH);
+    iconRequest.setIcon(DokiThemeIconz.WATCH);
     iconRequest.setText(PluginMessageBundle.message("settings.icon.request"));
     iconRequest.addActionListener(e -> {
       BrowserUtil.browse(Constants.REPO_URL + "/issues/new?assignees=Unthrottled&labels=enhancement&template=ICON_REQUEST.yml&title=%5BICON%5D%3A+");
     });
 
-    reportIssue.setIcon(DokiThemeIcons.SOLID_ERROR);
+    reportIssue.setIcon(DokiThemeIconz.SOLID_ERROR);
     reportIssue.setText(PluginMessageBundle.message("settings.report.bug"));
     reportIssue.addActionListener(e -> {
       BrowserUtil.browse(Constants.REPO_URL + "/issues/new?assignees=Unthrottled&labels=bug%2Ctriage&template=BUG_REPORT.yml&title=[Bug]%3A+");
