@@ -31,7 +31,6 @@ repositories {
 
 dependencies {
   implementation(project(":shared"))
-  runtimeOnly(project(":rider"))
 }
 
 allprojects {
