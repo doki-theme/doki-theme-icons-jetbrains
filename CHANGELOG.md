@@ -4,6 +4,12 @@
 
 ## [Unreleased]
 
+## 88.3-1.0.10 [Settings Menu Restoration]
+
+### Fixed
+
+- Settings menu not showing up.
+
 ## 88.3-1.0.9 [More Icons]
 
 ### Added

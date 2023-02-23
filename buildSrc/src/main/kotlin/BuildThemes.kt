@@ -269,7 +269,6 @@ open class BuildThemes : DefaultTask() {
 
   private fun getResourcesDirectory(): Path = get(
     project.rootDir.absolutePath,
-    "shared",
     "src",
     "main",
     "resources"
