@@ -31,9 +31,19 @@ repositories {
 
 dependencies {
   implementation("org.javassist:javassist:3.29.2-GA")
+  implementation("commons-io:commons-io:2.11.0")
+  implementation("io.sentry:sentry:6.14.0")
   testImplementation("org.assertj:assertj-core:3.24.2")
   testImplementation("io.mockk:mockk:1.13.4")
   testImplementation("org.junit.jupiter:junit-jupiter:5.9.2")
+}
+
+configurations {
+  implementation.configure {
+    // sentry brings in a slf4j that breaks when
+    // with the platform slf4j
+    exclude("org.slf4j")
+  }
 }
 
 repositories {
