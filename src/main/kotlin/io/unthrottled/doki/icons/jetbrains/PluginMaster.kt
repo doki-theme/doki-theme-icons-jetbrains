@@ -7,7 +7,7 @@ import com.intellij.openapi.project.ProjectManager
 import com.intellij.openapi.project.ProjectManagerListener
 import io.unthrottled.doki.icons.jetbrains.laf.LAFIconReplacementComponent
 import io.unthrottled.doki.icons.jetbrains.onboarding.UserOnBoarding
-import io.unthrottled.doki.icons.jetbrains.path.ExperimentalUIBastardizer
+import io.unthrottled.doki.icons.jetbrains.path.ExperimentalUIFixer
 import io.unthrottled.doki.icons.jetbrains.path.IconPathReplacementComponent
 import io.unthrottled.doki.icons.jetbrains.svg.ThemedSVGManager
 import io.unthrottled.doki.icons.jetbrains.themes.IconThemeManager
@@ -19,7 +19,7 @@ class PluginMaster : ProjectManagerListener, Disposable, Logging {
 
   companion object {
     init {
-      ExperimentalUIBastardizer.bastardizeExperimentalUI()
+      ExperimentalUIFixer.fixExperimentalUI()
     }
     val instance: PluginMaster
       get() = ApplicationManager.getApplication().getService(PluginMaster::class.java)

@@ -4,6 +4,12 @@
 
 ## [Unreleased]
 
+## 88.3-1.0.11 [Maintenance]
+
+### Fixed
+
+- References to internal JetBrains SDK APIs. 
+
 ## 88.3-1.0.10 [Settings Menu Restoration]
 
 ### Fixed
