@@ -52,7 +52,7 @@ object IconPathReplacementComponent : IconConfigListener {
   }
 
   fun installComponents() {
-    ExperimentalUIBastardizer.bastardizeExperimentalUI()
+    ExperimentalUIFixer.fixExperimentalUI()
 
     iconInstallPacs.forEach { pak ->
       IconLoader.removePathPatcher(pak.iconPatcher)
@@ -92,7 +92,7 @@ object IconPathReplacementComponent : IconConfigListener {
   }
 
   private fun refresh() {
-    ExperimentalUIBastardizer.bastardizeExperimentalUI()
+    ExperimentalUIFixer.fixExperimentalUI()
     ApplicationManager.getApplication().invokeLater {
       val app = ApplicationManager.getApplication()
       app.runWriteAction { FileTypeManagerEx.getInstanceEx().fireFileTypesChanged() }

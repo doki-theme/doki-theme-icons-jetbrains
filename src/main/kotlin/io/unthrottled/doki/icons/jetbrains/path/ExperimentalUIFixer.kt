@@ -5,14 +5,14 @@ import com.intellij.openapi.util.IconPathPatcher
 import com.intellij.ui.ExperimentalUI
 import io.unthrottled.doki.icons.jetbrains.tools.runSafely
 
-object ExperimentalUIBastardizer {
+object ExperimentalUIFixer {
 
   init {
-    bastardizeExperimentalUI()
+    fixExperimentalUI()
   }
 
   @Suppress("UnstableApiUsage")
-  fun bastardizeExperimentalUI() {
+  fun fixExperimentalUI() {
     if (!ExperimentalUI.isNewUI()) return
 
     runSafely({
