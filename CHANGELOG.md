@@ -4,6 +4,11 @@
 
 ## [Unreleased]
 
+## 88.5-1.0.12 [Mnemonic Bookmarks]
+
+### Added
+- Mnemonic Bookmarks
+
 ## 88.3-1.0.11 [Maintenance]
 
 ### Fixed

@@ -37,6 +37,7 @@ data class DokiTheme(
 
 data class IconPathMapping(
   val iconName: String,
+  val isOddBall: Boolean?,
 )
 
 open class BuildThemes : DefaultTask() {
@@ -129,6 +130,7 @@ open class BuildThemes : DefaultTask() {
           object : TypeToken<List<IconPathMapping>>() {}
         )
       }
+      .filter { it.isOddBall != true }
       .map { it.iconName }
       .toMutableSet()
 

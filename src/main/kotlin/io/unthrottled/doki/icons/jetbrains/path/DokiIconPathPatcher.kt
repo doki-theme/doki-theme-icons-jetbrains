@@ -9,7 +9,8 @@ import io.unthrottled.doki.icons.jetbrains.tools.logger
 
 data class PathMapping(
   val originalPath: String,
-  val iconName: String
+  val iconName: String,
+  val isOddBall: Boolean?
 )
 
 class DokiIconPathPatcher(private val mappingFile: String) : IconPathPatcher(), Logging {
@@ -22,7 +23,9 @@ class DokiIconPathPatcher(private val mappingFile: String) : IconPathPatcher(), 
     )
       .map { def ->
         def.associate {
-          it.originalPath to "${Constants.DOKI_ICONS_BASE_PATH}/${it.iconName}"
+          val dokiIconsBasePath =
+            if (it.isOddBall == true) Constants.DOKI_ODD_BALLS_ICONS_BASE_PATH else Constants.DOKI_ICONS_BASE_PATH
+          it.originalPath to "$dokiIconsBasePath/${it.iconName}"
         }
       }.orElseGet {
         logger().warn("Unable to read path mappings")
