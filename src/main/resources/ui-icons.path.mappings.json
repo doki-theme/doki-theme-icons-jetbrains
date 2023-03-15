@@ -761,7 +761,8 @@
   },
   {
     "originalPath": "/icons/ideavim.svg",
-    "iconName": "vim.svg"
+    "iconName": "plugins/vim.svg",
+    "isOddBall": true
   },
   {
     "originalPath": "/nodes/plugin.svg",
@@ -894,5 +895,25 @@
   {
     "originalPath": "/actions/searchWithHistory.svg",
     "iconName": "search_right_chevron_down.svg"
+  },
+  {
+    "originalPath": "/gutter/mnemonic.svg",
+    "iconName": "gutter/mnemonic.svg",
+    "isOddBall": true
+  },
+  {
+    "originalPath": "/gutter/mnemonic_dark.svg",
+    "iconName": "gutter/mnemonic_dark.svg",
+    "isOddBall": true
+  },
+  {
+    "originalPath": "/nodes/mnemonic.svg",
+    "iconName": "nodes/mnemonic.svg",
+    "isOddBall": true
+  },
+  {
+    "originalPath": "/nodes/mnemonic_dark.svg",
+    "iconName": "nodes/mnemonic_dark.svg",
+    "isOddBall": true
   }
 ]
