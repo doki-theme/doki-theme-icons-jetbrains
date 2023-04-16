@@ -34,7 +34,7 @@ dependencies {
   implementation("commons-io:commons-io:2.11.0")
   implementation("io.sentry:sentry:6.16.0")
   testImplementation("org.assertj:assertj-core:3.24.2")
-  testImplementation("io.mockk:mockk:1.13.4")
+  testImplementation("io.mockk:mockk:1.13.5")
   testImplementation("org.junit.jupiter:junit-jupiter:5.9.2")
 }
 
