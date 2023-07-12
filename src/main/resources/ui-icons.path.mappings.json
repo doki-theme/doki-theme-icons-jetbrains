@@ -40,6 +40,10 @@
     "iconName": "arrow_upper_right.svg"
   },
   {
+    "originalPath": "/expui/vcs/push.svg",
+    "iconName": "arrow_upper_right.svg"
+  },
+  {
     "originalPath": "/vcs/history.svg",
     "iconName": "history.svg"
   },
@@ -429,6 +433,10 @@
   },
   {
     "originalPath": "/vcs/fetch.svg",
+    "iconName": "arrow_bottom_left.svg"
+  },
+  {
+    "originalPath": "/expui/vcs/update.svg",
     "iconName": "arrow_bottom_left.svg"
   },
   {
