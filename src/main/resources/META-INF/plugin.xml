@@ -4,6 +4,7 @@
   <name>Doki Theme Icons</name>
   <vendor>Unthrottled</vendor>
 
+  <idea-version since-build="233.8264.8"/>
   <depends>com.intellij.modules.platform</depends>
   <depends optional="true" config-file="io.unthrottled.doki.icons-io.unthrottled.doki.theme.xml">io.acari.DDLCTheme
   </depends>
