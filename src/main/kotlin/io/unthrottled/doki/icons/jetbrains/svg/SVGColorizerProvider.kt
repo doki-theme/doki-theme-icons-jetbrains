@@ -64,7 +64,7 @@ class SVGColorPaletteReplacer(private val dokiTheme: DokiTheme) : PatcherProvide
       newPalette
     )
 
-  private val digest = toLongArray((dokiTheme.id + dokiTheme.version).toByteArray(Charsets.UTF_8))
+  private val digest = toLongArray(("pallet" + dokiTheme.id + dokiTheme.version).toByteArray(Charsets.UTF_8))
   override fun digest(): LongArray = digest
 }
 
@@ -125,7 +125,7 @@ class SVGColorizerProvider(private val dokiTheme: DokiTheme) : PatcherProvider {
   override fun attributeForPath(path: String): SvgAttributePatcher? = SVGColorizer(dokiTheme)
 
   private val digest =
-    toLongArray((dokiTheme.id + dokiTheme.version).toByteArray(Charsets.UTF_8))
+    toLongArray(("colorize" + dokiTheme.id + dokiTheme.version).toByteArray(Charsets.UTF_8))
 
   override fun digest(): LongArray = digest
 }
