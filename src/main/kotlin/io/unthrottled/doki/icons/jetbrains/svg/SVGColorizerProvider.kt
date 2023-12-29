@@ -4,14 +4,14 @@ import com.google.gson.reflect.TypeToken
 import com.intellij.openapi.util.text.Strings
 import com.intellij.ui.ColorUtil
 import com.intellij.ui.JBColor
-import com.intellij.util.SVGLoader
+import com.intellij.ui.svg.SvgAttributePatcher
+import io.unthrottled.doki.icons.jetbrains.shared.toLongArray
 import io.unthrottled.doki.icons.jetbrains.themes.DokiTheme
 import io.unthrottled.doki.icons.jetbrains.tools.AssetTools
 import io.unthrottled.doki.icons.jetbrains.tools.Logging
 import io.unthrottled.doki.icons.jetbrains.tools.logger
 import io.unthrottled.doki.icons.jetbrains.tools.toColor
 import io.unthrottled.doki.icons.jetbrains.tools.toHexString
-import org.w3c.dom.Element
 import java.awt.Color
 import kotlin.math.ceil
 
@@ -59,46 +59,36 @@ class SVGColorPaletteReplacer(private val dokiTheme: DokiTheme) : PatcherProvide
           .toHexString()
       }
 
-  override fun forPath(path: String?): SVGLoader.SvgElementColorPatcher? =
+  override fun attributeForPath(path: String): SvgAttributePatcher? =
     PalletPatcher(
-      (dokiTheme.id + dokiTheme.version).toByteArray(Charsets.UTF_8),
       newPalette
     )
+
+  private val digest = toLongArray((dokiTheme.id + dokiTheme.version).toByteArray(Charsets.UTF_8))
+  override fun digest(): LongArray = digest
 }
 
 class PalletPatcher(
-  private val digest: ByteArray,
   private val newPalette: Map<String, String>
-) : SVGLoader.SvgElementColorPatcher {
+) : Patcher {
 
   companion object {
     private const val HEX_STRING_LENGTH = 7
   }
-  override fun digest(): ByteArray? {
-    return digest
-  }
 
-  override fun patchColors(svg: Element) {
-    patchColorAttribute(svg, "fill")
-    patchColorAttribute(svg, "stop-color")
-    patchColorAttribute(svg, "stroke")
-    val nodes = svg.childNodes
-    val length = nodes.length
-    for (i in 0 until length) {
-      val item = nodes.item(i)
-      if (item is Element) {
-        patchColors(item)
-      }
-    }
+  override fun patchColors(attributes: MutableMap<String, String>) {
+    patchColorAttribute(attributes, "fill")
+    patchColorAttribute(attributes, "stop-color")
+    patchColorAttribute(attributes, "stroke")
   }
 
   @Suppress("MagicNumber") // cuz is majik
-  private fun patchColorAttribute(svg: Element, attrName: String) {
-    val color = svg.getAttribute(attrName)
-    val opacity = svg.getAttribute("$attrName-opacity")
+  private fun patchColorAttribute(attributes: MutableMap<String, String>, attrName: String) {
+    val color = attributes[attrName]
+    val opacity = attributes["$attrName-opacity"]
     if (!Strings.isEmpty(color)) {
       var alpha = 255
-      if (!Strings.isEmpty(opacity)) {
+      if (!opacity.isNullOrBlank()) {
         try {
           alpha = ceil((255f * opacity.toFloat()).toDouble()).toInt()
         } catch (ignore: Exception) {
@@ -113,12 +103,15 @@ class PalletPatcher(
         newColor = newPalette[key]
       }
       if (newColor != null) {
-        svg.setAttribute(attrName, newColor)
+        attributes[attrName] = newColor
       }
     }
   }
 
-  private fun toCanonicalColor(color: String): String {
+  private fun toCanonicalColor(color: String?): String? {
+    if (color.isNullOrBlank())
+      return color
+
     var s = color.lowercase()
     if (s.startsWith("#") && s.length < HEX_STRING_LENGTH) {
       s = "#" + ColorUtil.toHex(ColorUtil.fromHex(s))
@@ -128,78 +121,80 @@ class PalletPatcher(
 }
 
 class SVGColorizerProvider(private val dokiTheme: DokiTheme) : PatcherProvider {
-  override fun forPath(path: String?): SVGLoader.SvgElementColorPatcher? = SVGColorizer(dokiTheme)
+
+  override fun attributeForPath(path: String): SvgAttributePatcher? = SVGColorizer(dokiTheme)
+
+  private val digest =
+    toLongArray((dokiTheme.id + dokiTheme.version).toByteArray(Charsets.UTF_8))
+
+  override fun digest(): LongArray = digest
 }
 
 class SVGColorizer(private val dokiTheme: DokiTheme) : Patcher {
-  override fun patchColors(svg: Element) {
+
+  override fun patchColors(attributes: MutableMap<String, String>) {
     patchChildren(
-      svg
+      attributes
     )
   }
 
   @Suppress("MagicNumber")
   private fun patchChildren(
-    svg: Element
+    attributes: MutableMap<String, String>
   ) {
-    patchAccent(svg.getAttribute("accentTint"), svg) {
+    patchAccent(attributes["accentTint"], attributes) {
       it.toHexString()
     }
-    patchAccent(svg.getAttribute("accentTintDarker"), svg) {
+    patchAccent(attributes["accentTintDarker"], attributes) {
       ColorUtil.darker(it, 1).toHexString()
     }
-    patchAccent(svg.getAttribute("accentTintDarkest"), svg) {
+    patchAccent(attributes["accentTintDarkest"], attributes) {
       ColorUtil.darker(it, 3).toHexString()
     }
-    patchAccent(svg.getAttribute("accentContrastTint"), svg) {
+    patchAccent(attributes["accentContrastTint"], attributes) {
       getIconAccentContrastColor().toHexString()
     }
-    patchAccent(svg.getAttribute("stopTint"), svg) {
+    patchAccent(attributes["stopTint"], attributes) {
       getThemedStopColor()
     }
 
-    val themedStartAttr = svg.getAttribute("themedStart")
-    val themedStopAttr = svg.getAttribute("themedStop")
-    val themedFillAttr = svg.getAttribute("themedFill")
+    val themedStartAttr = attributes["themedStart"]
+    val themedStopAttr = attributes["themedStop"]
+    val themedFillAttr = attributes["themedFill"]
     when {
       "true" == themedStartAttr -> {
         val themedStart = getThemedStartColor()
-        svg.setAttribute("stop-color", themedStart)
-        svg.setAttribute("fill", themedStart)
+        attributes["stop-color"] = themedStart
+        attributes["fill"] = themedStart
       }
 
       "true" == themedStopAttr -> {
         val themedStop = getThemedStopColor()
-        svg.setAttribute("stop-color", themedStop)
-        svg.setAttribute("fill", themedStop)
+        attributes["stop-color"] = themedStop
+        attributes["fill"] = themedStop
       }
 
       "true" == themedFillAttr -> {
         val themedStart = getThemedStartColor()
-        svg.setAttribute("fill", themedStart)
-        svg.setAttribute("stroke", themedStart)
-      }
-    }
-
-    val nodes = svg.childNodes
-    val length = nodes.length
-    for (i in 0 until length) {
-      val item = nodes.item(i)
-      if (item is Element) {
-        patchColors(item)
+        attributes["fill"] = themedStart
+        attributes["stroke"] = themedStart
       }
     }
   }
 
-  private fun patchAccent(attribute: String?, svg: Element, colorDecorator: (Color) -> String) {
+  private fun patchAccent(
+    attribute: String?,
+    attributes: MutableMap<String, String>,
+    colorDecorator: (Color) -> String
+  ) {
     when (attribute) {
-      "fill" -> svg.setAttribute("fill", colorDecorator(getAccentColor()))
-      "stroke" -> svg.setAttribute("stroke", colorDecorator(getAccentColor()))
+      "fill" -> attributes["fill"] = colorDecorator(getAccentColor())
+      "stroke" -> attributes["stroke"] = colorDecorator(getAccentColor())
       "both", "partialFill" -> {
         val accentColor = colorDecorator(getAccentColor())
-        svg.setAttribute("stroke", accentColor)
-        svg.setAttribute("stroke-opacity", if (attribute == "both") "1" else "0.25")
-        svg.setAttribute("fill", accentColor)
+        attributes["stroke"] = accentColor
+        attributes["stroke-opacity"] = if (attribute == "both") "1" else "0.25"
+        attributes["fill"] = accentColor
       }
     }
   }
@@ -215,6 +210,4 @@ class SVGColorizer(private val dokiTheme: DokiTheme) : Patcher {
 
   private fun getThemedStopColor() =
     JBColor.namedColor("Doki.stopColor", Color.CYAN).toHexString()
-
-  override fun digest(): ByteArray = (dokiTheme.id + dokiTheme.version).toByteArray(Charsets.UTF_8)
 }

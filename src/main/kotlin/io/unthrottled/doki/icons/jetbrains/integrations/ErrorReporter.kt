@@ -3,7 +3,6 @@ package io.unthrottled.doki.icons.jetbrains.integrations
 import com.google.gson.GsonBuilder
 import com.intellij.ide.IdeBundle
 import com.intellij.ide.nls.NlsMessages
-import com.intellij.ide.plugins.PluginManagerCore
 import com.intellij.openapi.application.ApplicationInfo
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.application.ApplicationNamesInfo
@@ -25,7 +24,6 @@ import io.unthrottled.doki.icons.jetbrains.tools.runSafely
 import java.awt.Component
 import java.lang.management.ManagementFactory
 import java.text.SimpleDateFormat
-import java.util.Arrays
 import java.util.Properties
 import java.util.stream.Collectors
 
@@ -100,7 +98,6 @@ class ErrorReporter : ErrorReportSubmitter() {
       setExtra("GC", getGC())
       setExtra("Memory", Runtime.getRuntime().maxMemory() / FileUtilRt.MEGABYTE)
       setExtra("Cores", Runtime.getRuntime().availableProcessors())
-      setExtra("Non-Bundled Plugins", getNonBundledPlugins())
       setExtra("Plugin Config", gson.toJson(Config.instance))
     }
   }
@@ -120,11 +117,6 @@ class ErrorReporter : ErrorReportSubmitter() {
     return IdeBundle.message("about.box.vm", vmVersion, vmVendor)
   }
 
-  private fun getNonBundledPlugins(): String {
-    return Arrays.stream(PluginManagerCore.getPlugins())
-      .filter { p -> !p.isBundled && p.isEnabled }
-      .map { p -> p.pluginId.idString }.collect(Collectors.joining(","))
-  }
 
   private fun getGC() = ManagementFactory.getGarbageCollectorMXBeans().stream()
     .map { it.name }.collect(Collectors.joining(","))

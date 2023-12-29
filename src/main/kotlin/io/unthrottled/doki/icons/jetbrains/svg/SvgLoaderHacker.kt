@@ -1,26 +1,25 @@
 package io.unthrottled.doki.icons.jetbrains.svg
 
+import com.intellij.ui.svg.SvgAttributePatcher
 import com.intellij.util.SVGLoader
-import org.w3c.dom.Element
 import java.util.Optional
 
 typealias PatcherProvider = SVGLoader.SvgElementColorPatcherProvider
-typealias Patcher = SVGLoader.SvgElementColorPatcher
+typealias Patcher = SvgAttributePatcher
 
 object NoOptPatcher : Patcher {
-  override fun patchColors(svg: Element) {}
-  val byteArray = ByteArray(0)
-  override fun digest(): ByteArray {
-    return byteArray
-  }
 }
 
-val emptyByteArray = ByteArray(0)
+val emptyLongArray = LongArray(0)
 
 val noOptPatcherProvider = object : PatcherProvider {
 
-  override fun forPath(path: String?): SVGLoader.SvgElementColorPatcher {
+  override fun attributeForPath(path: String): SvgAttributePatcher {
     return NoOptPatcher
+  }
+
+  override fun digest(): LongArray {
+    return emptyLongArray
   }
 }
 
@@ -29,7 +28,7 @@ object SvgLoaderHacker {
   fun collectOtherPatcher(): PatcherProvider =
     Optional.ofNullable(
       SVGLoader::class.java.declaredFields
-        .firstOrNull { it.name == "ourColorPatcher" }
+        .firstOrNull { it.name == "colorPatcherProvider" }
     )
       .map { ourColorPatcherField ->
         ourColorPatcherField.isAccessible = true
