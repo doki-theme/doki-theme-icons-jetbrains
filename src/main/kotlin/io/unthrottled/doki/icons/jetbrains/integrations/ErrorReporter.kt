@@ -117,7 +117,6 @@ class ErrorReporter : ErrorReportSubmitter() {
     return IdeBundle.message("about.box.vm", vmVersion, vmVendor)
   }
 
-
   private fun getGC() = ManagementFactory.getGarbageCollectorMXBeans().stream()
     .map { it.name }.collect(Collectors.joining(","))
 

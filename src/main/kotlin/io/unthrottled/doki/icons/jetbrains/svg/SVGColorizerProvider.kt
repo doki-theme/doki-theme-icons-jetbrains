@@ -109,8 +109,9 @@ class PalletPatcher(
   }
 
   private fun toCanonicalColor(color: String?): String? {
-    if (color.isNullOrBlank())
+    if (color.isNullOrBlank()) {
       return color
+    }
 
     var s = color.lowercase()
     if (s.startsWith("#") && s.length < HEX_STRING_LENGTH) {

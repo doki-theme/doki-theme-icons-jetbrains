@@ -7,8 +7,7 @@ import java.util.Optional
 typealias PatcherProvider = SVGLoader.SvgElementColorPatcherProvider
 typealias Patcher = SvgAttributePatcher
 
-object NoOptPatcher : Patcher {
-}
+object NoOptPatcher : Patcher
 
 val emptyLongArray = LongArray(0)
 
