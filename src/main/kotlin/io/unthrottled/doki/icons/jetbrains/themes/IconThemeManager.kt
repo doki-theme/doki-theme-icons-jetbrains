@@ -3,7 +3,8 @@ package io.unthrottled.doki.icons.jetbrains.themes
 import com.google.gson.reflect.TypeToken
 import com.intellij.ide.ui.LafManager
 import com.intellij.ide.ui.LafManagerListener
-import com.intellij.ide.ui.laf.UIThemeBasedLookAndFeelInfo
+import com.intellij.ide.ui.laf.UIThemeLookAndFeelInfo
+import com.intellij.ide.ui.laf.UIThemeLookAndFeelInfoImpl
 import com.intellij.openapi.Disposable
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.util.SVGLoader
@@ -21,7 +22,6 @@ import io.unthrottled.doki.icons.jetbrains.tools.logger
 import io.unthrottled.doki.icons.jetbrains.tools.toOptional
 import java.util.EventListener
 import java.util.Optional
-import javax.swing.UIManager
 
 class DokiTheme(
   private val dokiThemeInformation: DokiThemeInformation,
@@ -86,7 +86,7 @@ class IconThemeManager : LafManagerListener, Disposable, IconConfigListener, Log
 
   val currentTheme: Optional<DokiThemePayload> =
     if (Config.instance.syncWithDokiTheme) {
-      mapLAFToDokiTheme(LafManager.getInstance().currentLookAndFeel)
+      mapLAFToDokiTheme(LafManager.getInstance().currentUIThemeLookAndFeel)
     } else {
       userSetTheme
     }.or {
@@ -94,7 +94,7 @@ class IconThemeManager : LafManagerListener, Disposable, IconConfigListener, Log
     }
   private val userSetTheme: Optional<DokiThemePayload>
     get() = LafManager.getInstance().installedLookAndFeels
-      .filterIsInstance<UIThemeBasedLookAndFeelInfo>()
+      .filterIsInstance<UIThemeLookAndFeelInfoImpl>()
       .firstOrNull {
         it.getId() == Config.instance.currentThemeId
       }.toOptional()
@@ -102,18 +102,18 @@ class IconThemeManager : LafManagerListener, Disposable, IconConfigListener, Log
         val themeId = it.getId()
         DokiThemePayload(
           themeMap[themeId] ?: error("Expecting theme with ID $themeId to be present"),
-          it.theme.colorPatcher
+          it.theme.colorPatcher ?: noOptPatcherProvider
         )
       }.or {
         val themeId = Config.instance.currentThemeId
         DokiThemePayload(
           themeMap[themeId] ?: error("Expecting theme with ID $themeId to be present"),
-          LafManager.getInstance().currentLookAndFeel
+          LafManager.getInstance().currentUIThemeLookAndFeel
             .toOptional()
-            .filter { it is UIThemeBasedLookAndFeelInfo }
+            .filter { it is UIThemeLookAndFeelInfoImpl }
             .map {
-              val uiTheme = it as UIThemeBasedLookAndFeelInfo
-              uiTheme.theme.colorPatcher
+              val uiTheme = it as UIThemeLookAndFeelInfoImpl
+              uiTheme.theme.colorPatcher ?: noOptPatcherProvider
             }.orElse(
               noOptPatcherProvider
             )
@@ -122,15 +122,15 @@ class IconThemeManager : LafManagerListener, Disposable, IconConfigListener, Log
   val allThemes: List<DokiTheme>
     get() = themeMap.values.toList()
 
-  private fun mapLAFToDokiTheme(currentLaf: UIManager.LookAndFeelInfo?): Optional<DokiThemePayload> {
+  private fun mapLAFToDokiTheme(currentLaf: UIThemeLookAndFeelInfo?): Optional<DokiThemePayload> {
     return currentLaf.toOptional()
-      .filter { it is UIThemeBasedLookAndFeelInfo }
-      .map { it as UIThemeBasedLookAndFeelInfo }
+      .filter { it is UIThemeLookAndFeelInfoImpl }
+      .map { it as UIThemeLookAndFeelInfoImpl }
       .filter { themeMap.containsKey(it.getId()) }
       .map {
         DokiThemePayload(
           themeMap[it.getId()]!!,
-          it.theme.colorPatcher
+          it.theme.colorPatcher ?: noOptPatcherProvider
         )
       }
   }
@@ -142,7 +142,7 @@ class IconThemeManager : LafManagerListener, Disposable, IconConfigListener, Log
   override fun lookAndFeelChanged(source: LafManager) {
     val messageBus = ApplicationManager.getApplication().messageBus
     if (Config.instance.syncWithDokiTheme) {
-      mapLAFToDokiTheme(source.currentLookAndFeel)
+      mapLAFToDokiTheme(source.currentUIThemeLookAndFeel)
         .map {
           Config.instance.currentThemeId = it.dokiTheme.id
           it
@@ -170,14 +170,14 @@ class IconThemeManager : LafManagerListener, Disposable, IconConfigListener, Log
     val currentThemeId = newState.currentThemeId
     if (previousState.currentThemeId != currentThemeId) {
       LafManager.getInstance().installedLookAndFeels
-        .filterIsInstance<UIThemeBasedLookAndFeelInfo>()
+        .filterIsInstance<UIThemeLookAndFeelInfoImpl>()
         .firstOrNull {
           it.getId() == currentThemeId
         }.toOptional()
         .flatMap { uiTheme ->
           getThemeById(currentThemeId)
             .map { dokiTheme ->
-              DokiThemePayload(dokiTheme, uiTheme.theme.colorPatcher)
+              DokiThemePayload(dokiTheme, uiTheme.theme.colorPatcher ?: noOptPatcherProvider)
             }
         }
         .ifPresent {

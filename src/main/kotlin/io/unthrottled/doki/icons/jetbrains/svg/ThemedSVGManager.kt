@@ -3,6 +3,7 @@ package io.unthrottled.doki.icons.jetbrains.svg
 import com.intellij.openapi.Disposable
 import com.intellij.openapi.actionSystem.impl.ActionToolbarImpl
 import com.intellij.openapi.application.ApplicationManager
+import com.intellij.ui.svg.setSelectionColorPatcherProvider
 import com.intellij.util.SVGLoader
 import io.unthrottled.doki.icons.jetbrains.themes.DokiThemePayload
 import io.unthrottled.doki.icons.jetbrains.themes.IconThemeManager
@@ -29,8 +30,10 @@ class ThemedSVGManager : ThemeManagerListener, Disposable {
   }
 
   private fun activateTheme(currentTheme: DokiThemePayload) {
+    val svgPatcherProvider = ComposedSVGColorizerProviderFactory.createForTheme(currentTheme)
     SVGLoader.colorPatcherProvider =
-      ComposedSVGColorizerProviderFactory.createForTheme(currentTheme)
+      svgPatcherProvider
+    setSelectionColorPatcherProvider(svgPatcherProvider)
     SwingUtilities.invokeLater { ActionToolbarImpl.updateAllToolbarsImmediately() }
   }
 

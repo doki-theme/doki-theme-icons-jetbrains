@@ -4,6 +4,7 @@
   <name>Doki Theme Icons</name>
   <vendor>Unthrottled</vendor>
 
+  <idea-version since-build="233.8264.8"/>
   <depends>com.intellij.modules.platform</depends>
   <depends optional="true" config-file="io.unthrottled.doki.icons-io.unthrottled.doki.theme.xml">io.acari.DDLCTheme
   </depends>
@@ -11,6 +12,7 @@
   <extensions defaultExtensionNs="com.intellij">
     <applicationConfigurable id="io.unthrottled.doki.icons.jetbrains.settings.ThemeSettings"
                              instance="io.unthrottled.doki.icons.jetbrains.settings.IconSettingsUI"
+                             displayName="Doki Theme Icons"
                              groupId="appearance"/>
     <applicationService serviceImplementation="io.unthrottled.doki.icons.jetbrains.config.Config"/>
     <applicationService serviceImplementation="io.unthrottled.doki.icons.jetbrains.themes.IconThemeManager"/>
