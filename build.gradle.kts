@@ -16,9 +16,9 @@ plugins {
   // Gradle Qodana Plugin
   id("org.jetbrains.qodana") version "0.1.13"
   // detekt linter - read more: https://detekt.github.io/detekt/gradle.html
-  id("io.gitlab.arturbosch.detekt") version "1.22.0"
+  id("io.gitlab.arturbosch.detekt") version "1.23.1"
   // ktlint linter - read more: https://github.com/JLLeitschuh/ktlint-gradle
-  id("org.jlleitschuh.gradle.ktlint") version "11.3.2"
+  id("org.jlleitschuh.gradle.ktlint") version "12.0.3"
 }
 
 group = properties("pluginGroup")
@@ -87,9 +87,9 @@ intellij {
   val activePlugins: MutableList<Any> =
     properties("platformPlugins").split(',').map(String::trim).filter(String::isNotEmpty).toMutableList()
 
-//  activePlugins.add(
-//    project(":doki-theme")
-//  )
+  activePlugins.add(
+    project(":doki-theme")
+  )
 
   plugins.set(activePlugins)
 }
