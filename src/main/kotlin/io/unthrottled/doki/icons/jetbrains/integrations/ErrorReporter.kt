@@ -39,24 +39,24 @@ class ErrorReporter : ErrorReportSubmitter() {
     events: Array<out IdeaLoggingEvent>,
     additionalInfo: String?,
     parentComponent: Component,
-    consumer: Consumer<in SubmittedReportInfo>
+    consumer: Consumer<in SubmittedReportInfo>,
   ): Boolean {
     ApplicationManager.getApplication()
       .executeOnPooledThread {
         Sentry.setUser(
           User().apply {
             this.id = Config.instance.userId
-          }
+          },
         )
         runSafely({
           Sentry.init { options: SentryOptions ->
             options.dsn =
               RestClient.performGet(
-                "https://jetbrains.assets.unthrottled.io/doki-theme-icons/sentry-dsn.txt"
+                "https://jetbrains.assets.unthrottled.io/doki-theme-icons/sentry-dsn.txt",
               )
                 .map { it.trim() }
                 .orElse(
-                  "https://3d3ed43aea294f4eb101f1e7714b0678@o403546.ingest.sentry.io/6684182"
+                  "https://3d3ed43aea294f4eb101f1e7714b0678@o403546.ingest.sentry.io/6684182",
                 )
           }
         }) {
@@ -71,12 +71,13 @@ class ErrorReporter : ErrorReportSubmitter() {
                   this.level = SentryLevel.ERROR
                   this.serverName = getAppName().second
                   this.setExtra("Additional Info", additionalInfo ?: "None")
-                }
+                },
             ).apply {
-              this.message = Message().apply {
-                this.message = it.throwableText
-              }
-            }
+              this.message =
+                Message().apply {
+                  this.message = it.throwableText
+                }
+            },
           )
         }
         consumer.consume(SubmittedReportInfo(SubmittedReportInfo.SubmissionStatus.NEW_ISSUE))
@@ -103,10 +104,11 @@ class ErrorReporter : ErrorReportSubmitter() {
   }
 
   private fun getJRE(properties: Properties): String {
-    val javaVersion = properties.getProperty(
-      "java.runtime.version",
-      properties.getProperty("java.version", "unknown")
-    )
+    val javaVersion =
+      properties.getProperty(
+        "java.runtime.version",
+        properties.getProperty("java.version", "unknown"),
+      )
     val arch = properties.getProperty("os.arch", "")
     return IdeBundle.message("about.box.jre", javaVersion, arch)
   }
@@ -117,8 +119,9 @@ class ErrorReporter : ErrorReportSubmitter() {
     return IdeBundle.message("about.box.vm", vmVersion, vmVendor)
   }
 
-  private fun getGC() = ManagementFactory.getGarbageCollectorMXBeans().stream()
-    .map { it.name }.collect(Collectors.joining(","))
+  private fun getGC() =
+    ManagementFactory.getGarbageCollectorMXBeans().stream()
+      .map { it.name }.collect(Collectors.joining(","))
 
   private fun getBuildInfo(appInfo: ApplicationInfo): String {
     var buildInfo = IdeBundle.message("about.box.build.number", appInfo.build.asString())

@@ -20,7 +20,6 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/buildSrc" />
-            <option value="$PROJECT_DIR$/../doki-theme-jetbrains" />
           </set>
         </option>
       </GradleProjectSettings>

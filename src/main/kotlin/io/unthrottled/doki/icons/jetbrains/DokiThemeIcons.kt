@@ -6,7 +6,6 @@ import io.unthrottled.doki.icons.jetbrains.tools.toOptional
 import java.util.Optional
 
 object DokiThemeIcons {
-
   fun getVersion(): Optional<String> =
     PluginManagerCore.getPlugin(PluginId.getId(Constants.PLUGIN_ID))
       .toOptional()

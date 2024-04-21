@@ -34,6 +34,5 @@ object DokiThemeIconz {
     val EXPANDED = load("doki/icons/chevron_down_13x13.svg")
   }
 
-  private fun load(path: String): Icon =
-    IconLoader.getIcon(path, DokiThemeIconz::class.java)
+  private fun load(path: String): Icon = IconLoader.getIcon(path, DokiThemeIconz::class.java)
 }

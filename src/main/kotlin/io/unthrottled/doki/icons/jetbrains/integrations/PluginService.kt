@@ -24,26 +24,30 @@ const val DOKI_THEME_COMMUNITY_PLUGIN_ID = "io.acari.DDLCTheme"
 private const val DOKI_THEME_ULTIMATE_PLUGIN_ID = "io.unthrottled.DokiTheme"
 
 object PluginService : Logging {
-
   private val objectMapper by lazy { ObjectMapper() }
 
-  fun isMotivatorInstalled(): Boolean = PluginManagerCore.isPluginInstalled(
-    PluginId.getId(MOTIVATOR_PLUGIN_ID)
-  )
+  fun isMotivatorInstalled(): Boolean =
+    PluginManagerCore.isPluginInstalled(
+      PluginId.getId(MOTIVATOR_PLUGIN_ID),
+    )
 
-  fun isDokiThemeInstalled(): Boolean = PluginManagerCore.isPluginInstalled(
-    PluginId.getId(DOKI_THEME_COMMUNITY_PLUGIN_ID)
-  ) || PluginManagerCore.isPluginInstalled(
-    PluginId.getId(DOKI_THEME_ULTIMATE_PLUGIN_ID)
-  )
+  fun isDokiThemeInstalled(): Boolean =
+    PluginManagerCore.isPluginInstalled(
+      PluginId.getId(DOKI_THEME_COMMUNITY_PLUGIN_ID),
+    ) ||
+      PluginManagerCore.isPluginInstalled(
+        PluginId.getId(DOKI_THEME_ULTIMATE_PLUGIN_ID),
+      )
 
-  fun isAmiiInstalled(): Boolean = PluginManagerCore.isPluginInstalled(
-    PluginId.getId(AMII_PLUGIN_ID)
-  )
+  fun isAmiiInstalled(): Boolean =
+    PluginManagerCore.isPluginInstalled(
+      PluginId.getId(AMII_PLUGIN_ID),
+    )
 
-  fun isRandomizerInstalled(): Boolean = PluginManagerCore.isPluginInstalled(
-    PluginId.getId(RANDOMIZER_PLUGIN_ID)
-  )
+  fun isRandomizerInstalled(): Boolean =
+    PluginManagerCore.isPluginInstalled(
+      PluginId.getId(RANDOMIZER_PLUGIN_ID),
+    )
 
   private val PLUGIN_MANAGER_URL by lazy {
     ApplicationInfoImpl.getInstanceEx()
@@ -54,7 +58,7 @@ object PluginService : Logging {
 
   private data class CompatibleUpdateRequest(
     val build: String,
-    val pluginXMLIds: List<String>
+    val pluginXMLIds: List<String>,
   )
 
   /**
@@ -70,24 +74,23 @@ object PluginService : Logging {
     val externalPluginId: String = "",
     @get:JsonProperty("pluginXmlId")
     val pluginId: String = "",
-    val version: String = ""
+    val version: String = "",
   )
 
-  private fun getLastCompatiblePluginUpdate(
-    ids: Set<PluginId>
-  ): List<IdeCompatibleUpdate> {
+  private fun getLastCompatiblePluginUpdate(ids: Set<PluginId>): List<IdeCompatibleUpdate> {
     return try {
       if (ids.isEmpty()) {
         return emptyList()
       }
 
-      val data = objectMapper.writeValueAsString(
-        CompatibleUpdateRequest(
-          ApplicationInfoImpl.getInstanceEx()
-            .build.asString(),
-          ids.map { it.idString }
+      val data =
+        objectMapper.writeValueAsString(
+          CompatibleUpdateRequest(
+            ApplicationInfoImpl.getInstanceEx()
+              .build.asString(),
+            ids.map { it.idString },
+          ),
         )
-      )
       HttpRequests
         .post(Urls.newFromEncoded(COMPATIBLE_UPDATE_URL).toExternalForm(), HttpRequests.JSON_CONTENT_TYPE)
         .productNameAsUserAgent()
@@ -107,9 +110,10 @@ object PluginService : Logging {
       Callable {
         runSafelyWithResult({
           val pluginId = PluginId.getId(AMII_PLUGIN_ID)
-          val lastCompatiblePluginUpdate = getLastCompatiblePluginUpdate(
-            Collections.singleton(pluginId)
-          )
+          val lastCompatiblePluginUpdate =
+            getLastCompatiblePluginUpdate(
+              Collections.singleton(pluginId),
+            )
           lastCompatiblePluginUpdate.firstOrNull { pluginNode ->
             pluginNode.pluginId == AMII_PLUGIN_ID
           } != null
@@ -117,7 +121,7 @@ object PluginService : Logging {
           logger().warn("Unable to check to see if AMII can be installed", it)
           false
         }
-      }
+      },
     ).get()
   }
 }

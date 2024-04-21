@@ -11,8 +11,10 @@ import io.unthrottled.doki.icons.jetbrains.tools.toOptional
 import javax.swing.Icon
 
 class TreeNamedIconProvider : IconProvider(), DumbAware {
-
-  override fun getIcon(element: PsiElement, flags: Int): Icon? =
+  override fun getIcon(
+    element: PsiElement,
+    flags: Int,
+  ): Icon? =
     when (element) {
       is PsiDirectory -> getDirectoryIcon(element)
       is PsiFile -> getFileIcon(element)
@@ -28,11 +30,12 @@ class TreeNamedIconProvider : IconProvider(), DumbAware {
   private fun provideIcon(
     configOption: Boolean,
     element: PsiElement,
-    function: (t: VirtualFileInfo) -> Icon?
-  ): Icon? = configOption.toOptional()
-    .filter { it }
-    .flatMap { PsiUtilCore.getVirtualFile(element).toOptional() }
-    .map { VirtualFileInfo(element, it) }
-    .map(function)
-    .orElseGet { null }
+    function: (t: VirtualFileInfo) -> Icon?,
+  ): Icon? =
+    configOption.toOptional()
+      .filter { it }
+      .flatMap { PsiUtilCore.getVirtualFile(element).toOptional() }
+      .map { VirtualFileInfo(element, it) }
+      .map(function)
+      .orElseGet { null }
 }

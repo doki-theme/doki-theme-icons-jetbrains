@@ -7,13 +7,12 @@ import io.unthrottled.doki.icons.jetbrains.DokiThemeIcons.getVersion
 import io.unthrottled.doki.icons.jetbrains.onboarding.UpdateNotification
 
 class ShowUpdateNotification : AnAction(), DumbAware {
-
   override fun actionPerformed(e: AnActionEvent) {
     getVersion()
       .ifPresent {
         UpdateNotification.display(
           e.project!!,
-          it
+          it,
         )
       }
   }

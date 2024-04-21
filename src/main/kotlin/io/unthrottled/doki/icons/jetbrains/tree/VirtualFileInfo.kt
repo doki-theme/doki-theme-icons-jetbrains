@@ -5,7 +5,7 @@ import com.intellij.psi.PsiElement
 
 class VirtualFileInfo(
   val psiElement: PsiElement,
-  private val virtualFile: VirtualFile
+  private val virtualFile: VirtualFile,
 ) {
   val name: String?
     get() = virtualFile.name

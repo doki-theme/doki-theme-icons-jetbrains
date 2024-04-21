@@ -8,13 +8,15 @@ import java.awt.Point
 
 object BalloonTools {
   private const val NOTIFICATION_Y_OFFSET = 20
+
   fun fetchBalloonParameters(project: Project): Pair<IdeFrame, RelativePoint> {
     val ideFrame = getIDEFrame(project)
     val frameBounds = ideFrame.component.bounds
-    val notificationPosition = RelativePoint(
-      ideFrame.component,
-      Point(frameBounds.x, NOTIFICATION_Y_OFFSET)
-    )
+    val notificationPosition =
+      RelativePoint(
+        ideFrame.component,
+        Point(frameBounds.x, NOTIFICATION_Y_OFFSET),
+      )
     return Pair(ideFrame, notificationPosition)
   }
 
@@ -22,5 +24,5 @@ object BalloonTools {
     (
       WindowManager.getInstance().getIdeFrame(project)
         ?: WindowManager.getInstance().allProjectFrames.first()
-      )
+    )
 }

@@ -87,9 +87,9 @@ intellij {
   val activePlugins: MutableList<Any> =
     properties("platformPlugins").split(',').map(String::trim).filter(String::isNotEmpty).toMutableList()
 
-  activePlugins.add(
-    project(":doki-theme")
-  )
+//  activePlugins.add(
+//    project(":doki-theme")
+//  )
 
   plugins.set(activePlugins)
 }
@@ -132,11 +132,11 @@ tasks {
           throw GradleException("Plugin description section not found in README.md:\n$start ... $end")
         }
         subList(indexOf(start) + 1, indexOf(end))
-      }.joinToString("\n").run { markdownToHTML(this) }
+      }.joinToString("\n").run { markdownToHTML(this) },
     )
 
     changeNotes.set(
-      projectDir.resolve("RELEASE-NOTES.md").readText().run { markdownToHTML(this) }
+      projectDir.resolve("RELEASE-NOTES.md").readText().run { markdownToHTML(this) },
     )
   }
 

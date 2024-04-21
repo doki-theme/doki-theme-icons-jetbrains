@@ -10,7 +10,6 @@ import javassist.expr.ExprEditor
 import javassist.expr.MethodCall
 
 object PlatformHacker : Logging {
-
   init {
     IconPathReplacementComponent.installComponents()
     hackPlatform()
@@ -31,8 +30,8 @@ object PlatformHacker : Logging {
       val cp = ClassPool(true)
       cp.insertClassPath(
         ClassClassPath(
-          Class.forName("com.intellij.execution.ui.RunState")
-        )
+          Class.forName("com.intellij.execution.ui.RunState"),
+        ),
       )
       val ctClass = cp.get("com.intellij.execution.ui.StopWithDropDownAction")
       val doPaintText = ctClass.getDeclaredMethods("update")[0]
@@ -43,7 +42,7 @@ object PlatformHacker : Logging {
               m.replace("{ \$_ = \$1; }")
             }
           }
-        }
+        },
       )
       ctClass.toClass()
     }) {
@@ -56,8 +55,8 @@ object PlatformHacker : Logging {
       val cp = ClassPool(true)
       cp.insertClassPath(
         ClassClassPath(
-          Class.forName("com.intellij.execution.ui.RunState")
-        )
+          Class.forName("com.intellij.execution.ui.RunState"),
+        ),
       )
       val ctClass = cp.get("com.intellij.execution.ui.RunWidgetButtonLook")
       val doPaintText = ctClass.getDeclaredMethods("paintIcon")[0]
@@ -68,7 +67,7 @@ object PlatformHacker : Logging {
               m.replace("{ \$_ = \$1; }")
             }
           }
-        }
+        },
       )
       ctClass.toClass()
     }) {
@@ -79,8 +78,8 @@ object PlatformHacker : Logging {
       val cp = ClassPool(true)
       cp.insertClassPath(
         ClassClassPath(
-          Class.forName("com.intellij.execution.ui.RunState")
-        )
+          Class.forName("com.intellij.execution.ui.RunState"),
+        ),
       )
       val ctClass = cp.get("com.intellij.execution.ui.RedesignedRunConfigurationSelector")
       val doPaintText = ctClass.getDeclaredMethods("update")[0]
@@ -91,7 +90,7 @@ object PlatformHacker : Logging {
               m.replace("{ \$_ = \$1; }")
             }
           }
-        }
+        },
       )
       ctClass.toClass()
     }) {
@@ -104,8 +103,8 @@ object PlatformHacker : Logging {
       val cp = ClassPool(true)
       cp.insertClassPath(
         ClassClassPath(
-          Class.forName("com.intellij.openapi.wm.impl.SideStack")
-        )
+          Class.forName("com.intellij.openapi.wm.impl.SideStack"),
+        ),
       )
       val ctClass = cp.get("com.intellij.openapi.wm.impl.SquareStripeButtonLook")
       val doPaintText = ctClass.getDeclaredMethods("paintIcon")[0]
@@ -116,7 +115,7 @@ object PlatformHacker : Logging {
               m.replace("{ \$_ = \$1; }")
             }
           }
-        }
+        },
       )
       ctClass.toClass()
     }) {

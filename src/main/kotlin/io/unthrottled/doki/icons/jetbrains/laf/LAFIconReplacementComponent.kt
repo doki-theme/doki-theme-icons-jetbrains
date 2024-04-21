@@ -15,7 +15,6 @@ import javax.swing.SwingUtilities
 import javax.swing.UIManager
 
 object LAFIconReplacementComponent : IconConfigListener, ThemeManagerListener {
-
   private val connection = ApplicationManager.getApplication().messageBus.connect()
 
   fun initialize() {
@@ -31,11 +30,14 @@ object LAFIconReplacementComponent : IconConfigListener, ThemeManagerListener {
     }
     setTreeIcons(
       collapsed = DokiThemeIconz.Tree.COLLAPSED,
-      expanded = DokiThemeIconz.Tree.EXPANDED
+      expanded = DokiThemeIconz.Tree.EXPANDED,
     )
   }
 
-  private fun setTreeIcons(collapsed: Icon, expanded: Icon) {
+  private fun setTreeIcons(
+    collapsed: Icon,
+    expanded: Icon,
+  ) {
     val defaults = UIManager.getLookAndFeelDefaults()
     defaults[DokiThemeIconz.Tree.COLLAPSED_KEY] = collapsed
     defaults[DokiThemeIconz.Tree.SELECTED_COLLAPSED_KEY] = collapsed
@@ -48,7 +50,10 @@ object LAFIconReplacementComponent : IconConfigListener, ThemeManagerListener {
     connection.dispose()
   }
 
-  override fun iconConfigUpdated(previousState: IconSettingsModel, newState: IconSettingsModel) {
+  override fun iconConfigUpdated(
+    previousState: IconSettingsModel,
+    newState: IconSettingsModel,
+  ) {
     if (newState.isUIIcons != previousState.isUIIcons) {
       if (newState.isUIIcons) {
         installLAFIcons()
@@ -61,7 +66,7 @@ object LAFIconReplacementComponent : IconConfigListener, ThemeManagerListener {
   private fun removeLAFIcons() {
     setTreeIcons(
       collapsed = LafIconLookup.getSelectedIcon("treeCollapsed"),
-      expanded = LafIconLookup.getSelectedIcon("treeExpanded")
+      expanded = LafIconLookup.getSelectedIcon("treeExpanded"),
     )
   }
 

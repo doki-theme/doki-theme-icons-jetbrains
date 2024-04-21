@@ -18,19 +18,18 @@ import org.intellij.lang.annotations.Language
 @Language("HTML")
 private fun buildUpdateMessage(): String =
   """
-      What's New?<br>
-      <ul>
-        <li>Added initial 2023.3 build support.</li>
-      </ul>
-      <br>See the <a href="https://github.com/doki-theme/doki-theme-icons-jetbrains#documentation">documentation</a> for features, usages, and configurations.
-      <br>The <a href="https://github.com/doki-theme/doki-theme-icons-jetbrains/blob/master/CHANGELOG.md">changelog</a> is available for more details.
-      <br><br>
-      Thanks for downloading!
-      </div>
+  What's New?<br>
+  <ul>
+    <li>Added initial 2023.3 build support.</li>
+  </ul>
+  <br>See the <a href="https://github.com/doki-theme/doki-theme-icons-jetbrains#documentation">documentation</a> for features, usages, and configurations.
+  <br>The <a href="https://github.com/doki-theme/doki-theme-icons-jetbrains/blob/master/CHANGELOG.md">changelog</a> is available for more details.
+  <br><br>
+  Thanks for downloading!
+  </div>
   """.trimIndent()
 
 object UpdateNotification {
-
   private const val UPDATE_CHANNEL_NAME = "$PLUGIN_NAME Updates"
   private val notificationGroup =
     NotificationGroupManager.getInstance()
@@ -38,15 +37,16 @@ object UpdateNotification {
 
   fun display(
     project: Project,
-    newVersion: String
+    newVersion: String,
   ) {
-    val updateNotification = notificationGroup.createNotification(
-      buildUpdateMessage(),
-      NotificationType.INFORMATION
-    )
-      .setTitle("$PLUGIN_NAME updated to v$newVersion")
-      .setIcon(PLUGIN_ICON)
-      .setListener(NotificationListener.UrlOpeningListener(false))
+    val updateNotification =
+      notificationGroup.createNotification(
+        buildUpdateMessage(),
+        NotificationType.INFORMATION,
+      )
+        .setTitle("$PLUGIN_NAME updated to v$newVersion")
+        .setIcon(PLUGIN_ICON)
+        .setListener(NotificationListener.UrlOpeningListener(false))
 
     showNotification(project, updateNotification)
   }
@@ -54,13 +54,13 @@ object UpdateNotification {
   fun sendMessage(
     title: String,
     message: String,
-    project: Project? = null
+    project: Project? = null,
   ) {
     showRegularNotification(
       title,
       message,
       project = project,
-      listener = defaultListener
+      listener = defaultListener,
     )
   }
 
@@ -70,11 +70,11 @@ object UpdateNotification {
     title: String = "",
     content: String,
     project: Project? = null,
-    listener: NotificationListener? = defaultListener
+    listener: NotificationListener? = defaultListener,
   ) {
     notificationGroup.createNotification(
       content,
-      NotificationType.INFORMATION
+      NotificationType.INFORMATION,
     ).setIcon(PLUGIN_ICON)
       .setTitle(title)
       .setListener(listener ?: defaultListener)
@@ -83,18 +83,19 @@ object UpdateNotification {
 
   private fun showNotification(
     project: Project,
-    updateNotification: Notification
+    updateNotification: Notification,
   ) {
     try {
       val (ideFrame, notificationPosition) = fetchBalloonParameters(project)
-      val balloon = NotificationsManagerImpl.createBalloon(
-        ideFrame,
-        updateNotification,
-        true,
-        false,
-        BalloonLayoutData.fullContent(),
-        Disposer.newDisposable()
-      )
+      val balloon =
+        NotificationsManagerImpl.createBalloon(
+          ideFrame,
+          updateNotification,
+          true,
+          false,
+          BalloonLayoutData.fullContent(),
+          Disposer.newDisposable(),
+        )
       balloon.show(notificationPosition, Balloon.Position.atLeft)
     } catch (e: Throwable) {
       updateNotification.notify(project)

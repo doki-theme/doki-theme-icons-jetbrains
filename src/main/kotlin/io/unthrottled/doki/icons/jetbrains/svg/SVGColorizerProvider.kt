@@ -16,13 +16,12 @@ import java.awt.Color
 import kotlin.math.ceil
 
 class SVGColorPaletteReplacer(private val dokiTheme: DokiTheme) : PatcherProvider, Logging {
-
   companion object {
     private val iconTemplate: Map<String, String> =
       AssetTools.readJsonFromResources<Map<String, String>>(
         "/doki/generated",
         "icon.palette.template.json",
-        object : TypeToken<Map<String, String>>() {}.type
+        object : TypeToken<Map<String, String>>() {}.type,
       ).orElseGet {
         emptyMap()
       }
@@ -41,37 +40,39 @@ class SVGColorPaletteReplacer(private val dokiTheme: DokiTheme) : PatcherProvide
           logger().error(
             """Hey silly maintainer, you forgot to give theme 
               |"${dokiTheme.listName}:${dokiTheme.id}" color "$namedColor", pls fix
-            """.trimMargin()
+            """.trimMargin(),
           )
         }
         newColor
       }.toMutableMap().apply {
         // todo: document deez
-        this["#000000"] = JBColor.namedColor(
-          "Panel.background",
-          ColorUtil.fromHex(dokiTheme.colors["baseBackground"]!!)
-        )
-          .toHexString()
-        this["#776bc4"] = ColorUtil.darker(
-          ColorUtil.fromHex(dokiTheme.colors["iconSecondaryBlend"]!!),
-          SECONDARY_BLEND_DARKENING
-        )
-          .toHexString()
+        this["#000000"] =
+          JBColor.namedColor(
+            "Panel.background",
+            ColorUtil.fromHex(dokiTheme.colors["baseBackground"]!!),
+          )
+            .toHexString()
+        this["#776bc4"] =
+          ColorUtil.darker(
+            ColorUtil.fromHex(dokiTheme.colors["iconSecondaryBlend"]!!),
+            SECONDARY_BLEND_DARKENING,
+          )
+            .toHexString()
       }
 
   override fun attributeForPath(path: String): SvgAttributePatcher? =
     PalletPatcher(
-      newPalette
+      newPalette,
     )
 
   private val digest = toLongArray(("pallet" + dokiTheme.id + dokiTheme.version).toByteArray(Charsets.UTF_8))
+
   override fun digest(): LongArray = digest
 }
 
 class PalletPatcher(
-  private val newPalette: Map<String, String>
+  private val newPalette: Map<String, String>,
 ) : Patcher {
-
   companion object {
     private const val HEX_STRING_LENGTH = 7
   }
@@ -122,7 +123,6 @@ class PalletPatcher(
 }
 
 class SVGColorizerProvider(private val dokiTheme: DokiTheme) : PatcherProvider {
-
   override fun attributeForPath(path: String): SvgAttributePatcher? = SVGColorizer(dokiTheme)
 
   private val digest =
@@ -132,17 +132,14 @@ class SVGColorizerProvider(private val dokiTheme: DokiTheme) : PatcherProvider {
 }
 
 class SVGColorizer(private val dokiTheme: DokiTheme) : Patcher {
-
   override fun patchColors(attributes: MutableMap<String, String>) {
     patchChildren(
-      attributes
+      attributes,
     )
   }
 
   @Suppress("MagicNumber")
-  private fun patchChildren(
-    attributes: MutableMap<String, String>
-  ) {
+  private fun patchChildren(attributes: MutableMap<String, String>) {
     patchAccent(attributes["accentTint"], attributes) {
       it.toHexString()
     }
@@ -186,7 +183,7 @@ class SVGColorizer(private val dokiTheme: DokiTheme) : Patcher {
   private fun patchAccent(
     attribute: String?,
     attributes: MutableMap<String, String>,
-    colorDecorator: (Color) -> String
+    colorDecorator: (Color) -> String,
   ) {
     when (attribute) {
       "fill" -> attributes["fill"] = colorDecorator(getAccentColor())
@@ -200,15 +197,11 @@ class SVGColorizer(private val dokiTheme: DokiTheme) : Patcher {
     }
   }
 
-  private fun getAccentColor() =
-    dokiTheme.colors["accentColor"]!!.toColor()
+  private fun getAccentColor() = dokiTheme.colors["accentColor"]!!.toColor()
 
-  private fun getIconAccentContrastColor() =
-    JBColor.namedColor("Doki.Icon.Accent.Contrast.color", Color.WHITE)
+  private fun getIconAccentContrastColor() = JBColor.namedColor("Doki.Icon.Accent.Contrast.color", Color.WHITE)
 
-  private fun getThemedStartColor() =
-    JBColor.namedColor("Doki.startColor", Color.CYAN).toHexString()
+  private fun getThemedStartColor() = JBColor.namedColor("Doki.startColor", Color.CYAN).toHexString()
 
-  private fun getThemedStopColor() =
-    JBColor.namedColor("Doki.stopColor", Color.CYAN).toHexString()
+  private fun getThemedStopColor() = JBColor.namedColor("Doki.stopColor", Color.CYAN).toHexString()
 }

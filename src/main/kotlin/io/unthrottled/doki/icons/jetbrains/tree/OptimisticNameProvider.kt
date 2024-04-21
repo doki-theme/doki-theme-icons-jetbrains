@@ -4,11 +4,9 @@ import com.intellij.openapi.project.Project
 import io.unthrottled.doki.icons.jetbrains.tools.toOptional
 import java.util.Optional
 
-fun Project.nameProvider(): OptimisticNameProvider =
-  this.getService(OptimisticNameProvider::class.java)
+fun Project.nameProvider(): OptimisticNameProvider = this.getService(OptimisticNameProvider::class.java)
 
-class OptimisticNameProvider(private val project: Project) {
-
+class OptimisticNameProvider() {
   private val priorityList = SchwiftyList<NamedIconMapping>()
 
   fun findMapping(fileName: String): Optional<NamedIconMapping> {

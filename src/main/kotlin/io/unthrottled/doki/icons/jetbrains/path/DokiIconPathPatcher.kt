@@ -10,16 +10,15 @@ import io.unthrottled.doki.icons.jetbrains.tools.logger
 data class PathMapping(
   val originalPath: String,
   val iconName: String,
-  val isOddBall: Boolean?
+  val isOddBall: Boolean?,
 )
 
 class DokiIconPathPatcher(private val mappingFile: String) : IconPathPatcher(), Logging {
-
   private val pathMappings: Map<String, String> =
     readJsonFromResources<List<PathMapping>>(
       "/",
       mappingFile,
-      object : TypeToken<List<PathMapping>>() {}.type
+      object : TypeToken<List<PathMapping>>() {}.type,
     )
       .map { def ->
         def.associate {
@@ -34,20 +33,20 @@ class DokiIconPathPatcher(private val mappingFile: String) : IconPathPatcher(), 
 
   override fun patchPath(
     path: String,
-    classLoader: ClassLoader?
-  ): String? = pathMappings[
-    if (path.startsWith('/')) {
-      path
-    } else {
-      "/$path"
-    }
-  ]
+    classLoader: ClassLoader?,
+  ): String? =
+    pathMappings[
+      if (path.startsWith('/')) {
+        path
+      } else {
+        "/$path"
+      },
+    ]
 
   override fun getContextClassLoader(
     path: String,
-    originalClassLoader: ClassLoader?
-  ): ClassLoader? =
-    javaClass.classLoader
+    originalClassLoader: ClassLoader?,
+  ): ClassLoader? = javaClass.classLoader
 
   override fun equals(other: Any?): Boolean {
     if (this === other) return true

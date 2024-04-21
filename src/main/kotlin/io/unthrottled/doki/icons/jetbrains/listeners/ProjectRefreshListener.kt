@@ -7,10 +7,9 @@ import io.unthrottled.doki.icons.jetbrains.config.IconConfigListener
 import io.unthrottled.doki.icons.jetbrains.config.IconSettingsModel
 
 class ProjectRefreshListener : IconConfigListener {
-
   override fun iconConfigUpdated(
     previousState: IconSettingsModel,
-    newState: IconSettingsModel
+    newState: IconSettingsModel,
   ) {
     LafManager.getInstance().updateUI()
     refreshProjects()

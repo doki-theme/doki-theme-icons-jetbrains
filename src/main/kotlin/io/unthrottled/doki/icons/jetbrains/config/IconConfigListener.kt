@@ -9,5 +9,9 @@ interface IconConfigListener : EventListener {
     val TOPIC: Topic<IconConfigListener> =
       Topic(IconConfigListener::class.java)
   }
-  fun iconConfigUpdated(previousState: IconSettingsModel, newState: IconSettingsModel)
+
+  fun iconConfigUpdated(
+    previousState: IconSettingsModel,
+    newState: IconSettingsModel,
+  )
 }

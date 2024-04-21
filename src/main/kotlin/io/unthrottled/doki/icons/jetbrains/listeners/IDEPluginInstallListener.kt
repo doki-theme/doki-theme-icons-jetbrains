@@ -8,13 +8,12 @@ import io.unthrottled.doki.icons.jetbrains.PluginMaster
 import io.unthrottled.doki.icons.jetbrains.tools.Logging
 
 class IDEPluginInstallListener : DynamicPluginListener, Logging {
-
   override fun beforePluginLoaded(pluginDescriptor: IdeaPluginDescriptor) {
   }
 
   override fun beforePluginUnload(
     pluginDescriptor: IdeaPluginDescriptor,
-    isUpdate: Boolean
+    isUpdate: Boolean,
   ) {
   }
 
@@ -31,7 +30,7 @@ class IDEPluginInstallListener : DynamicPluginListener, Logging {
 
   override fun pluginUnloaded(
     pluginDescriptor: IdeaPluginDescriptor,
-    isUpdate: Boolean
+    isUpdate: Boolean,
   ) {
   }
 }

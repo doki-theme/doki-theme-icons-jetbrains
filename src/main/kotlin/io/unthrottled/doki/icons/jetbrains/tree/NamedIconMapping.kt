@@ -8,21 +8,21 @@ import io.unthrottled.doki.icons.jetbrains.tools.toOptional
 import java.util.Optional
 
 enum class NamedIconMappings(
-  val fileName: String
+  val fileName: String,
 ) {
-  FILE("files.named.mappings.json")
+  FILE("files.named.mappings.json"),
 }
 
 data class SerializedNamedIconMapping(
   val name: String,
   val mappingPattern: String,
-  val iconName: String
+  val iconName: String,
 )
 
 data class NamedIconMapping(
   val name: String,
   val mappingRegex: Regex,
-  val iconName: String
+  val iconName: String,
 )
 
 object NamedIconMappingLocator {
@@ -35,19 +35,18 @@ object NamedIconMappingLocator {
 }
 
 object NamedIconMappingFactory : Logging {
-
   fun create(namedIconMapping: NamedIconMappings): List<NamedIconMapping> =
     AssetTools.readJsonFromResources<List<SerializedNamedIconMapping>>(
       "/",
       namedIconMapping.fileName,
-      object : TypeToken<List<SerializedNamedIconMapping>>() {}.type
+      object : TypeToken<List<SerializedNamedIconMapping>>() {}.type,
     )
       .map { serializedNamedIconMappings ->
         serializedNamedIconMappings.map {
           NamedIconMapping(
             name = it.name,
             mappingRegex = Regex(it.mappingPattern),
-            iconName = it.iconName
+            iconName = it.iconName,
           )
         }
       }

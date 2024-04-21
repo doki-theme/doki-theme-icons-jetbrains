@@ -8,9 +8,8 @@ internal class SchwiftyNode<T>(
   var parent: SchwiftyNode<T>? = null,
   var child: SchwiftyNode<T>? = null,
   private val onNewHead: (SchwiftyNode<T>) -> Unit,
-  private val onNewTail: (SchwiftyNode<T>) -> Unit
+  private val onNewTail: (SchwiftyNode<T>) -> Unit,
 ) {
-
   fun bumpPriority() {
     val myParent = parent
     if (myParent != null) {
@@ -43,7 +42,6 @@ internal class SchwiftyNode<T>(
 }
 
 class SchwiftyList<T : Any> {
-
   private var head: SchwiftyNode<T>? = null
   private var tail: SchwiftyNode<T>? = null
 
@@ -62,16 +60,17 @@ class SchwiftyList<T : Any> {
   }
 
   fun enqueue(itemToAdd: T): T {
-    val schwiftyNode = SchwiftyNode(
-      itemToAdd,
-      null,
-      null,
-      {
-        this.head = it
+    val schwiftyNode =
+      SchwiftyNode(
+        itemToAdd,
+        null,
+        null,
+        {
+          this.head = it
+        },
+      ) {
+        this.tail = it
       }
-    ) {
-      this.tail = it
-    }
     val currentTail = tail
     if (currentTail == null) {
       head = schwiftyNode

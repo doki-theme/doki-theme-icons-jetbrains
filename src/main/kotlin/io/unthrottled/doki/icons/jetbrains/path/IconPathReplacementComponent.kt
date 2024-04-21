@@ -11,7 +11,7 @@ import io.unthrottled.doki.icons.jetbrains.config.IconSettingsModel
 data class IconReplacementPack(
   val iconPatcher: DokiIconPathPatcher,
   val iconSettingsExtractor: (IconSettingsModel) -> Boolean,
-  val iconConfigExtractor: (Config) -> Boolean
+  val iconConfigExtractor: (Config) -> Boolean,
 )
 
 object IconPathReplacementComponent : IconConfigListener {
@@ -20,28 +20,28 @@ object IconPathReplacementComponent : IconConfigListener {
       IconReplacementPack(
         DokiIconPathPatcher("alex-icons.path.mappings.json"),
         { it.isMyIcons },
-        { it.isMyIcons }
+        { it.isMyIcons },
       ),
       IconReplacementPack(
         DokiIconPathPatcher("ui-icons.path.mappings.json"),
         { it.isUIIcons },
-        { it.isUIIcons }
+        { it.isUIIcons },
       ),
       IconReplacementPack(
         DokiIconPathPatcher("node.path.mappings.json"),
         { it.isUIIcons },
-        { it.isUIIcons }
+        { it.isUIIcons },
       ),
       IconReplacementPack(
         DokiIconPathPatcher("file-icons.path.mappings.json"),
         { it.isUIIcons },
-        { it.isUIIcons }
+        { it.isUIIcons },
       ),
       IconReplacementPack(
         DokiIconPathPatcher("glyph-icons.path.mappings.json"),
         { it.isGlyphIcons },
-        { it.isGlyphIcon }
-      )
+        { it.isGlyphIcon },
+      ),
     )
 
   private val connection = ApplicationManager.getApplication().messageBus.connect()
@@ -69,10 +69,14 @@ object IconPathReplacementComponent : IconConfigListener {
     }
   }
 
-  override fun iconConfigUpdated(previousState: IconSettingsModel, newState: IconSettingsModel) {
-    val hasChanged = iconInstallPacs.any {
-      it.iconSettingsExtractor(previousState) != it.iconSettingsExtractor(newState)
-    }
+  override fun iconConfigUpdated(
+    previousState: IconSettingsModel,
+    newState: IconSettingsModel,
+  ) {
+    val hasChanged =
+      iconInstallPacs.any {
+        it.iconSettingsExtractor(previousState) != it.iconSettingsExtractor(newState)
+      }
     if (!hasChanged) {
       return
     }

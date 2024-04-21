@@ -11,7 +11,6 @@ import java.util.Optional
 import java.util.UUID
 
 object UserOnBoarding {
-
   fun attemptToPerformNewUpdateActions(project: Project) {
     getNewVersion().ifPresent { newVersion ->
       Config.instance.version = newVersion

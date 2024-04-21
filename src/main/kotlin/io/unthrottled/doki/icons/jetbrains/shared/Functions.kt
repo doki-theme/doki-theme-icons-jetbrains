@@ -5,6 +5,7 @@ fun toLongArray(bytArray: ByteArray): LongArray {
   bytArray.forEachIndexed { index, byte -> digest[index] = byte.toLong() }
   return digest
 }
+
 fun toByteArray(longArray: LongArray): ByteArray {
   val digest = ByteArray(longArray.size)
   longArray.forEachIndexed { index, byte -> digest[index] = byte.toByte() }

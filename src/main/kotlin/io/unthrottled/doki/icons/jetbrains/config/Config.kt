@@ -13,7 +13,7 @@ fun Application.getConfig(): Config = this.getService(Config::class.java)
 
 @State(
   name = "doki-theme-icon-config",
-  storages = [Storage("doki-theme-icons.xml")]
+  storages = [Storage("doki-theme-icons.xml")],
 )
 class Config : PersistentStateComponent<Config>, Cloneable {
   companion object {
@@ -32,8 +32,7 @@ class Config : PersistentStateComponent<Config>, Cloneable {
   var isMyIcons: Boolean = false
   var syncWithDokiTheme: Boolean = true
 
-  override fun getState(): Config? =
-    createCopy(this)
+  override fun getState(): Config? = createCopy(this)
 
   override fun loadState(state: Config) {
     copyBean(state, this)
