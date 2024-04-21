@@ -126,10 +126,10 @@ class IconThemeManager : LafManagerListener, Disposable, IconConfigListener, Log
     return currentLaf.toOptional()
       .filter { it is UIThemeLookAndFeelInfoImpl }
       .map { it as UIThemeLookAndFeelInfoImpl }
-      .filter { themeMap.containsKey(it.getId()) }
+      .filter { themeMap.containsKey(it.id) }
       .map {
         DokiThemePayload(
-          themeMap[it.getId()]!!,
+          themeMap[it.id]!!,
           it.theme.colorPatcher ?: noOptPatcherProvider
         )
       }
