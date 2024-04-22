@@ -37,7 +37,7 @@ data class IconSettingsModel(
   var isNamedFolderIcons: Boolean,
   var isMyIcons: Boolean,
   var currentThemeId: String,
-  var syncWithDokiTheme: Boolean
+  var syncWithDokiTheme: Boolean,
 )
 
 object IconSettings {
@@ -52,29 +52,33 @@ object IconSettings {
       isGlyphIcons = Config.instance.isGlyphIcon,
       isNamedFolderIcons = Config.instance.isNamedFolderIcons,
       isMyIcons = Config.instance.isMyIcons,
-      currentThemeId = IconThemeManager.instance.getThemeById(
-        Config.instance.currentThemeId
-      ).orElseGet {
-        IconThemeManager.instance.defaultTheme
-      }.id,
-      syncWithDokiTheme = Config.instance.syncWithDokiTheme
+      currentThemeId =
+        IconThemeManager.instance.getThemeById(
+          Config.instance.currentThemeId,
+        ).orElseGet {
+          IconThemeManager.instance.defaultTheme
+        }.id,
+      syncWithDokiTheme = Config.instance.syncWithDokiTheme,
     )
 
   fun createThemeComboBoxModel(settingsSupplier: () -> IconSettingsModel): ComboBox<ThemeComboItem> {
-    val themeList = IconThemeManager.instance.allThemes
-      .sortedBy { theme -> theme.listName }
-      .map { ThemeComboItem(it) }
-    val themeComboBox = ComboBox(
-      DefaultComboBoxModel(
-        Vector(
-          themeList
-        )
+    val themeList =
+      IconThemeManager.instance.allThemes
+        .sortedBy { theme -> theme.listName }
+        .map { ThemeComboItem(it) }
+    val themeComboBox =
+      ComboBox(
+        DefaultComboBoxModel(
+          Vector(
+            themeList,
+          ),
+        ),
       )
-    )
 
-    themeComboBox.model.selectedItem = themeList.find {
-      it.id == settingsSupplier().currentThemeId
-    }
+    themeComboBox.model.selectedItem =
+      themeList.find {
+        it.id == settingsSupplier().currentThemeId
+      }
 
     themeComboBox.addActionListener {
       settingsSupplier().currentThemeId = (themeComboBox.model.selectedItem as ThemeComboItem).id

@@ -11,23 +11,22 @@ object NoOptPatcher : Patcher
 
 val emptyLongArray = LongArray(0)
 
-val noOptPatcherProvider = object : PatcherProvider {
+val noOptPatcherProvider =
+  object : PatcherProvider {
+    override fun attributeForPath(path: String): SvgAttributePatcher {
+      return NoOptPatcher
+    }
 
-  override fun attributeForPath(path: String): SvgAttributePatcher {
-    return NoOptPatcher
+    override fun digest(): LongArray {
+      return emptyLongArray
+    }
   }
-
-  override fun digest(): LongArray {
-    return emptyLongArray
-  }
-}
 
 object SvgLoaderHacker {
-
   fun collectOtherPatcher(): PatcherProvider =
     Optional.ofNullable(
       SVGLoader::class.java.declaredFields
-        .firstOrNull { it.name == "colorPatcherProvider" }
+        .firstOrNull { it.name == "colorPatcherProvider" },
     )
       .map { ourColorPatcherField ->
         ourColorPatcherField.isAccessible = true

@@ -4,7 +4,6 @@ import org.assertj.core.api.Assertions
 import org.junit.Test
 
 internal class SchwiftyListTest {
-
   @Test
   fun shouldPreferItemsFound() {
     val schwiftyList = SchwiftyList<String>()
@@ -14,7 +13,7 @@ internal class SchwiftyListTest {
         it === "Zero Two"
       }.orElseGet {
         "Best Girl"
-      }
+      },
     ).isEqualTo("Best Girl")
 
     schwiftyList.enqueue("Ryuko")
@@ -27,7 +26,7 @@ internal class SchwiftyListTest {
         it === "Zero Two"
       }.orElseGet {
         "Best Girl"
-      }
+      },
     ).isEqualTo("Best Girl")
     Assertions.assertThat(predicateCount).isEqualTo(1)
     predicateCount = 0
@@ -36,7 +35,7 @@ internal class SchwiftyListTest {
       schwiftyList.first {
         predicateCount++
         it === "Ryuko"
-      }.orElseThrow()
+      }.orElseThrow(),
     ).isEqualTo("Ryuko")
     Assertions.assertThat(predicateCount).isEqualTo(1)
     predicateCount = 0
@@ -46,7 +45,7 @@ internal class SchwiftyListTest {
       schwiftyList.first {
         predicateCount++
         it === "Ryuko"
-      }.orElseThrow()
+      }.orElseThrow(),
     ).isEqualTo("Ryuko")
     Assertions.assertThat(predicateCount).isEqualTo(1)
     predicateCount = 0
@@ -55,7 +54,7 @@ internal class SchwiftyListTest {
       schwiftyList.first {
         predicateCount++
         it === "Kokkoro"
-      }.orElseThrow()
+      }.orElseThrow(),
     ).isEqualTo("Kokkoro")
     Assertions.assertThat(predicateCount).isEqualTo(2)
     predicateCount = 0
@@ -64,7 +63,7 @@ internal class SchwiftyListTest {
       schwiftyList.first {
         predicateCount++
         it === "Kokkoro"
-      }.orElseThrow()
+      }.orElseThrow(),
     ).isEqualTo("Kokkoro")
     Assertions.assertThat(predicateCount).isEqualTo(1)
     predicateCount = 0
@@ -73,7 +72,7 @@ internal class SchwiftyListTest {
       schwiftyList.first {
         predicateCount++
         it === "Ryuko"
-      }.orElseThrow()
+      }.orElseThrow(),
     ).isEqualTo("Ryuko")
     Assertions.assertThat(predicateCount).isEqualTo(2)
     predicateCount = 0
@@ -82,7 +81,7 @@ internal class SchwiftyListTest {
       schwiftyList.first {
         predicateCount++
         it === "Ryuko"
-      }.orElseThrow()
+      }.orElseThrow(),
     ).isEqualTo("Ryuko")
     Assertions.assertThat(predicateCount).isEqualTo(1)
     predicateCount = 0
@@ -91,7 +90,7 @@ internal class SchwiftyListTest {
       schwiftyList.first {
         predicateCount++
         it === "Zero Two"
-      }.orElseGet { "Best Girl" }
+      }.orElseGet { "Best Girl" },
     ).isEqualTo("Best Girl")
     Assertions.assertThat(predicateCount).isEqualTo(2)
     predicateCount = 0
@@ -102,7 +101,7 @@ internal class SchwiftyListTest {
       schwiftyList.first {
         predicateCount++
         it === "Zero Two"
-      }.orElseThrow()
+      }.orElseThrow(),
     ).isEqualTo("Zero Two")
     Assertions.assertThat(predicateCount).isEqualTo(3)
     predicateCount = 0
@@ -111,7 +110,7 @@ internal class SchwiftyListTest {
       schwiftyList.first {
         predicateCount++
         it === "Zero Two"
-      }.orElseThrow()
+      }.orElseThrow(),
     ).isEqualTo("Zero Two")
     Assertions.assertThat(predicateCount).isEqualTo(2)
     predicateCount = 0
@@ -120,7 +119,7 @@ internal class SchwiftyListTest {
       schwiftyList.first {
         predicateCount++
         it === "Zero Two"
-      }.orElseThrow()
+      }.orElseThrow(),
     ).isEqualTo("Zero Two")
     Assertions.assertThat(predicateCount).isEqualTo(1)
     predicateCount = 0
@@ -129,7 +128,7 @@ internal class SchwiftyListTest {
       schwiftyList.first {
         predicateCount++
         it === "Kokkoro"
-      }.orElseThrow()
+      }.orElseThrow(),
     ).isEqualTo("Kokkoro")
     Assertions.assertThat(predicateCount).isEqualTo(3)
     predicateCount = 0
@@ -138,7 +137,7 @@ internal class SchwiftyListTest {
       schwiftyList.first {
         predicateCount++
         it === "Kokkoro"
-      }.orElseThrow()
+      }.orElseThrow(),
     ).isEqualTo("Kokkoro")
     Assertions.assertThat(predicateCount).isEqualTo(2)
     predicateCount = 0
@@ -147,7 +146,7 @@ internal class SchwiftyListTest {
       schwiftyList.first {
         predicateCount++
         it === "Zero Two"
-      }.orElseThrow()
+      }.orElseThrow(),
     ).isEqualTo("Zero Two")
     Assertions.assertThat(predicateCount).isEqualTo(2)
     predicateCount = 0
@@ -156,7 +155,7 @@ internal class SchwiftyListTest {
       schwiftyList.first {
         predicateCount++
         it === "Kokkoro"
-      }.orElseThrow()
+      }.orElseThrow(),
     ).isEqualTo("Kokkoro")
     Assertions.assertThat(predicateCount).isEqualTo(2)
     predicateCount = 0
@@ -165,7 +164,7 @@ internal class SchwiftyListTest {
       schwiftyList.first {
         predicateCount++
         it === "Kokkoro"
-      }.orElseThrow()
+      }.orElseThrow(),
     ).isEqualTo("Kokkoro")
     Assertions.assertThat(predicateCount).isEqualTo(1)
     predicateCount = 0
@@ -174,7 +173,7 @@ internal class SchwiftyListTest {
       schwiftyList.first {
         predicateCount++
         it === "Ryuko"
-      }.orElseThrow()
+      }.orElseThrow(),
     ).isEqualTo("Ryuko")
     Assertions.assertThat(predicateCount).isEqualTo(3)
     predicateCount = 0
@@ -183,7 +182,7 @@ internal class SchwiftyListTest {
       schwiftyList.first {
         predicateCount++
         it === "Zero Two"
-      }.orElseThrow()
+      }.orElseThrow(),
     ).isEqualTo("Zero Two")
     Assertions.assertThat(predicateCount).isEqualTo(3)
     predicateCount = 0
@@ -192,7 +191,7 @@ internal class SchwiftyListTest {
       schwiftyList.first {
         predicateCount++
         it === "Zero Two"
-      }.orElseThrow()
+      }.orElseThrow(),
     ).isEqualTo("Zero Two")
     Assertions.assertThat(predicateCount).isEqualTo(2)
     predicateCount = 0
@@ -201,7 +200,7 @@ internal class SchwiftyListTest {
       schwiftyList.first {
         predicateCount++
         it === "Zero Two"
-      }.orElseThrow()
+      }.orElseThrow(),
     ).isEqualTo("Zero Two")
     Assertions.assertThat(predicateCount).isEqualTo(1)
     predicateCount = 0

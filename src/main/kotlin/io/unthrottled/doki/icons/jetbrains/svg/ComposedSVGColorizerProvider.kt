@@ -7,9 +7,8 @@ import io.unthrottled.doki.icons.jetbrains.themes.DokiThemePayload
 import io.unthrottled.doki.icons.jetbrains.tools.runSafelyWithResult
 
 class ComposedSVGColorizer(
-  private val patchers: List<Patcher>
+  private val patchers: List<Patcher>,
 ) : Patcher {
-
   override fun patchColors(attributes: MutableMap<String, String>) {
     patchers.forEach {
       it.patchColors(attributes)
@@ -20,17 +19,18 @@ class ComposedSVGColorizer(
 @Suppress("UnstableApiUsage")
 class ComposedSVGColorizerProvider(
   dokiThemePayload: DokiThemePayload,
-  otherSvgPatcherProvider: PatcherProvider
+  otherSvgPatcherProvider: PatcherProvider,
 ) : PatcherProvider {
   private val colorizer = SVGColorizerProvider(dokiThemePayload.dokiTheme)
   private val replacer = SVGColorPaletteReplacer(dokiThemePayload.dokiTheme)
-  private val patcherProviders = listOf(
-    otherSvgPatcherProvider,
-    colorizer,
-    replacer,
-    dokiThemePayload.colorPatcher
-  )
-    .distinct()
+  private val patcherProviders =
+    listOf(
+      otherSvgPatcherProvider,
+      colorizer,
+      replacer,
+      dokiThemePayload.colorPatcher,
+    )
+      .distinct()
 
   private val digest: LongArray
 
@@ -53,12 +53,11 @@ class ComposedSVGColorizerProvider(
           }) {
             null
           }
-        }
+        },
     )
 }
 
 object ComposedSVGColorizerProviderFactory {
-
   fun createForTheme(dokiThemePayload: DokiThemePayload): PatcherProvider {
     val otherSvgPatcherProvider = SvgLoaderHacker.collectOtherPatcher()
     return ComposedSVGColorizerProvider(dokiThemePayload, otherSvgPatcherProvider)

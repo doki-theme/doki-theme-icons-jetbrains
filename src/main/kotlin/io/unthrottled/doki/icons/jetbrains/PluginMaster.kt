@@ -16,11 +16,11 @@ import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.ConcurrentMap
 
 class PluginMaster : ProjectManagerListener, Disposable, Logging {
-
   companion object {
     init {
       ExperimentalUIFixer.fixExperimentalUI()
     }
+
     val instance: PluginMaster
       get() = ApplicationManager.getApplication().getService(PluginMaster::class.java)
   }
@@ -62,9 +62,8 @@ class PluginMaster : ProjectManagerListener, Disposable, Logging {
 }
 
 internal data class ProjectListeners(
-  private val project: Project
+  private val project: Project,
 ) : Disposable {
-
   override fun dispose() {
   }
 }

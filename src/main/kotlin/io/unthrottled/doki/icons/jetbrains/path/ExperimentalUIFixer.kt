@@ -6,7 +6,6 @@ import com.intellij.ui.ExperimentalUI
 import io.unthrottled.doki.icons.jetbrains.tools.runSafely
 
 object ExperimentalUIFixer {
-
   init {
     fixExperimentalUI()
   }
