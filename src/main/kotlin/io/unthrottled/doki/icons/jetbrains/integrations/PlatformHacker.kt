@@ -34,16 +34,17 @@ object PlatformHacker : Logging {
         ),
       )
       val ctClass = cp.get("com.intellij.execution.ui.StopWithDropDownAction")
-      val doPaintText = ctClass.getDeclaredMethods("update")[0]
-      doPaintText.instrument(
-        object : ExprEditor() {
-          override fun edit(m: MethodCall?) {
-            if (m?.methodName == "toStrokeIcon") {
-              m.replace("{ \$_ = \$1; }")
+      ctClass.getDeclaredMethods("update").forEach { doPaintText ->
+        doPaintText.instrument(
+          object : ExprEditor() {
+            override fun edit(m: MethodCall?) {
+              if (m?.methodName == "toStrokeIcon") {
+                m.replace("{ \$_ = \$1; }")
+              }
             }
-          }
-        },
-      )
+          },
+        )
+      }
       ctClass.toClass()
     }) {
       logger().warn("Unable to hack 'fixEXPUIStopButton' for raisins", it)
@@ -59,16 +60,17 @@ object PlatformHacker : Logging {
         ),
       )
       val ctClass = cp.get("com.intellij.execution.ui.RunWidgetButtonLook")
-      val doPaintText = ctClass.getDeclaredMethods("paintIcon")[0]
-      doPaintText.instrument(
-        object : ExprEditor() {
-          override fun edit(m: MethodCall?) {
-            if (m?.methodName == "toStrokeIcon") {
-              m.replace("{ \$_ = \$1; }")
+      ctClass.getDeclaredMethods("paintIcon").forEach { doPaintText ->
+        doPaintText.instrument(
+          object : ExprEditor() {
+            override fun edit(m: MethodCall?) {
+              if (m?.methodName == "toStrokeIcon") {
+                m.replace("{ \$_ = \$1; }")
+              }
             }
-          }
-        },
-      )
+          },
+        )
+      }
       ctClass.toClass()
     }) {
       logger().warn("Unable to hack 'fixEXPUIRunWidget' for raisins", it)
@@ -82,16 +84,17 @@ object PlatformHacker : Logging {
         ),
       )
       val ctClass = cp.get("com.intellij.execution.ui.RedesignedRunConfigurationSelector")
-      val doPaintText = ctClass.getDeclaredMethods("update")[0]
-      doPaintText.instrument(
-        object : ExprEditor() {
-          override fun edit(m: MethodCall?) {
-            if (m?.methodName == "toStrokeIcon") {
-              m.replace("{ \$_ = \$1; }")
+      ctClass.getDeclaredMethods("update").forEach { doPaintText ->
+        doPaintText.instrument(
+          object : ExprEditor() {
+            override fun edit(m: MethodCall?) {
+              if (m?.methodName == "toStrokeIcon") {
+                m.replace("{ \$_ = \$1; }")
+              }
             }
-          }
-        },
-      )
+          },
+        )
+      }
       ctClass.toClass()
     }) {
       logger().warn("Unable to hack 'fixEXPUIRunWidget' try two for raisins", it)
@@ -107,16 +110,17 @@ object PlatformHacker : Logging {
         ),
       )
       val ctClass = cp.get("com.intellij.openapi.wm.impl.SquareStripeButtonLook")
-      val doPaintText = ctClass.getDeclaredMethods("paintIcon")[0]
-      doPaintText.instrument(
-        object : ExprEditor() {
-          override fun edit(m: MethodCall?) {
-            if (m?.methodName == "toStrokeIcon") {
-              m.replace("{ \$_ = \$1; }")
+      ctClass.getDeclaredMethods("paintIcon").forEach { doPaintText ->
+        doPaintText.instrument(
+          object : ExprEditor() {
+            override fun edit(m: MethodCall?) {
+              if (m?.methodName == "toStrokeIcon") {
+                m.replace("{ \$_ = \$1; }")
+              }
             }
-          }
-        },
-      )
+          },
+        )
+      }
       ctClass.toClass()
     }) {
       logger().warn("Unable to hack 'fixEXPUIButton' for raisins", it)
