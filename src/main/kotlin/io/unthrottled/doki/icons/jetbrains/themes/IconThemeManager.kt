@@ -100,7 +100,6 @@ class IconThemeManager : LafManagerListener, Disposable, IconConfigListener, Log
           theme.id == Config.instance.currentThemeId
         }.toOptional()
         .map { theme ->
-          // todo: fix
           val themeId = theme.id
           val themeColorPatcher = buildThemeColorPatcher(theme)
           DokiThemePayload(
@@ -121,22 +120,27 @@ class IconThemeManager : LafManagerListener, Disposable, IconConfigListener, Log
           ).toOptional()
         }
 
-  private fun buildThemeColorPatcher(theme: UIThemeLookAndFeelInfo): PatcherProvider? {
-    val themeClassMethods = theme.javaClass.methods
-    val attr = themeClassMethods.firstOrNull { method -> method.name == "attributeForPath" }
-    val digest = themeClassMethods.firstOrNull { method -> method.name == "digest" }
+  private fun buildThemeColorPatcher(themeLookAndFeel: UIThemeLookAndFeelInfo): PatcherProvider? {
+    val themeLookAndFeelMethods = themeLookAndFeel.javaClass.methods
+    val themeGetter = themeLookAndFeelMethods.firstOrNull { method -> method.name == "getTheme" }
+    val theme = themeGetter?.invoke(themeLookAndFeel)
+    val themeClassMethods = theme?.javaClass?.methods ?: return null
+    val colorPatcherGetter = themeClassMethods.firstOrNull { method -> method.name == "getColorPatcher" }
+    val colorPatcherProvider = colorPatcherGetter?.invoke(theme)
+    val colorPatcherMethods = colorPatcherProvider?.javaClass?.methods ?: return null
+    val attr = colorPatcherMethods.firstOrNull { method -> method.name == "attributeForPath" }
+    val digest = colorPatcherMethods.firstOrNull { method -> method.name == "digest" }
     return object : PatcherProvider, Logging {
-      override fun attributeForPath(path: String): SvgAttributePatcher? {
-        return runSafelyWithResult({
-          val patcherForPath = attr?.invoke(digest, path)
+      override fun attributeForPath(path: String): SvgAttributePatcher? =
+        runSafelyWithResult({
+          val patcherForPath = attr?.invoke(colorPatcherProvider, path) ?: return@runSafelyWithResult null
           val patchColorsMethod =
-            patcherForPath?.javaClass
-              ?.methods?.firstOrNull { method -> method.name == "patchColors" }
+            patcherForPath.javaClass
+              .methods.firstOrNull { method -> method.name == "patchColors" } ?: return@runSafelyWithResult null
           object : SvgAttributePatcher {
             override fun patchColors(attributes: MutableMap<String, String>) {
               runSafelyWithResult({
-                patchColorsMethod
-                  ?.invoke(patcherForPath, attributes)
+                patchColorsMethod.invoke(patcherForPath, attributes)
               }) { patchingError ->
                 logger().warn("unable to patch colors", patchingError)
               }
@@ -146,16 +150,14 @@ class IconThemeManager : LafManagerListener, Disposable, IconConfigListener, Log
           logger().warn("Unable to patch path for raisins", it)
           null
         }
-      }
 
-      override fun digest(): LongArray {
-        return runSafelyWithResult({
-          digest?.invoke(theme) as LongArray
+      override fun digest(): LongArray =
+        runSafelyWithResult({
+          digest?.invoke(colorPatcherProvider) as LongArray
         }) { digestError ->
           logger().warn("Unable to get digest", digestError)
           longArrayOf()
         }
-      }
     }
   }
 
