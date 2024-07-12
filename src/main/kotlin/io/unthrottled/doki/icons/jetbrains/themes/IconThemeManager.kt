@@ -4,21 +4,22 @@ import com.google.gson.reflect.TypeToken
 import com.intellij.ide.ui.LafManager
 import com.intellij.ide.ui.LafManagerListener
 import com.intellij.ide.ui.laf.UIThemeLookAndFeelInfo
-import com.intellij.ide.ui.laf.UIThemeLookAndFeelInfoImpl
 import com.intellij.openapi.Disposable
 import com.intellij.openapi.application.ApplicationManager
-import com.intellij.util.SVGLoader
+import com.intellij.ui.svg.SvgAttributePatcher
 import com.intellij.util.messages.Topic
 import io.unthrottled.doki.icons.jetbrains.DokiThemeIcons
 import io.unthrottled.doki.icons.jetbrains.DokiThemeInformation
 import io.unthrottled.doki.icons.jetbrains.config.Config
 import io.unthrottled.doki.icons.jetbrains.config.IconConfigListener
 import io.unthrottled.doki.icons.jetbrains.config.IconSettingsModel
+import io.unthrottled.doki.icons.jetbrains.svg.PatcherProvider
 import io.unthrottled.doki.icons.jetbrains.svg.noOptPatcherProvider
 import io.unthrottled.doki.icons.jetbrains.tools.AssetTools
 import io.unthrottled.doki.icons.jetbrains.tools.Logging
 import io.unthrottled.doki.icons.jetbrains.tools.doOrElse
 import io.unthrottled.doki.icons.jetbrains.tools.logger
+import io.unthrottled.doki.icons.jetbrains.tools.runSafelyWithResult
 import io.unthrottled.doki.icons.jetbrains.tools.toOptional
 import java.util.EventListener
 import java.util.Optional
@@ -39,7 +40,7 @@ class DokiTheme(
 
 data class DokiThemePayload(
   val dokiTheme: DokiTheme,
-  val colorPatcher: SVGLoader.SvgElementColorPatcherProvider,
+  val colorPatcher: PatcherProvider,
 )
 
 interface ThemeManagerListener : EventListener {
@@ -94,16 +95,17 @@ class IconThemeManager : LafManagerListener, Disposable, IconConfigListener, Log
     }
   private val userSetTheme: Optional<DokiThemePayload>
     get() =
-      LafManager.getInstance().installedLookAndFeels
-        .filterIsInstance<UIThemeLookAndFeelInfoImpl>()
-        .firstOrNull {
-          it.getId() == Config.instance.currentThemeId
+      LafManager.getInstance().installedThemes
+        .firstOrNull { theme ->
+          theme.id == Config.instance.currentThemeId
         }.toOptional()
-        .map {
-          val themeId = it.getId()
+        .map { theme ->
+          // todo: fix
+          val themeId = theme.id
+          val themeColorPatcher = buildThemeColorPatcher(theme)
           DokiThemePayload(
             themeMap[themeId] ?: error("Expecting theme with ID $themeId to be present"),
-            it.theme.colorPatcher ?: noOptPatcherProvider,
+            themeColorPatcher ?: noOptPatcherProvider,
           )
         }.or {
           val themeId = Config.instance.currentThemeId
@@ -111,27 +113,62 @@ class IconThemeManager : LafManagerListener, Disposable, IconConfigListener, Log
             themeMap[themeId] ?: error("Expecting theme with ID $themeId to be present"),
             LafManager.getInstance().currentUIThemeLookAndFeel
               .toOptional()
-              .filter { it is UIThemeLookAndFeelInfoImpl }
-              .map {
-                val uiTheme = it as UIThemeLookAndFeelInfoImpl
-                uiTheme.theme.colorPatcher ?: noOptPatcherProvider
+              .map { uiTheme ->
+                buildThemeColorPatcher(uiTheme) ?: noOptPatcherProvider
               }.orElse(
                 noOptPatcherProvider,
               ),
           ).toOptional()
         }
+
+  private fun buildThemeColorPatcher(theme: UIThemeLookAndFeelInfo): PatcherProvider? {
+    val themeClassMethods = theme.javaClass.methods
+    val attr = themeClassMethods.firstOrNull { method -> method.name == "attributeForPath" }
+    val digest = themeClassMethods.firstOrNull { method -> method.name == "digest" }
+    return object : PatcherProvider, Logging {
+      override fun attributeForPath(path: String): SvgAttributePatcher? {
+        return runSafelyWithResult({
+          val patcherForPath = attr?.invoke(digest, path)
+          val patchColorsMethod =
+            patcherForPath?.javaClass
+              ?.methods?.firstOrNull { method -> method.name == "patchColors" }
+          object : SvgAttributePatcher {
+            override fun patchColors(attributes: MutableMap<String, String>) {
+              runSafelyWithResult({
+                patchColorsMethod
+                  ?.invoke(patcherForPath, attributes)
+              }) { patchingError ->
+                logger().warn("unable to patch colors", patchingError)
+              }
+            }
+          }
+        }) {
+          logger().warn("Unable to patch path for raisins", it)
+          null
+        }
+      }
+
+      override fun digest(): LongArray {
+        return runSafelyWithResult({
+          digest?.invoke(theme) as LongArray
+        }) { digestError ->
+          logger().warn("Unable to get digest", digestError)
+          longArrayOf()
+        }
+      }
+    }
+  }
+
   val allThemes: List<DokiTheme>
     get() = themeMap.values.toList()
 
   private fun mapLAFToDokiTheme(currentLaf: UIThemeLookAndFeelInfo?): Optional<DokiThemePayload> {
     return currentLaf.toOptional()
-      .filter { it is UIThemeLookAndFeelInfoImpl }
-      .map { it as UIThemeLookAndFeelInfoImpl }
       .filter { themeMap.containsKey(it.id) }
       .map {
         DokiThemePayload(
           themeMap[it.id]!!,
-          it.theme.colorPatcher ?: noOptPatcherProvider,
+          buildThemeColorPatcher(it) ?: noOptPatcherProvider,
         )
       }
   }
@@ -169,15 +206,14 @@ class IconThemeManager : LafManagerListener, Disposable, IconConfigListener, Log
   ) {
     val currentThemeId = newState.currentThemeId
     if (previousState.currentThemeId != currentThemeId) {
-      LafManager.getInstance().installedLookAndFeels
-        .filterIsInstance<UIThemeLookAndFeelInfoImpl>()
+      LafManager.getInstance().installedThemes
         .firstOrNull {
-          it.getId() == currentThemeId
+          it.id == currentThemeId
         }.toOptional()
         .flatMap { uiTheme ->
           getThemeById(currentThemeId)
             .map { dokiTheme ->
-              DokiThemePayload(dokiTheme, uiTheme.theme.colorPatcher ?: noOptPatcherProvider)
+              DokiThemePayload(dokiTheme, buildThemeColorPatcher(uiTheme) ?: noOptPatcherProvider)
             }
         }
         .ifPresent {
