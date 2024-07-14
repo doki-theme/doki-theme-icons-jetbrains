@@ -127,6 +127,7 @@ object PlatformHacker : Logging {
       logger().warn("Unable to hack 'fixEXPUIButton' for raisins", it)
     }
   }
+
   private fun fixEXPUIDefaultButton() {
     runSafely({
       val cp = ClassPool(true)

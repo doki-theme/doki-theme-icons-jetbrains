@@ -79,8 +79,8 @@ class ThemedSVGManager : ThemeManagerListener, Disposable, Logging {
     val setPatcher = svgLoaderClass.declaredMethods.firstOrNull { it.name == "setColorPatcherProvider" }
     setPatcher?.invoke(null, proxiedSVGElementColorProvider)
 
-    val clazz = Class.forName("com.intellij.ui.svg.SvgKt")
-    val setPatcherProvider = clazz.declaredMethods.firstOrNull { it.name == "setSelectionColorPatcherProvider" }
+    val svgClass = Class.forName("com.intellij.ui.svg.SvgKt")
+    val setPatcherProvider = svgClass.declaredMethods.firstOrNull { it.name == "setSelectionColorPatcherProvider" }
     setPatcherProvider?.invoke(null, proxiedSVGElementColorProvider)
   }
 

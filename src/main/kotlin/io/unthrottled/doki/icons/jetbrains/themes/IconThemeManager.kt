@@ -128,15 +128,18 @@ class IconThemeManager : LafManagerListener, Disposable, IconConfigListener, Log
     val colorPatcherGetter = themeClassMethods.firstOrNull { method -> method.name == "getColorPatcher" }
     val colorPatcherProvider = colorPatcherGetter?.invoke(theme)
     val colorPatcherMethods = colorPatcherProvider?.javaClass?.methods ?: return null
-    val attr = colorPatcherMethods.firstOrNull { method -> method.name == "attributeForPath" }
-    val digest = colorPatcherMethods.firstOrNull { method -> method.name == "digest" }
+    val getAttributeForPath = colorPatcherMethods.firstOrNull { method -> method.name == "attributeForPath" }
+    val getDigest = colorPatcherMethods.firstOrNull { method -> method.name == "digest" }
     return object : PatcherProvider, Logging {
       override fun attributeForPath(path: String): SvgAttributePatcher? =
         runSafelyWithResult({
-          val patcherForPath = attr?.invoke(colorPatcherProvider, path) ?: return@runSafelyWithResult null
+          val patcherForPath =
+            getAttributeForPath?.invoke(colorPatcherProvider, path)
+              ?: return@runSafelyWithResult null
           val patchColorsMethod =
             patcherForPath.javaClass
-              .methods.firstOrNull { method -> method.name == "patchColors" } ?: return@runSafelyWithResult null
+              .methods.firstOrNull { method -> method.name == "patchColors" }
+              ?: return@runSafelyWithResult null
           object : SvgAttributePatcher {
             override fun patchColors(attributes: MutableMap<String, String>) {
               runSafelyWithResult({
@@ -153,7 +156,7 @@ class IconThemeManager : LafManagerListener, Disposable, IconConfigListener, Log
 
       override fun digest(): LongArray =
         runSafelyWithResult({
-          digest?.invoke(colorPatcherProvider) as LongArray
+          getDigest?.invoke(colorPatcherProvider) as LongArray
         }) { digestError ->
           logger().warn("Unable to get digest", digestError)
           longArrayOf()
