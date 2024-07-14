@@ -22,10 +22,10 @@ object ExperimentalUIFixer : Logging {
         .forEach {
           it.isAccessible = true
           val experimentalUIClass = Class.forName("com.intellij.ui.ExperimentalUI")
-          val instance =
+          val expUIInstance =
             experimentalUIClass.methods.firstOrNull { method -> method.name == "getInstance" }
               ?.invoke(null)
-          val patcher = it.get(instance)
+          val patcher = it.get(expUIInstance)
           IconLoader.removePathPatcher(patcher as IconPathPatcher)
         }
     }) {
