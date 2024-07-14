@@ -124,8 +124,8 @@ class IconThemeManager : LafManagerListener, Disposable, IconConfigListener, Log
     val themeLookAndFeelMethods = themeLookAndFeel.javaClass.methods
     val themeGetter = themeLookAndFeelMethods.firstOrNull { method -> method.name == "getTheme" }
     val theme = themeGetter?.invoke(themeLookAndFeel)
-    val themeClassMethods = theme?.javaClass?.methods ?: return null
-    val colorPatcherGetter = themeClassMethods.firstOrNull { method -> method.name == "getColorPatcher" }
+    val themeClassMethods = theme?.javaClass?.methods
+    val colorPatcherGetter = themeClassMethods?.firstOrNull { method -> method.name == "getColorPatcher" }
     val colorPatcherProvider = colorPatcherGetter?.invoke(theme)
     val colorPatcherMethods = colorPatcherProvider?.javaClass?.methods ?: return null
     val getAttributeForPath = colorPatcherMethods.firstOrNull { method -> method.name == "attributeForPath" }
