@@ -1,2 +1,2 @@
 ### Added
-- Initial 2023.3 build support.
+- Initial 2024.2 build support.

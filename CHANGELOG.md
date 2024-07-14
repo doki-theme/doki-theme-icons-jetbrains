@@ -4,6 +4,11 @@
 
 ## [Unreleased]
 
+## 88.5-1.4.0 [2024.2 Build Support]
+
+### Added
+- Initial 2024.2 build support.
+
 ## 88.5-1.1.0 [2023.3 Build Support]
 
 ### Added
