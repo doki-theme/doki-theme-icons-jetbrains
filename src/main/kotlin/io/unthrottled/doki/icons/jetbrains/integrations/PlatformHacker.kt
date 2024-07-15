@@ -21,6 +21,7 @@ object PlatformHacker : Logging {
 
   private fun hackEXPUI() {
     fixEXPUIButton()
+    fixEXPUIDefaultButton()
     fixEXPUIRunWidget()
     fixEXPUIStopButton()
   }
@@ -124,6 +125,32 @@ object PlatformHacker : Logging {
       ctClass.toClass()
     }) {
       logger().warn("Unable to hack 'fixEXPUIButton' for raisins", it)
+    }
+  }
+
+  private fun fixEXPUIDefaultButton() {
+    runSafely({
+      val cp = ClassPool(true)
+      cp.insertClassPath(
+        ClassClassPath(
+          Class.forName("com.intellij.ide.ui.laf.darcula.ui.DarculaMenuSeparatorUI"),
+        ),
+      )
+      val ctClass = cp.get("com.intellij.ide.ui.laf.darcula.ui.DarculaOptionButtonUI")
+      ctClass.getDeclaredMethods("paintArrow").forEach { doPaintText ->
+        doPaintText.instrument(
+          object : ExprEditor() {
+            override fun edit(m: MethodCall?) {
+              if (m?.methodName == "toStrokeIcon") {
+                m.replace("{ \$_ = \$1; }")
+              }
+            }
+          },
+        )
+      }
+      ctClass.toClass()
+    }) {
+      logger().warn("Unable to hack 'fixEXPUIDefaultButton' for raisins", it)
     }
   }
 }

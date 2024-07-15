@@ -16,7 +16,6 @@ class ComposedSVGColorizer(
   }
 }
 
-@Suppress("UnstableApiUsage")
 class ComposedSVGColorizerProvider(
   dokiThemePayload: DokiThemePayload,
   otherSvgPatcherProvider: PatcherProvider,
@@ -59,7 +58,6 @@ class ComposedSVGColorizerProvider(
 
 object ComposedSVGColorizerProviderFactory {
   fun createForTheme(dokiThemePayload: DokiThemePayload): PatcherProvider {
-    val otherSvgPatcherProvider = SvgLoaderHacker.collectOtherPatcher()
-    return ComposedSVGColorizerProvider(dokiThemePayload, otherSvgPatcherProvider)
+    return ComposedSVGColorizerProvider(dokiThemePayload, noOptPatcherProvider)
   }
 }
