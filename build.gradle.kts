@@ -8,7 +8,7 @@ plugins {
   // Java support
   id("java")
   // Kotlin support
-  kotlin("jvm") version "1.8.10"
+  kotlin("jvm") version "2.0.0"
   // Gradle IntelliJ Plugin
   id("org.jetbrains.intellij") version "1.16.1"
   // Gradle Changelog Plugin
@@ -143,6 +143,7 @@ tasks {
   runIde {
     maxHeapSize = "2g"
     systemProperty("idea.ui.icons.svg.disk.cache", "false")
+    systemProperty("idea.platform.prefix", properties("idePrefix"))
     val idePath = properties("idePath")
     if (idePath.isNotEmpty()) {
       ideDir.set(file(idePath))
