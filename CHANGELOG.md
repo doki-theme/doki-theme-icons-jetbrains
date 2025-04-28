@@ -4,6 +4,11 @@
 
 ## [Unreleased]
 
+#  88.5-1.6.0 [2025.1 Build Support]
+
+- Lowest supported version is now 2025.1
+- Compiles to the 2025.1 build
+
 #  88.5-1.5.0 [2024.3 Build Support]
 
 - Lowest supported version is now 2024.3

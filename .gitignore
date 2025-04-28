@@ -32,3 +32,4 @@ build
 iconSource/
 iconSource
 tmp
+.intellijPlatform/
