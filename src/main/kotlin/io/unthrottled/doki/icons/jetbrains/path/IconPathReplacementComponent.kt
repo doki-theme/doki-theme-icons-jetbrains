@@ -1,12 +1,12 @@
 package io.unthrottled.doki.icons.jetbrains.path
 
-import com.intellij.openapi.actionSystem.impl.ActionToolbarImpl
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.fileTypes.ex.FileTypeManagerEx
 import com.intellij.openapi.util.IconLoader
 import io.unthrottled.doki.icons.jetbrains.config.Config
 import io.unthrottled.doki.icons.jetbrains.config.IconConfigListener
 import io.unthrottled.doki.icons.jetbrains.config.IconSettingsModel
+import io.unthrottled.doki.icons.jetbrains.tools.updateToolbars
 
 data class IconReplacementPack(
   val iconPatcher: DokiIconPathPatcher,
@@ -100,7 +100,7 @@ object IconPathReplacementComponent : IconConfigListener {
     ApplicationManager.getApplication().invokeLater {
       val app = ApplicationManager.getApplication()
       app.runWriteAction { FileTypeManagerEx.getInstanceEx().fireFileTypesChanged() }
-      app.runWriteAction { ActionToolbarImpl.updateAllToolbarsImmediately() }
+      app.runWriteAction { updateToolbars() }
     }
   }
 }

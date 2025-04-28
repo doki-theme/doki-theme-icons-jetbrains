@@ -48,65 +48,27 @@ jobs:
       - name: Gradle Wrapper Validation
         uses: gradle/wrapper-validation-action@v1.0.6
 
-      # Setup Java 17 environment for the next steps
+      # Setup Java 21 environment for the next steps
       - name: Setup Java
         uses: actions/setup-java@v3
         with:
           distribution: zulu
-          java-version: 17
+          java-version: 21
 
       - name: Grant execute permission for scripts
         run: chmod +x getMasterThemes.sh
       - name: Pull down the Master Themes
         run: ./getMasterThemes.sh
 
-      # Set environment variables
-      - name: Export Properties
-        id: properties
-        shell: bash
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          PROPERTIES="$(./gradlew properties --console=plain -q)"
-          VERSION="$(echo "$PROPERTIES" | grep "^version:" | cut -f2- -d ' ')"
-          NAME="$(echo "$PROPERTIES" | grep "^pluginName:" | cut -f2- -d ' ')"
-
-          echo "::set-output name=version::$VERSION"
-          echo "::set-output name=name::$NAME"
-          echo "::set-output name=pluginVerifierHomeDir::~/.pluginVerifier"
-
-          ./gradlew listProductsReleases # prepare list of IDEs for Plugin Verifier
-
       - name: Perform QA
         env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           IS_CI: 'true'
         run: ./gradlew check
-
-      # Collect Tests Result of failed tests
-      - name: Collect Tests Result
-        if: ${{ failure() }}
-        uses: actions/upload-artifact@v3
-        with:
-          name: tests-result
-          path: ${{ github.workspace }}/build/reports/tests
-
-      # Cache Plugin Verifier IDEs
-      - name: Setup Plugin Verifier IDEs Cache
-        uses: actions/cache@v3
-        with:
-          path: ${{ steps.properties.outputs.pluginVerifierHomeDir }}/ides
-          key: plugin-verifier-${{ hashFiles('build/listProductsReleases.txt') }}
 
       # Run Verify Plugin task and IntelliJ Plugin Verifier tool
       - name: Run Plugin Verification tasks
         env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           IS_CI: 'true'
-        run: ./gradlew runPluginVerifier -Pplugin.verifier.home.dir=${{ steps.properties.outputs.pluginVerifierHomeDir }}
-
-      # Collect Plugin Verifier Result
-      - name: Collect Plugin Verifier Result
-        if: ${{ always() }}
-        uses: actions/upload-artifact@v3
-        with:
-          name: pluginVerifier-result
-          path: ${{ github.workspace }}/build/reports/pluginVerifier
+        run: ./gradlew verifyPlugin

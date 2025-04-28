@@ -12,7 +12,9 @@ import javassist.expr.MethodCall
 object PlatformHacker : Logging {
   init {
     IconPathReplacementComponent.installComponents()
-    hackPlatform()
+    if(System.getenv("DOKI_HACK") != "false") {
+      hackPlatform()
+    }
   }
 
   fun hackPlatform() {
