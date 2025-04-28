@@ -10,6 +10,7 @@ import io.unthrottled.doki.icons.jetbrains.tools.Logging
 import io.unthrottled.doki.icons.jetbrains.tools.logger
 import io.unthrottled.doki.icons.jetbrains.tools.runSafely
 import io.unthrottled.doki.icons.jetbrains.tools.runSafelyWithResult
+import io.unthrottled.doki.icons.jetbrains.tools.updateToolbars
 import java.lang.reflect.InvocationHandler
 import java.lang.reflect.Method
 import java.lang.reflect.Proxy
@@ -17,7 +18,7 @@ import javax.swing.SwingUtilities
 
 class ThemedSVGManager : ThemeManagerListener, Disposable, Logging {
   companion object {
-    val instance: ThemedSVGManager =
+    fun getInstance(): ThemedSVGManager =
       ApplicationManager.getApplication().getService(ThemedSVGManager::class.java)
   }
 
@@ -41,7 +42,7 @@ class ThemedSVGManager : ThemeManagerListener, Disposable, Logging {
     }) {
       logger().warn("Unable to set hacked patcher", it)
     }
-    SwingUtilities.invokeLater { ActionToolbarImpl.updateAllToolbarsImmediately() }
+    SwingUtilities.invokeLater { updateToolbars() }
   }
 
   private fun setHackedPatcher(svgPatcherProvider: PatcherProvider) {

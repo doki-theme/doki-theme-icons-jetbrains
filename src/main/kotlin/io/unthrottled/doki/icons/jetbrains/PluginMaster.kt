@@ -29,7 +29,7 @@ class PluginMaster : ProjectManagerListener, Disposable, Logging {
 
   init {
     IconThemeManager.instance.init()
-    ThemedSVGManager.instance.initialize()
+    ThemedSVGManager.getInstance().initialize()
     IconPathReplacementComponent.initialize()
     LAFIconReplacementComponent.initialize()
   }
@@ -49,7 +49,7 @@ class PluginMaster : ProjectManagerListener, Disposable, Logging {
 
   override fun dispose() {
     IconThemeManager.instance.dispose()
-    ThemedSVGManager.instance.dispose()
+    ThemedSVGManager.getInstance().dispose()
     IconPathReplacementComponent.dispose()
     LAFIconReplacementComponent.dispose()
     projectListeners.forEach { (_, listeners) -> listeners.dispose() }

@@ -7,6 +7,6 @@ import io.unthrottled.doki.icons.jetbrains.svg.ThemedSVGManager
 
 class SetPatcherAction : AnAction(), DumbAware {
   override fun actionPerformed(e: AnActionEvent) {
-    ThemedSVGManager.instance.initialize()
+    ThemedSVGManager.getInstance().initialize()
   }
 }

@@ -1,6 +1,5 @@
 package io.unthrottled.doki.icons.jetbrains.laf
 
-import com.intellij.openapi.actionSystem.impl.ActionToolbarImpl
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.util.ui.LafIconLookup
 import icons.DokiThemeIconz
@@ -10,6 +9,7 @@ import io.unthrottled.doki.icons.jetbrains.config.IconSettingsModel
 import io.unthrottled.doki.icons.jetbrains.themes.DokiThemePayload
 import io.unthrottled.doki.icons.jetbrains.themes.IconThemeManager
 import io.unthrottled.doki.icons.jetbrains.themes.ThemeManagerListener
+import io.unthrottled.doki.icons.jetbrains.tools.updateToolbars
 import javax.swing.Icon
 import javax.swing.SwingUtilities
 import javax.swing.UIManager
@@ -43,8 +43,12 @@ object LAFIconReplacementComponent : IconConfigListener, ThemeManagerListener {
     defaults[DokiThemeIconz.Tree.SELECTED_COLLAPSED_KEY] = collapsed
     defaults[DokiThemeIconz.Tree.EXPANDED_KEY] = expanded
     defaults[DokiThemeIconz.Tree.SELECTED_EXPANDED_KEY] = expanded
-    SwingUtilities.invokeLater { ActionToolbarImpl.updateAllToolbarsImmediately() }
+    SwingUtilities.invokeLater {
+      updateToolbars()
+    }
   }
+
+
 
   fun dispose() {
     connection.dispose()
